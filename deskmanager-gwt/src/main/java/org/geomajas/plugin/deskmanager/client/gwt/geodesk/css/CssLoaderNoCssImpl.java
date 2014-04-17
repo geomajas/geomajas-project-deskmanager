@@ -8,19 +8,17 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.geomajas.plugin.deskmanager.client.gwt.manager.util;
+package org.geomajas.plugin.deskmanager.client.gwt.geodesk.css;
 
 /**
- * ...
- * 
- * @author Jan De Moerloose
- *
+ * @author Dosi Bingov
+ *         <p/>
+ *         Implementation of {@link org.geomajas.gwt.client.util.css.CssLoaderUtil}.
  */
-public final class ManagerConstants {
+public class CssLoaderNoCssImpl implements CssLoaderGeodesk {
 
-	private ManagerConstants() {
-	};
-
-	public static final String ICON_OPENSAMPLELOKET = "[ISOMORPHIC]/images/silk/application_view_gallery.png";
-
+	@Override
+	public void loadStyleSheet() {
+		//do nothig here
+	}
 }
