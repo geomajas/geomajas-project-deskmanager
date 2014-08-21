@@ -3,20 +3,33 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.geomajas.plugin</groupId>
-		<artifactId>geomajas-client-gwt-plugin-deskmanager-parent</artifactId>
-		<version>1.15.0-SNAPSHOT</version>
+		<groupId>org.geomajas.project</groupId>
+		<artifactId>geomajas-project-deskmanager</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>geomajas-plugin-deskmanager-gwt</artifactId>
+	<groupId>org.geomajas</groupId>
+	<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 	<packaging>jar</packaging>
-	<name>Geomajas GWT client: Plugin Deskmanager - GWT</name>
-	<description>Geomajas GWT client: Plugin Deskmanager - GWT</description>
+	<name>Geomajas Deskmanager Project - GWT</name>
+	<description>Geomajas Deskmanager Project - GWT</description>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.geomajas.project</groupId>
+				<artifactId>geomajas-project-client-gwt</artifactId>
+				<version>1.15.0-SNAPSHOT</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-deskmanager</artifactId>
+			<groupId>org.geomajas</groupId>
+			<artifactId>geomajas-project-deskmanager</artifactId>
 		</dependency>
 
 		<!-- Geomajas dependencies -->
