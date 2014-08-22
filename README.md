@@ -1,10 +1,10 @@
-Geomajas Deskmanager Project
+Geomajas Deskmanager project
 ===============
 
 What is Geomajas
 ----------------
 
-Geomajas is an Open Source Web Mapping Framework written in Java. It provides both server and client components. This project contains the geomajas deskmanager project.
+Geomajas is an Open Source Web Mapping Framework written in Java. It provides both server and client components. This project contains the geomajas deskmanager.
 
 For more details about the project, how to use it, manuals and other information, take a look at the website at http://www.geomajas.org/ .
 
