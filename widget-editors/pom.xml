@@ -32,12 +32,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.geomajas.widget</groupId>
-			<artifactId>geomajas-widget-layer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.geomajas.widget</groupId>
 			<artifactId>geomajas-widget-layer-gwt</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.geomajas.widget</groupId>
+            <artifactId>geomajas-widget-searchandfilter-gwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geomajas.widget</groupId>
+            <artifactId>geomajas-widget-advancedviews-gwt</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -48,6 +52,41 @@
 			<artifactId>gwt-servlet</artifactId>
             <scope>runtime</scope>
 		</dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt.gwtmockito</groupId>
+            <artifactId>gwtmockito</artifactId>
+            <version>1.1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>1.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>1.5</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
