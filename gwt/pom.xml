@@ -14,18 +14,6 @@
 	<name>Geomajas Deskmanager Project - GWT</name>
 	<description>Geomajas Deskmanager Project - GWT</description>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.geomajas.project</groupId>
-				<artifactId>geomajas-project-client-gwt</artifactId>
-				<version>1.15.0-SNAPSHOT</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.geomajas</groupId>
