@@ -29,6 +29,7 @@
 		<module>gwt</module>
 		<module>documentation</module>
 		<module>widget-editors</module>
+		<module>javadoc</module>
 	</modules>
 
 	<properties>
