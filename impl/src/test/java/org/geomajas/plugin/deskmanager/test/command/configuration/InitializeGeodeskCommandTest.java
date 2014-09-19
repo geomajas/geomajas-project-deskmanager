@@ -8,11 +8,12 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.geomajas.plugin.deskmanager.test.command.geodesk;
+package org.geomajas.plugin.deskmanager.test.command.configuration;
 
 import org.geomajas.command.CommandDispatcher;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskRequest;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskResponse;
+import org.geomajas.command.dto.GetConfigurationRequest;
+import org.geomajas.command.dto.GetConfigurationResponse;
+import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUserData;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.test.LoginBeforeTestingWithPredefinedProfileBase;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
@@ -43,31 +44,34 @@ public class InitializeGeodeskCommandTest extends LoginBeforeTestingWithPredefin
 
 	@Test
 	public void testGetPublicConfiguration() {
-		InitializeGeodeskRequest request = new InitializeGeodeskRequest();
-		request.setGeodeskId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE);
+		GetConfigurationRequest request = new GetConfigurationRequest();
+		request.setApplicationId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE);
 
-		InitializeGeodeskResponse response = (InitializeGeodeskResponse) dispatcher.execute(
-				InitializeGeodeskResponse.COMMAND, request, getToken(Role.GUEST), "en");
+		GetConfigurationResponse response = (GetConfigurationResponse) dispatcher.execute(
+				GetConfigurationRequest.COMMAND, request, getToken(Role.GUEST), "en");
 
 		Assert.assertTrue(response.getErrorMessages().isEmpty());
 
-		Assert.assertEquals(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE, response.getGeodeskIdentifier());
-		Assert.assertEquals("${buildNumber}", response.getDeskmanagerBuild());
-		Assert.assertEquals("${project.version}", response.getDeskmanagerVersion());
-		Assert.assertEquals(ExampleDatabaseProvisioningServiceImpl.CLIENTAPPLICATION_ID,
-				response.getUserApplicationKey());
+		Assert.assertTrue(response.getApplication().getUserData() instanceof DeskmanagerApplicationInfoUserData);
+		DeskmanagerApplicationInfoUserData userData =
+				(DeskmanagerApplicationInfoUserData) response.getApplication().getUserData();
 
-		Assert.assertNotNull(response.getClientApplicationInfo());
-		Assert.assertTrue(response.getClientApplicationInfo().getMaps().isEmpty());
+		Assert.assertEquals(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE, response.getApplication().getId());
+		Assert.assertEquals("${buildNumber}", userData.getDeskmanagerBuild());
+		Assert.assertEquals("${project.version}", userData.getDeskmanagerVersion());
+		Assert.assertEquals(ExampleDatabaseProvisioningServiceImpl.CLIENTAPPLICATION_ID,
+				userData.getUserApplicationKey());
+
+		Assert.assertNotNull(response.getApplication());
 	}
 
 	@Test
 	public void testGetPrivateConfiguration() {
-		InitializeGeodeskRequest request = new InitializeGeodeskRequest();
-		request.setGeodeskId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_DE_PRIVATE);
+		GetConfigurationRequest request = new GetConfigurationRequest();
+		request.setApplicationId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_DE_PRIVATE);
 
-		InitializeGeodeskResponse response = (InitializeGeodeskResponse) dispatcher.execute(
-				InitializeGeodeskResponse.COMMAND, request, getToken(Role.GUEST), "en");
+		GetConfigurationResponse response = (GetConfigurationResponse) dispatcher.execute(
+				GetConfigurationRequest.COMMAND, request, getToken(Role.GUEST), "en");
 
 		Assert.assertFalse(response.getErrorMessages().isEmpty());
 		Assert.assertEquals(GeomajasSecurityException.class.getName(), response.getExceptions().get(0).getClassName());

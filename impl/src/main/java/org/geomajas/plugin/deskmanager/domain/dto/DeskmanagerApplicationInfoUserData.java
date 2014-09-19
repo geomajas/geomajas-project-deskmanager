@@ -8,24 +8,19 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.geomajas.plugin.deskmanager.command.geodesk.dto;
+package org.geomajas.plugin.deskmanager.domain.dto;
 
-import org.geomajas.command.CommandResponse;
-import org.geomajas.configuration.client.ClientApplicationInfo;
+import org.geomajas.annotation.Api;
+import org.geomajas.configuration.client.ClientUserDataInfo;
 
 /**
- * Response object for {@link org.geomajas.plugin.deskmanager.command.geodesk.InitializeGeodeskCommand}.
- * 
- * @author Jan De Moerloose
+ * Extra information that is attached to the ApplicationInfo of deskmanager geodesks.
+ *
  * @author Oliver May
+ * @since 1.0.0
  */
-public class InitializeGeodeskResponse extends CommandResponse {
-
-	private static final long serialVersionUID = 100L;
-
-	public static final String COMMAND = "command.deskmanager.geodesk.InitializeGeodesk";
-
-	private String geodeskIdentifier;
+@Api(allMethods = true)
+public class DeskmanagerApplicationInfoUserData implements ClientUserDataInfo {
 
 	private String userApplicationKey;
 
@@ -33,48 +28,9 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	private String deskmanagerBuild;
 
-	private ClientApplicationInfo clientApplicationInfo;
-
-	
-	/**
-	 * Get the geodesk identifier (public id).
-	 * 
-	 * @return the identifier.
-	 */
-	public String getGeodeskIdentifier() {
-		return geodeskIdentifier;
-	}
-
-	/**
-	 * Set the geodesk identifier (public id).
-	 * 
-	 *  @param geodeskIdentifier the identifier
-	 */
-	public void setGeodeskIdentifier(String geodeskIdentifier) {
-		this.geodeskIdentifier = geodeskIdentifier;
-	}
-
-	/**
-	 * Get the client application info, this info does not contain maps.
-	 * 
-	 * @return the client application info.
-	 */
-	public ClientApplicationInfo getClientApplicationInfo() {
-		return clientApplicationInfo;
-	}
-
-	/**
-	 * Set the client application info, this info must not contain maps.
-	 * 
-	 * @param clientApplicationInfo the client application info.
-	 */
-	public void setClientApplicationInfo(ClientApplicationInfo clientApplicationInfo) {
-		this.clientApplicationInfo = clientApplicationInfo;
-	}
-
 	/**
 	 * Get the user application key for this geodesk.
-	 * 
+	 *
 	 * @return the user application key.
 	 */
 	public String getUserApplicationKey() {
@@ -83,7 +39,7 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	/**
 	 * Set the user application key for this geodesk.
-	 * 
+	 *
 	 * @param userApplicationKey the user application key
 	 */
 	public void setUserApplicationKey(String userApplicationKey) {
@@ -92,7 +48,7 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	/**
 	 * Set the deskmanager application version.
-	 * 
+	 *
 	 * @param deskmanagerVersion the deskmanagerVersion to set.
 	 */
 	public void setDeskmanagerVersion(String deskmanagerVersion) {
@@ -101,7 +57,7 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	/**
 	 * Get the deskmanager application version.
-	 * 
+	 *
 	 * @return the deskmanager version string, injected by maven.
 	 */
 	public String getDeskmanagerVersion() {
@@ -110,7 +66,7 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	/**
 	 * Set the deskmanager build version.
-	 * 
+	 *
 	 * @param deskmanagerBuild the deskmanagerBuild to set.
 	 */
 	public void setDeskmanagerBuild(String deskmanagerBuild) {
@@ -119,10 +75,11 @@ public class InitializeGeodeskResponse extends CommandResponse {
 
 	/**
 	 * Get the deskmanager build version.
-	 * 
+	 *
 	 * @return the unique application build string, injected by maven.
 	 */
 	public String getDeskmanagerBuild() {
 		return deskmanagerBuild;
 	}
+
 }

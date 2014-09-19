@@ -60,6 +60,15 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			</list>
 		</property>
 	</bean>
+
+	<!-- Override some beans to allow configuration from database -->
+	<bean class="org.geomajas.plugin.deskmanager.command.configuration.GetConfigurationCommand"
+		  id="command.configuration.Get" />
+	<bean class="org.geomajas.plugin.deskmanager.command.configuration.GetMapConfigurationCommand"
+		  id="command.configuration.GetMap" />
+	<bean class="org.geomajas.plugin.deskmanager.service.common.DeskmanagerPrintConfigurationService"
+		  id="plugin.printing.component.service.PrintConfigurationService" />
+
 		
 </beans>
 

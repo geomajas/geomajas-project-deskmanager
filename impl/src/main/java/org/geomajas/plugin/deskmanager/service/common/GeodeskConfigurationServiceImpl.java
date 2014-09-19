@@ -10,12 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.service.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.SerializationUtils;
 import org.geomajas.configuration.LayerInfo;
 import org.geomajas.configuration.NamedStyleInfo;
@@ -30,11 +24,12 @@ import org.geomajas.geometry.service.GeometryService;
 import org.geomajas.global.GeomajasException;
 import org.geomajas.layer.Layer;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
-import org.geomajas.plugin.deskmanager.command.common.GetMapConfigurationCommand;
+import org.geomajas.plugin.deskmanager.command.configuration.GetMapConfigurationCommand;
 import org.geomajas.plugin.deskmanager.configuration.UserApplicationInfo;
 import org.geomajas.plugin.deskmanager.domain.BaseGeodesk;
 import org.geomajas.plugin.deskmanager.domain.ClientLayer;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
+import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUserData;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
 import org.geomajas.plugin.runtimeconfig.service.Rewirable;
@@ -46,9 +41,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kristof Heirwegh
@@ -83,6 +85,14 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 	@Autowired
 	private SessionFactory session;
 
+	@Autowired
+	@Qualifier("deskmanager.version")
+	private String deskmanagerVersion;
+
+	@Autowired
+	@Qualifier("deskmanager.build")
+	private String deskmanagerBuild;
+
 	// -------------------------------------------------
 
 	private UserApplicationInfo getUserApplicationInfo(String key) {
@@ -99,9 +109,14 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 			geodesk = (Geodesk) session.getCurrentSession().merge(geodesk);
 			UserApplicationInfo userApplicationInfo = getUserApplicationInfo(geodesk.getBlueprint()
 					.getUserApplicationKey());
-
 			ClientApplicationInfo appInfo = (ClientApplicationInfo) SerializationUtils.clone(userApplicationInfo
 					.getApplicationInfo());
+			DeskmanagerApplicationInfoUserData deskmanagerUserDataInfo =
+					buildDeskmanagerApplicationInfoUserData(userApplicationInfo);
+
+			appInfo.setId(geodesk.getGeodeskId());
+
+
 			BaseGeodesk blueprint = blueprintService.getBlueprintByIdInternal(geodesk.getBlueprint().getId());
 			if (includeMaps) {
 				ClientMapInfo mainMap = null;
@@ -163,10 +178,12 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 				}
 
 				// Custom configurations for main map (order matters, overrides)
+				mainMap.setUserData(deskmanagerUserDataInfo);
 				mainMap.getWidgetInfo().putAll(userApplicationInfo.getMainMapWidgetInfos());
 				mainMap.getWidgetInfo().putAll(blueprint.getMainMapClientWidgetInfos());
 				mainMap.getWidgetInfo().putAll(geodesk.getMainMapClientWidgetInfos());
 
+				overviewMap.setUserData(deskmanagerUserDataInfo);
 				overviewMap.getWidgetInfo().putAll(userApplicationInfo.getOverviewMapWidgetInfos());
 				overviewMap.getWidgetInfo().putAll(blueprint.getOverviewMapClientWidgetInfos());
 				overviewMap.getWidgetInfo().putAll(geodesk.getOverviewMapClientWidgetInfos());
@@ -176,9 +193,11 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 			}
 
 			// -- custom widget configurations
+			appInfo.setUserData(deskmanagerUserDataInfo);
 			appInfo.getWidgetInfo().putAll(userApplicationInfo.getApplicationWidgetInfos());
 			appInfo.getWidgetInfo().putAll(blueprint.getApplicationClientWidgetInfos());
 			appInfo.getWidgetInfo().putAll(geodesk.getApplicationClientWidgetInfos());
+
 
 			return appInfo;
 
@@ -187,6 +206,15 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 			log.warn("Error creating configuration: " + e.getMessage());
 			return null;
 		}
+	}
+
+	private DeskmanagerApplicationInfoUserData buildDeskmanagerApplicationInfoUserData(
+			UserApplicationInfo userApplicationInfo) {
+		DeskmanagerApplicationInfoUserData clientUserDataInfo = new DeskmanagerApplicationInfoUserData();
+		clientUserDataInfo.setDeskmanagerBuild(deskmanagerBuild);
+		clientUserDataInfo.setDeskmanagerVersion(deskmanagerVersion);
+		clientUserDataInfo.setUserApplicationKey(userApplicationInfo.getKey());
+		return clientUserDataInfo;
 	}
 
 	/*
