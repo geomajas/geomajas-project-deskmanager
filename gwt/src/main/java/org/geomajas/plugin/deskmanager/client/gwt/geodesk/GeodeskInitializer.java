@@ -11,13 +11,13 @@
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk;
 
 import org.geomajas.annotation.Api;
+import org.geomajas.command.dto.GetConfigurationRequest;
+import org.geomajas.command.dto.GetConfigurationResponse;
 import org.geomajas.gwt.client.command.AbstractCommandCallback;
 import org.geomajas.gwt.client.command.GwtCommand;
 import org.geomajas.gwt.client.command.GwtCommandDispatcher;
 import org.geomajas.gwt.client.command.TokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.impl.DeskmanagerTokenRequestHandler;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskRequest;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,17 +66,17 @@ public class GeodeskInitializer {
 	public void loadApplication(String geodeskId, TokenRequestHandler tokenRequestHandler) {
 		GwtCommandDispatcher.getInstance().setTokenRequestHandler(tokenRequestHandler);
 
-		GwtCommand initializeGeodeskCommand = new GwtCommand(InitializeGeodeskResponse.COMMAND);
-		final AbstractCommandCallback<InitializeGeodeskResponse> openLoketCallback = 
-			new AbstractCommandCallback<InitializeGeodeskResponse>() {
+		GwtCommand initializeGeodeskCommand = new GwtCommand(GetConfigurationRequest.COMMAND);
+		final AbstractCommandCallback<GetConfigurationResponse> openLoketCallback =
+			new AbstractCommandCallback<GetConfigurationResponse>() {
 
-			public void execute(InitializeGeodeskResponse response) {
+			public void execute(GetConfigurationResponse response) {
 				fireGeodeskInitialized(response);
 			}
 		};
 
-		InitializeGeodeskRequest request = new InitializeGeodeskRequest();
-		request.setGeodeskId(geodeskId);
+		GetConfigurationRequest request = new GetConfigurationRequest();
+		request.setApplicationId(geodeskId);
 		initializeGeodeskCommand.setCommandRequest(request);
 		GwtCommandDispatcher.getInstance().execute(initializeGeodeskCommand, openLoketCallback);
 	}
@@ -101,7 +101,7 @@ public class GeodeskInitializer {
 		handlers.remove(handler);
 	}
 
-	private void fireGeodeskInitialized(InitializeGeodeskResponse response) {
+	private void fireGeodeskInitialized(GetConfigurationResponse response) {
 		for (GeodeskInitializationHandler handler : handlers) {
 			handler.initialized(response);
 		}
