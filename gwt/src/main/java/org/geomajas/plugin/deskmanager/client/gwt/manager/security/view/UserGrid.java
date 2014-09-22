@@ -32,7 +32,7 @@ import org.geomajas.gwt.client.Geomajas;
 import org.geomajas.gwt.client.util.WidgetLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter.ObjectsTabHandler;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.List;
 

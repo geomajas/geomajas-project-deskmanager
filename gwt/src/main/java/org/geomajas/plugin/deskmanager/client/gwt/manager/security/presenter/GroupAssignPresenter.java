@@ -18,7 +18,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.service.Manager;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;

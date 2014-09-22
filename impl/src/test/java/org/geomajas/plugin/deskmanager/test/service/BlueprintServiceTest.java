@@ -11,10 +11,10 @@
 package org.geomajas.plugin.deskmanager.test.service;
 
 import org.geomajas.configuration.client.ClientWidgetInfo;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.domain.BaseGeodesk;
 import org.geomajas.plugin.deskmanager.domain.Blueprint;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityService;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
 import org.geomajas.plugin.deskmanager.service.common.BlueprintService;
 import org.geomajas.plugin.deskmanager.test.SecurityContainingTestBase;
@@ -55,7 +55,7 @@ public class BlueprintServiceTest extends SecurityContainingTestBase {
 	@Test
 	public void testLoadBlueprints() throws Exception {
 
-		String token = ((DeskmanagerSecurityService) securityService).registerRole(
+		String token = ((DeskmanagerSecurityService) securityService).registerProfile(
 				RetrieveRolesRequest.MANAGER_ID, ((StubProfileService) profileService).getPredefinedProfiles().get(1));
 		securityManager.createSecurityContext(token);
 

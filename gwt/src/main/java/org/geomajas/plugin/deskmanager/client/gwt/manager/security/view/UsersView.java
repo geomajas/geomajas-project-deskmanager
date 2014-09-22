@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.client.gwt.manager.security.view;
 import java.util.List;
 
 import org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter.ObjectsTabHandler;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 /**
  * @author Jan De Moerloose

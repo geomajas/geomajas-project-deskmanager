@@ -30,7 +30,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter.Use
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.Manager;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import javax.validation.ConstraintViolation;
 import java.util.Set;

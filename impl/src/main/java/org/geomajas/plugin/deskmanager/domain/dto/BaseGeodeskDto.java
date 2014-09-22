@@ -10,21 +10,18 @@
  */
 package org.geomajas.plugin.deskmanager.domain.dto;
 
+import org.geomajas.configuration.client.ClientWidgetInfo;
+import org.geomajas.plugin.deskmanager.configuration.UserApplicationInfo;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
-import org.geomajas.annotation.Api;
-import org.geomajas.configuration.client.ClientWidgetInfo;
-import org.geomajas.plugin.deskmanager.configuration.UserApplicationInfo;
 
 /**
  * Common base for geodesks and blueprints.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public interface BaseGeodeskDto extends Serializable {
 
 	/**

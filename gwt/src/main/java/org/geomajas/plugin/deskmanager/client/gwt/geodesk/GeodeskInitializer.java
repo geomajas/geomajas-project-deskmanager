@@ -10,7 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk;
 
-import org.geomajas.annotation.Api;
 import org.geomajas.command.dto.GetConfigurationRequest;
 import org.geomajas.command.dto.GetConfigurationResponse;
 import org.geomajas.gwt.client.command.AbstractCommandCallback;
@@ -29,9 +28,7 @@ import java.util.List;
  * {@link GeodeskInitializationHandler}.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api (allMethods = true)
 public class GeodeskInitializer {
 
 	private List<GeodeskInitializationHandler> handlers = new ArrayList<GeodeskInitializationHandler>();

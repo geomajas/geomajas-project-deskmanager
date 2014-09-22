@@ -10,15 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.geomajas.annotation.Api;
-import org.geomajas.gwt.client.Geomajas;
-import org.geomajas.gwt.client.util.Notify;
-import org.geomajas.gwt.client.util.UrlBuilder;
-import org.geomajas.plugin.deskmanager.client.gwt.common.i18n.CommonMessages;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
@@ -34,15 +25,20 @@ import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Img;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.layout.HLayout;
+import org.geomajas.gwt.client.Geomajas;
+import org.geomajas.gwt.client.util.Notify;
+import org.geomajas.gwt.client.util.UrlBuilder;
+import org.geomajas.plugin.deskmanager.client.gwt.common.i18n.CommonMessages;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A form that uploads files to the server.
  * 
  * @author Kristof Heirwegh
  * @author Oliver May
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public class FileUploadForm extends HLayout {
 
 	private static final CommonMessages MESSAGES = GWT.create(CommonMessages.class);

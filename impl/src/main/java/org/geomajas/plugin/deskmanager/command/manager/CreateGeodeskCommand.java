@@ -18,7 +18,7 @@ import org.geomajas.plugin.deskmanager.command.manager.dto.GeodeskResponse;
 import org.geomajas.plugin.deskmanager.domain.Blueprint;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.plugin.deskmanager.service.common.BlueprintService;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
 import org.geomajas.plugin.deskmanager.service.common.GeodeskService;

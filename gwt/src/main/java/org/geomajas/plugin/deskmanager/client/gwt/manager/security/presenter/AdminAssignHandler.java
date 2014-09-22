@@ -10,7 +10,7 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter;
 
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.List;
 

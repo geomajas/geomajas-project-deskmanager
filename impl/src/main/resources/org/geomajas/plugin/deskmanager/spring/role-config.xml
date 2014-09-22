@@ -10,14 +10,14 @@
 
 	<!-- Replace security context by our implementation. -->
 	<bean name="security.SecurityManager"
-		  class="org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityManager" />
+		  class="org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityManager" />
 	<bean name="security.SecurityContext" scope="thread"
-		  class="org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContextImpl">
+		  class="org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContextImpl">
 		<aop:scoped-proxy/>
   	</bean>
 
 	<util:map id="security.roles" key-type="java.lang.String"
-		value-type="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		value-type="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<entry key="UNASSIGNED" value-ref="UnassignedAuthorizationInfo" />
 		<entry key="GUEST" value-ref="GuestAuthorizationInfo" />
 
@@ -30,7 +30,7 @@
 	</util:map>
 
 	<bean id="UnassignedAuthorizationInfo"
-		class="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		class="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<property name="commandsInclude">
 			<list>
 				<value>command.deskmanager.security.*</value>
@@ -67,7 +67,7 @@
 	</bean>
 
 	<bean id="GuestAuthorizationInfo"
-		class="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		class="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<property name="commandsInclude">
 			<list>
 				<value>.*</value>
@@ -105,7 +105,7 @@
 	</bean>
 
 	<bean id="ConsultingAuthorizationInfo"
-		class="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		class="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<property name="commandsInclude">
 			<list>
 				<value>.*</value>
@@ -143,7 +143,7 @@
 	</bean>
 
 	<bean id="ManagerAuthorizationInfo"
-		class="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		class="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<property name="commandsInclude">
 			<list>
 				<value>.*</value>
@@ -176,7 +176,7 @@
 	</bean>
 
 	<bean id="AdministratorAuthorizationInfo"
-		class="org.geomajas.plugin.deskmanager.security.role.authorization.configuration.DeskmanagerAuthorizationInfo">
+		class="org.geomajas.plugin.deskmanager.security.internal.role.authorization.configuration.DeskmanagerAuthorizationInfo">
 		<property name="commandsInclude">
 			<list>
 				<value>.*</value>

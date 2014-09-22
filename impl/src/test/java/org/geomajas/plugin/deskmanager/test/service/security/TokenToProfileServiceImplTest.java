@@ -1,19 +1,18 @@
 package org.geomajas.plugin.deskmanager.test.service.security;
 
 import org.geomajas.global.GeomajasException;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
-import org.geomajas.plugin.deskmanager.domain.security.GroupMember;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityService;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
-import org.geomajas.plugin.deskmanager.service.security.GroupService;
-import org.geomajas.plugin.deskmanager.service.security.ProfileService;
-import org.geomajas.plugin.deskmanager.service.security.UserService;
-import org.geomajas.plugin.deskmanager.test.security.StubProfileService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.GroupService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UsernamePasswordProfileService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
 import org.geomajas.security.SecurityService;
@@ -34,8 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Test the functions of {@link ProfileService} as implemented by
- * {@link org.geomajas.plugin.deskmanager.service.security.impl.TokenToProfileServiceImpl}.
+ * Test the functions of {@link org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UsernamePasswordProfileService} as implemented by
+ * {@link org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.TokenToProfileServiceImpl}.
  *
  * @author Jan Venstermans
  */
@@ -52,7 +51,7 @@ public class TokenToProfileServiceImplTest {
 	GroupService groupService;
 
 	@Autowired
-	ProfileService profileService;
+	UsernamePasswordProfileService profileService;
 
 	@Autowired
 	DtoConverterService dtoConverterService;
@@ -388,7 +387,7 @@ public class TokenToProfileServiceImplTest {
 	/* private methods */
 	private void logIn(Profile profile) {
 		// register user and create token
-		String token = ((DeskmanagerSecurityService) securityService).registerRole(RetrieveRolesRequest.MANAGER_ID,
+		String token = ((DeskmanagerSecurityService) securityService).registerProfile(RetrieveRolesRequest.MANAGER_ID,
 				profile);
 		// log in with token
 		securityManager.createSecurityContext(token);

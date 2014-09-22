@@ -19,7 +19,7 @@ import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
-import org.geomajas.plugin.deskmanager.domain.security.GroupMember;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.TerritoryCategory;
@@ -27,7 +27,7 @@ import org.geomajas.plugin.deskmanager.domain.security.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.CategoryDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.List;
 

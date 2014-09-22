@@ -18,7 +18,7 @@ import org.geomajas.gwt.client.command.TokenRequestHandler;
  * Interface supporting a token request handler.
  *
  * @author Oliver May
- * @since 1.15.0
+ * @since 1.0.0
  */
 @Api(allMethods = true)
 public interface HasTokenRequestHandler {

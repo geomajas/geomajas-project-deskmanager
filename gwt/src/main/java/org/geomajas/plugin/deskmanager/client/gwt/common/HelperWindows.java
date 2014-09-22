@@ -20,7 +20,6 @@ import java.util.Map;
  * Introduced for testing purposes.
  *
  * @author Jan Venstermans
- * @since 1.15.0
  */
 public interface HelperWindows {
 

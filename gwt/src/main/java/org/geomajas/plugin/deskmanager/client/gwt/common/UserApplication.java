@@ -10,21 +10,17 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.common;
 
-import org.geomajas.annotation.Api;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 import org.geomajas.configuration.client.ClientApplicationInfo;
 import org.geomajas.gwt.client.widget.MapWidget;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
-
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Interface for the deskmanager applications.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api (allMethods = true)
 public interface UserApplication extends UserApplicationConfiguration {
 
 	/**

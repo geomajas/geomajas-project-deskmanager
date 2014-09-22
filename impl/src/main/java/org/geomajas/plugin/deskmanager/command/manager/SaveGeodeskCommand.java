@@ -20,7 +20,7 @@ import org.geomajas.plugin.deskmanager.command.manager.dto.SaveGeodeskRequest;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
 import org.geomajas.plugin.deskmanager.service.common.GeodeskService;
 import org.geomajas.plugin.deskmanager.service.common.TerritoryService;

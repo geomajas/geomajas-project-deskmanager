@@ -10,10 +10,8 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.geomajas.annotation.Api;
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.HandlerRegistration;
 import org.geomajas.configuration.client.ClientApplicationInfo;
 import org.geomajas.gwt.client.GwtCommandCallback;
 import org.geomajas.gwt.client.command.GwtCommandDispatcher;
@@ -22,17 +20,15 @@ import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationE
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.impl.DeskmanagerGwtCommandCallback;
 
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Abstract deskmanager user application. It implements the handlers, provides empty supported widget configuration
  * lists and handles user friendly error messages.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api
 public abstract class AbstractUserApplication implements UserApplication {
 
 	private HandlerManager handlerManager;

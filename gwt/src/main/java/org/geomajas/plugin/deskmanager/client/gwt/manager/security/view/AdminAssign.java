@@ -14,7 +14,7 @@ import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter.AdminAssignHandler;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.List;
 

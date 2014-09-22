@@ -19,7 +19,7 @@ import org.geomajas.plugin.deskmanager.domain.Blueprint;
 import org.geomajas.plugin.deskmanager.domain.ClientLayer;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.LayerModel;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.security.GeomajasSecurityException;
 import org.geomajas.security.SecurityContext;
 import org.hibernate.Criteria;

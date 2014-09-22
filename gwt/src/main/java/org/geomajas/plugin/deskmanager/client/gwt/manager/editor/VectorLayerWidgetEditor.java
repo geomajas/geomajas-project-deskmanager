@@ -19,7 +19,6 @@ import org.geomajas.configuration.client.ClientVectorLayerInfo;
  * Additional functionality: provide the widget editor with the clientVectorLayerInfo.
  * 
  * @author Jan Venstermans
- * @since 1.15.0
  */
 @Api (allMethods = true)
 public interface VectorLayerWidgetEditor extends LayerWidgetEditor {

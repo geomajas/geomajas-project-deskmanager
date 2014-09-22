@@ -1,11 +1,9 @@
 package org.geomajas.plugin.deskmanager.test.service.security;
 
-import org.geomajas.plugin.deskmanager.domain.security.GroupMember;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.User;
-import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
-import org.geomajas.plugin.deskmanager.service.security.GroupService;
-import org.geomajas.plugin.deskmanager.service.security.UserService;
-import org.geomajas.plugin.deskmanager.service.security.impl.UserServiceImpl;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.UserServiceImpl;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
 import org.hibernate.SessionFactory;

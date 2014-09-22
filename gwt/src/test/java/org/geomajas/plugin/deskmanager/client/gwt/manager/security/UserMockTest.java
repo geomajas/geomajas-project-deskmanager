@@ -14,7 +14,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.security.view.UsersAnd
 import org.geomajas.plugin.deskmanager.client.gwt.manager.security.view.UsersView;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.Manager;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

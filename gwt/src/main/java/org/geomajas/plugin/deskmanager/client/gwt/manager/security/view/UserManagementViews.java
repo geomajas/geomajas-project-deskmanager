@@ -12,7 +12,7 @@ package org.geomajas.plugin.deskmanager.client.gwt.manager.security.view;
 
 
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 /**
  * Interface with getters for the different views.
