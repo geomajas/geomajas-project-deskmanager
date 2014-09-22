@@ -24,7 +24,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * Contains unique combination of a {@link User}, {@link Role} and {@link org.geomajas.plugin.deskmanager.domain.security.Territory}.
+ * Contains unique combination of a {@link User}, {@link Role} and
+ * {@link org.geomajas.plugin.deskmanager.domain.security.Territory}.
  *
  * @author Jan De Moerloose
  */

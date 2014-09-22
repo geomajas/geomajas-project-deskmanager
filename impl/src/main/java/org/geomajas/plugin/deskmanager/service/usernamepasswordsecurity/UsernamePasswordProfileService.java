@@ -21,46 +21,44 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Service for creating or deleting {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} object, i.e.
- * linking a {@link User}, a {@link Role} and a
- * {@link org.geomajas.plugin.deskmanager.domain.security.Territory} object.
- *  The type {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} is also known as a Profile.
+ * Service for creating or deleting {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity .GroupMember}
+ * object, i.e. linking a {@link User}, a {@link Role} and a
+ * {@link org.geomajas.plugin.deskmanager.domain.security.Territory}object. The type
+ * {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} is also known as a Profile.
  *
  * @author Jan Venstermans
  */
 public interface UsernamePasswordProfileService {
 
 	/**
-	 * Update the profiles (specifically groups-role combination) of a user.
-	 * All but the Administrator role profiles will be processed;
-	 * profiles of admin roles don't have a group.
+	 * Update the profiles (specifically groups-role combination) of a user. All but the Administrator role profiles
+	 * will be processed; profiles of admin roles don't have a group.
 	 *
 	 * @param userId id of the student
-	 * @param addedProfiles list of profiles containing the role and group information
-	 *                         of profiles to be added to the user
-	 * @param removedProfiles list of profiles containing the role and group information
-	 *                         of profiles to be deleted from the user
+	 * @param addedProfiles list of profiles containing the role and group information of profiles to be added to the
+	 * user
+	 * @param removedProfiles list of profiles containing the role and group information of profiles to be deleted from
+	 * the user
 	 * @throws org.geomajas.global.GeomajasException
 	 */
 	void updateUserProfileList(long userId, List<ProfileDto> addedProfiles,
-							   List<ProfileDto> removedProfiles) throws GeomajasException;
+			List<ProfileDto> removedProfiles) throws GeomajasException;
 
 	/**
-	 * Update the profiles (specifically user-role combination) related to a group.
-	 * All but the Administrator role profiles will be processed;
-	 * for adding admin roles to a user, use {@link #updateAdmins(java.util.List, java.util.List)}.
+	 * Update the profiles (specifically user-role combination) related to a group. All but the Administrator role
+	 * profiles will be processed; for adding admin roles to a user, use {@link #updateAdmins(java.util.List,
+	 * java.util.List)}.
 	 *
 	 * @param territoryId id of the group
-	 * @param addedAssignments map where a key is a userId and
-	 *                              a value is a list of roles to be added for that user.
-	 * @param removedAssignments map where a key is a userId and
-	 *                              a value is a list of roles to be deleted for that user.
+	 * @param addedAssignments map where a key is a userId and a value is a list of roles to be added for that user.
+	 * @param removedAssignments map where a key is a userId and a value is a list of roles to be deleted for that
+	 * user.
 	 */
 	void updateGroupAssignment(long territoryId, Map<Long, List<Role>> addedAssignments,
-							   Map<Long, List<Role>> removedAssignments) throws GeomajasException;
+			Map<Long, List<Role>> removedAssignments) throws GeomajasException;
 
 	/**
-	 *  Update the list of {@link Role#ADMINISTRATOR} users.
+	 * Update the list of {@link Role#ADMINISTRATOR} users.
 	 *
 	 * @param addedAdminUserIds users that have to be added to the administrator list
 	 * @param removedAdminsUserIds users that need to be removed from the administrator list
@@ -69,18 +67,18 @@ public interface UsernamePasswordProfileService {
 	void updateAdmins(List<Long> addedAdminUserIds, List<Long> removedAdminsUserIds) throws GeomajasException;
 
 	/**
-	 * Returns the profiles ({@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} instances) where the
-	 * group is the one provided as the method argument.
+	 * Returns the profiles ({@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember}
+	 * instances) where the group is the one provided as the method argument.
 	 *
-	 * @param territory group for which the {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember}
-	 *                     are searched
+	 * @param territory group for which the
+	 * {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} are searched
 	 * @return list of {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} for the group
 	 */
 	List<GroupMember> getProfilesOfGroup(Territory territory);
 
 	/**
-	 * Returns all users that have a {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember} with
-	 * the {@link Role#ADMINISTRATOR} role.
+	 * Returns all users that have a {@link org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember}
+	 * with the {@link Role#ADMINISTRATOR} role.
 	 *
 	 * @return the list of administrator users
 	 */
