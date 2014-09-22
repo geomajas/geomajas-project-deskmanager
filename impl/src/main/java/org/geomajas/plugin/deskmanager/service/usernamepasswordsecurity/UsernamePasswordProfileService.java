@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity;
 import org.geomajas.global.GeomajasException;
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 

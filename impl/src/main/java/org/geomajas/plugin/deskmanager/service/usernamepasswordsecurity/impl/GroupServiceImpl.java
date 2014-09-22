@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl;
 import com.vividsolutions.jts.geom.Geometry;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.TerritoryCategory;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.service.manager.GenericFileService;
 import org.geomajas.plugin.deskmanager.service.manager.ShapeFileService;

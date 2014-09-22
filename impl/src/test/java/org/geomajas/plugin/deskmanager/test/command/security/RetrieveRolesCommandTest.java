@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.test.command.security;
 import org.geomajas.command.CommandDispatcher;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesResponse;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;

@@ -11,7 +11,7 @@
 package org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl;
 
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.Base64;

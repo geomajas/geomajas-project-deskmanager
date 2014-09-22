@@ -5,7 +5,7 @@ import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.Retr
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityService;

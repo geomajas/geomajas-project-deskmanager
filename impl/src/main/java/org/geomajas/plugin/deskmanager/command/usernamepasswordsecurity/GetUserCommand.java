@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity;
 import org.geomajas.command.Command;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.GetUserRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.GetUserResponse;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.slf4j.Logger;

@@ -13,7 +13,7 @@ package org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity;
 import org.geomajas.command.Command;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.DeleteUserRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.DeleteUserResponse;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.AuthenticationSession;
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationService;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationSessionService;

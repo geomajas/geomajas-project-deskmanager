@@ -10,18 +10,18 @@
  */
 package org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity;
 
-import java.util.List;
-
 import org.geomajas.command.Command;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.FindUsersRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.FindUsersResponse;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Command for finding users.

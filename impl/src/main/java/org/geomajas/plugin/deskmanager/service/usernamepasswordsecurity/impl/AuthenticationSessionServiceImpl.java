@@ -11,7 +11,7 @@
 package org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl;
 
 import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.AuthenticationSession;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationSessionService;
 import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.security.GeomajasSecurityException;
