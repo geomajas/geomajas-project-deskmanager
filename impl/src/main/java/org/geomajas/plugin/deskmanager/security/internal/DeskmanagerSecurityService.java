@@ -19,6 +19,7 @@ import org.geomajas.security.SecurityService;
  * Security service for the deskmanager application, allows registration of login profiles.
  *
  * @author Oliver May
+ * @since 1.0.0
  */
 @Api(allMethods = true)
 @UserImplemented

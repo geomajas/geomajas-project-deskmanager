@@ -14,6 +14,8 @@ import org.geomajas.plugin.deskmanager.security.internal.role.DeskmanagerAuthent
 import org.geomajas.security.Authentication;
 
 /**
+ * Service to register authentication tokens.
+ *
  * @author Oliver May
  */
 public interface AuthenticationTokenService {
@@ -27,7 +29,8 @@ public interface AuthenticationTokenService {
 	Authentication getAuthentication(String token);
 
 	/**
-	 * Invalidate the authentication object
+	 * Invalidate the authentication object.
+	 *
 	 * @param token
 	 */
 	void logout(String token);
