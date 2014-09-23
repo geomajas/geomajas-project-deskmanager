@@ -49,6 +49,12 @@ public class DeskmanagerSecurityServiceImpl implements DeskmanagerSecurityServic
 			auth.setAuthorizations(new BaseAuthorization[] { new DeskmanagerAuthorization(auth.getProfile(),
 					null, applicationContext) });
 			return auth;
+		} else if (authenticationToken.startsWith("guest-")) {
+			String geodeskId = authenticationToken.split("-")[1];
+			DeskmanagerAuthentication auth = new DeskmanagerAuthentication(createGuestProfile());
+			auth.setAuthorizations(new BaseAuthorization[] { new DeskmanagerAuthorization(auth.getProfile(),
+					geodeskId, applicationContext) });
+			return auth;
 		}
 		return tokenService.getAuthentication(authenticationToken);
 	}
