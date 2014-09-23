@@ -24,14 +24,15 @@
 	<description>Geomajas GWT client: Plugin Deskmanager - Javadoc</description>
 
 	<dependencies>
-
-
-
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
