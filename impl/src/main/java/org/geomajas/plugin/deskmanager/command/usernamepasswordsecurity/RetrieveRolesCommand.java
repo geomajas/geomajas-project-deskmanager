@@ -48,7 +48,7 @@ public class RetrieveRolesCommand implements Command<RetrieveRolesRequest, Retri
 	private DeskmanagerSecurityService securityService;
 
 	@Autowired
-	private ProfileService tokenToProfileService;
+	private ProfileService profileService;
 
 	@Autowired
 	private DtoConverterService dtoService;
@@ -75,9 +75,9 @@ public class RetrieveRolesCommand implements Command<RetrieveRolesRequest, Retri
 		// non-manager geodesk
 		} else if (!RetrieveRolesRequest.MANAGER_ID.equals(geodeskId)) {
 			response.setPublicGeodesk(geodeskService.isGeodeskPublic(geodeskId));
-			List<Profile> profilesOfToken = tokenToProfileService.getProfiles(request.getSecurityToken());
+			List<Profile> profilesOfToken = profileService.getProfiles(request.getSecurityToken());
 			if (profilesOfToken.size() == 0 && response.isPublicGeodesk()) {
-				profilesOfToken = Arrays.asList(tokenToProfileService.createGuestProfile());
+				profilesOfToken = Arrays.asList(profileService.createGuestProfile());
 			}
 			for (Profile profile : profilesOfToken) {
 				DeskmanagerAuthorization auth = new DeskmanagerAuthorization(profile, geodeskId, applicationContext);
@@ -88,7 +88,7 @@ public class RetrieveRolesCommand implements Command<RetrieveRolesRequest, Retri
 			}
 		// manager geodesk
 		} else if (RetrieveRolesRequest.MANAGER_ID.equals(geodeskId)) { // manager interface: ignore guest role
-			for (Profile profile : tokenToProfileService.getProfiles(request.getSecurityToken())) {
+			for (Profile profile : profileService.getProfiles(request.getSecurityToken())) {
 				if (!Role.GUEST.equals(profile.getRole())) {
 					String token = securityService.registerProfile(request.getGeodeskId(), profile);
 					profiles.put(token, dtoService.toDto(profile));
