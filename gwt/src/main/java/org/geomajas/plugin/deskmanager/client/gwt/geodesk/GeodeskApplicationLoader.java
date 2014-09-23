@@ -10,7 +10,12 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Widget;
 import org.geomajas.annotation.Api;
+import org.geomajas.command.dto.GetConfigurationResponse;
 import org.geomajas.gwt.client.command.TokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.common.HasTokenRequestHandler;
@@ -22,12 +27,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationE
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.i18n.GeodeskMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.impl.LoadingScreen;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskResponse;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Widget;
+import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUserData;
 
 /**
  * Main class for deskmanager applications. This entrypoint will show a loading screen and will load the deskmanager
@@ -102,17 +102,19 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 		GeodeskInitializer initializer = new GeodeskInitializer(fallbackHandler);
 		initializer.addHandler(new GeodeskInitializationHandler() {
 
-			public void initialized(InitializeGeodeskResponse response) {
-				GdmLayout.version = response.getDeskmanagerVersion();
-				GdmLayout.build = response.getDeskmanagerBuild();
+			public void initialized(GetConfigurationResponse response) {
+				DeskmanagerApplicationInfoUserData userData =
+						(DeskmanagerApplicationInfoUserData) response.getApplication().getUserData();
+				GdmLayout.version = userData.getDeskmanagerVersion();
+				GdmLayout.build = userData.getDeskmanagerBuild();
 
 				// Load geodesk from registry
-				geodesk = UserApplicationRegistry.getInstance().get(response.getUserApplicationKey());
+				geodesk = UserApplicationRegistry.getInstance().get(userData.getUserApplicationKey());
 
 				if (geodesk != null) {
 
-					geodesk.setApplicationId(response.getGeodeskIdentifier());
-					geodesk.setClientApplicationInfo(response.getClientApplicationInfo());
+					geodesk.setApplicationId(response.getApplication().getId());
+					geodesk.setClientApplicationInfo(response.getApplication());
 
 					// Register the geodesk to the loading screen (changes banner, and name), and set the page title
 					loadScreen.registerGeodesk(geodesk);

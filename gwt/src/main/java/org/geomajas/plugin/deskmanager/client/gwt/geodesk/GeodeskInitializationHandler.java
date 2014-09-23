@@ -11,7 +11,7 @@
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk;
 
 import org.geomajas.annotation.Api;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskResponse;
+import org.geomajas.command.dto.GetConfigurationResponse;
 
 
 
@@ -29,6 +29,6 @@ public interface GeodeskInitializationHandler {
 	 * 
 	 * @param response the response
 	 */
-	void initialized(InitializeGeodeskResponse response);
+	void initialized(GetConfigurationResponse response);
 
 }

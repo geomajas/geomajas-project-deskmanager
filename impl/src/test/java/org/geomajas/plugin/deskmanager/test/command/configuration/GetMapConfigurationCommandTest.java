@@ -8,7 +8,7 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.geomajas.plugin.deskmanager.test.command.common;
+package org.geomajas.plugin.deskmanager.test.command.configuration;
 
 import org.geomajas.command.CommandDispatcher;
 import org.geomajas.command.CommandResponse;

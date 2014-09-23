@@ -8,12 +8,13 @@
  * by the Geomajas Contributors License Agreement. For full licensing
  * details, see LICENSE.txt in the project root.
  */
-package org.geomajas.plugin.deskmanager.test.command.common;
+package org.geomajas.plugin.deskmanager.test.command.configuration;
 
 import org.geomajas.command.CommandDispatcher;
 import org.geomajas.command.CommandResponse;
 import org.geomajas.command.dto.GetConfigurationRequest;
 import org.geomajas.command.dto.GetConfigurationResponse;
+import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUserData;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.test.LoginBeforeTestingWithPredefinedProfileBase;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
@@ -52,6 +53,9 @@ public class GetConfigurationCommandTest extends LoginBeforeTestingWithPredefine
 
 		Assert.assertTrue(response.getErrorMessages().isEmpty());
 		Assert.assertNotNull(response.getApplication());
+		Assert.assertTrue(response.getApplication().getUserData() instanceof DeskmanagerApplicationInfoUserData);
+		Assert.assertEquals(((DeskmanagerApplicationInfoUserData) response.getApplication().getUserData())
+				.getUserApplicationKey(), ExampleDatabaseProvisioningServiceImpl.CLIENTAPPLICATION_ID);
 	}
 
 	@Test

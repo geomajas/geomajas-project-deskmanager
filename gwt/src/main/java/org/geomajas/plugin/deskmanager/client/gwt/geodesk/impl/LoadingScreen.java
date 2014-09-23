@@ -23,6 +23,7 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Progressbar;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import org.geomajas.command.dto.GetConfigurationResponse;
 import org.geomajas.gwt.client.Geomajas;
 import org.geomajas.gwt.client.command.GwtCommandDispatcher;
 import org.geomajas.gwt.client.command.event.DispatchStoppedEvent;
@@ -38,7 +39,6 @@ import org.geomajas.plugin.deskmanager.client.gwt.geodesk.GeodeskInitializationH
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.i18n.GeodeskMessages;
-import org.geomajas.plugin.deskmanager.command.geodesk.dto.InitializeGeodeskResponse;
 
 /**
  * <p>
@@ -231,7 +231,7 @@ public class LoadingScreen extends VLayout implements GeodeskInitializationHandl
 		}
 	}
 
-	public void initialized(InitializeGeodeskResponse response) {
+	public void initialized(GetConfigurationResponse response) {
 		// TODO
 	}
 }
