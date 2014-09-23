@@ -1,7 +1,7 @@
 package org.geomajas.plugin.deskmanager.test.service.security;
 
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.service.security.GroupService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.GroupService;
 import org.geomajas.security.GeomajasSecurityException;
 import org.hibernate.SessionFactory;
 import org.junit.Assert;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 

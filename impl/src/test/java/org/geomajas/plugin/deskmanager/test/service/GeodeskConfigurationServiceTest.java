@@ -20,7 +20,7 @@ import org.geomajas.plugin.deskmanager.domain.Blueprint;
 import org.geomajas.plugin.deskmanager.domain.ClientLayer;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityService;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
 import org.geomajas.plugin.deskmanager.service.common.BlueprintService;
 import org.geomajas.plugin.deskmanager.service.common.GeodeskConfigurationService;
@@ -85,7 +85,7 @@ public class GeodeskConfigurationServiceTest extends SecurityContainingTestBase 
 	@Before
 	public void setup() throws Exception {
 		// First profile in list is admin
-		String token = ((DeskmanagerSecurityService) securityService).registerRole("42",
+		String token = ((DeskmanagerSecurityService) securityService).registerProfile("42",
 				((StubProfileService) profileService).getPredefinedProfiles().get(0));
 		// Log in
 		securityManager.createSecurityContext(token);

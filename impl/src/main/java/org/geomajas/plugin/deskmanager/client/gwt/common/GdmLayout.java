@@ -10,16 +10,12 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.common;
 
-import org.geomajas.annotation.Api;
-
 /**
  * Utility class to change default behaviour of the deskmanager layouts.
  * 
  * @author Oliver May
  * 
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public final class GdmLayout {
 
 	/**

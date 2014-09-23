@@ -1,11 +1,12 @@
 package org.geomajas.plugin.deskmanager.test;
 
 import org.geomajas.global.GeomajasException;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityService;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityServiceImpl;
 import org.geomajas.plugin.deskmanager.test.security.StubProfileService;
 import org.geomajas.security.*;
 import org.junit.Before;
@@ -48,15 +49,15 @@ public abstract class LoginBeforeTestingWithPredefinedProfileBase extends Securi
 		createToken(pService, deskmanagerSecurityService, Role.ADMINISTRATOR);
 		createToken(pService, deskmanagerSecurityService, Role.DESK_MANAGER);
 
-		String guestToken = deskmanagerSecurityService.registerRole(RetrieveRolesRequest.MANAGER_ID,
-				DeskmanagerSecurityService.createGuestProfile());
+		String guestToken = deskmanagerSecurityService.registerProfile(RetrieveRolesRequest.MANAGER_ID,
+				DeskmanagerSecurityServiceImpl.createGuestProfile());
 		tokenMap.put(Role.GUEST, guestToken);
 	}
 
 	private void createToken(StubProfileService pService,
 							 DeskmanagerSecurityService deskmanagerSecurityService, Role role) {
 		Profile profile = pService.getProfileByRole(role);
-		String token = deskmanagerSecurityService.registerRole(RetrieveRolesRequest.MANAGER_ID,
+		String token = deskmanagerSecurityService.registerProfile(RetrieveRolesRequest.MANAGER_ID,
 				profile);
 		tokenMap.put(role, token);
 	}

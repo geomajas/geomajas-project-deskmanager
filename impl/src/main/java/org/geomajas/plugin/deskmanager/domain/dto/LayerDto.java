@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.geomajas.annotation.Api;
 import org.geomajas.configuration.client.ClientLayerInfo;
 import org.geomajas.configuration.client.ClientWidgetInfo;
 
@@ -23,9 +22,7 @@ import org.geomajas.configuration.client.ClientWidgetInfo;
  * Dto object for a {@link org.geomajas.plugin.deskmanager.domain.ClientLayer}.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public class LayerDto implements Serializable {
 
 	private static final long serialVersionUID = 100L;

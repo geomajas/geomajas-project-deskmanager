@@ -11,26 +11,20 @@
 package org.geomajas.plugin.deskmanager.test.command.security;
 
 import org.geomajas.command.CommandDispatcher;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesResponse;
-import org.geomajas.plugin.deskmanager.domain.security.AuthenticationSession;
-import org.geomajas.plugin.deskmanager.domain.security.User;
-import org.geomajas.plugin.deskmanager.security.AuthenticationService;
-import org.geomajas.plugin.deskmanager.service.security.UserService;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesResponse;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.transform.DistinctRootEntityResultTransformer;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 /**
  * @author Oliver May

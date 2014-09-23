@@ -21,8 +21,8 @@ import org.geomajas.gwt.client.command.event.TokenChangedHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.HelperWindows;
 import org.geomajas.plugin.deskmanager.client.gwt.common.LogoutHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.ProfileRequestCallback;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesResponse;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesResponse;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 

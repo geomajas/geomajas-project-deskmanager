@@ -9,10 +9,11 @@
 
 	<source path="command/common/dto" />
 	<source path="command/manager/dto" />
-	<source path="command/security/dto" />
+	<source path="command/usernamepasswordsecurity/dto" />
 
 	<source path="domain/dto" />
 	<source path="domain/security/dto" />
+	<source path="domain/usernamepasswordsecurity/dto" />
 
 	<source path="configuration" />
 	

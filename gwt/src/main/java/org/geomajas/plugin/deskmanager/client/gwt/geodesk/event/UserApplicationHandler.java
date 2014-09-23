@@ -10,17 +10,13 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk.event;
 
-import org.geomajas.annotation.Api;
-
 import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Throws onUserApplicationLoad(UserApplicationEvent) when the user application is loaded.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api
 public interface UserApplicationHandler extends EventHandler {
 
 	/**

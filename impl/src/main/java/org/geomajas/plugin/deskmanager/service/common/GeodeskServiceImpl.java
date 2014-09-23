@@ -18,7 +18,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.security.GeomajasSecurityException;
 import org.geomajas.security.SecurityContext;
 import org.hibernate.Criteria;

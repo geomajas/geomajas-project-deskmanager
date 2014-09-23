@@ -1,21 +1,20 @@
 package org.geomajas.plugin.deskmanager.test.service.security;
 
 import junit.framework.Assert;
-import org.geomajas.plugin.deskmanager.domain.security.AuthenticationSession;
-import org.geomajas.plugin.deskmanager.domain.security.GroupMember;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.AuthenticationSession;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
-import org.geomajas.plugin.deskmanager.domain.security.User;
-import org.geomajas.plugin.deskmanager.security.AuthenticationService;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationService;
 import org.geomajas.plugin.deskmanager.security.ProfileService;
-import org.geomajas.plugin.deskmanager.service.security.AuthenticationSessionService;
-import org.geomajas.plugin.deskmanager.service.security.UserService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationSessionService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.DistinctRootEntityResultTransformer;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import java.util.List;
 
 /**
  * Test the functions of {@link AuthenticationService} as implemented by
- * {@link org.geomajas.plugin.deskmanager.service.security.impl.AuthenticationServiceImpl}.
+ * {@link org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.AuthenticationServiceImpl}.
  *
  * @author Jan Venstermans
  */

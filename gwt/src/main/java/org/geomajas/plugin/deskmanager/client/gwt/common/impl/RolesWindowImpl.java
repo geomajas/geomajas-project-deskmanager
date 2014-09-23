@@ -43,15 +43,11 @@ public class RolesWindowImpl implements HelperWindows.RolesChoiceWindow {
 	private static final CommonMessages MESSAGES = GWT.create(CommonMessages.class);
 
 	private final List<Role> roleOrderInWindow = Arrays.asList(Role.ADMINISTRATOR, Role.DESK_MANAGER, Role.EDITING_USER,
-			Role.CONSULTING_USER, Role.GUEST, Role.UNASSIGNED);
+			Role.CONSULTING_USER, Role.GUEST);
 
 	/**
 	 * Ask the user to select a role.
 	 *
-	 * @param onlyAdminRoles
-	 *            is true the window will only ask for admin roles. This is introduced for the 'beheersmodule'. TODO:
-	 *            make sure the getAvailableRolesCommand only returns the correct roles so that this constructor can be
-	 *            removed.
 	 * @param roles a list of roles.
 	 * @param callback the callback, called when a role is selected.
 	 */
@@ -114,8 +110,6 @@ public class RolesWindowImpl implements HelperWindows.RolesChoiceWindow {
 
 	private String getRoleDescription(Role role) {
 		switch (role)  {
-			case UNASSIGNED:
-				return MESSAGES.roleUnassignedDescription();
 			case GUEST:
 				return MESSAGES.roleGuestDescription();
 			case ADMINISTRATOR:

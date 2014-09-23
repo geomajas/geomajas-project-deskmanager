@@ -69,4 +69,22 @@ public class GetConfigurationCommandTest extends LoginBeforeTestingWithPredefine
 		Assert.assertFalse(response.getErrorMessages().isEmpty());
 		Assert.assertEquals(GeomajasSecurityException.class.getName(), response.getExceptions().get(0).getClassName());
 	}
+
+	@Test
+	public void testGetPublicConfigurationWithoutAuthentication() {
+		GetConfigurationRequest request = new GetConfigurationRequest();
+		request.setApplicationId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE);
+
+		CommandResponse response = dispatcher.execute(
+				GetConfigurationRequest.COMMAND, request, null, "en");
+
+		Assert.assertTrue(response instanceof GetConfigurationResponse);
+		Assert.assertTrue(response.getErrorMessages().isEmpty());
+		Assert.assertNotNull(((GetConfigurationResponse) response).getApplication());
+		Assert.assertTrue(((GetConfigurationResponse) response).getApplication().getUserData() instanceof
+				DeskmanagerApplicationInfoUserData);
+		Assert.assertEquals(((DeskmanagerApplicationInfoUserData) ((GetConfigurationResponse) response).getApplication
+				().getUserData())
+				.getUserApplicationKey(), ExampleDatabaseProvisioningServiceImpl.CLIENTAPPLICATION_ID);
+	}
 }

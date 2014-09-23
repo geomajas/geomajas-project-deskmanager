@@ -17,7 +17,6 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.Layout;
-import org.geomajas.annotation.Api;
 import org.geomajas.gwt.client.command.TokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.CommonClientBundle;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
@@ -27,7 +26,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.common.i18n.CommonMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.common.impl.DeskmanagerTokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.impl.LoadingScreen;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.impl.ManagerInitializer;
-import org.geomajas.plugin.deskmanager.command.security.dto.RetrieveRolesRequest;
+import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 
 /**
@@ -35,9 +34,7 @@ import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
  * will load the management application, if it's needed asking for a login role.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public final class ManagerApplicationLoader implements HasTokenRequestHandler {
 
 	private static final ManagerApplicationLoader INSTANCE = new ManagerApplicationLoader();

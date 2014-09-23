@@ -12,11 +12,10 @@ package org.geomajas.plugin.deskmanager.test.security;
 
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityService;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityServiceImpl;
 import org.geomajas.plugin.deskmanager.service.common.TerritoryService;
-import org.geomajas.plugin.deskmanager.service.security.impl.TokenToProfileServiceImpl;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.TokenToProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class StubProfileService extends TokenToProfileServiceImpl {
 		deskEditor.setTerritory(groupService.getByCode("BE"));
 		profiles.add(deskEditor);
 
-		profiles.add(DeskmanagerSecurityService.createGuestProfile());
+		profiles.add(DeskmanagerSecurityServiceImpl.createGuestProfile());
 
 		return profiles;
 	}

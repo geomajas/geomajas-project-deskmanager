@@ -10,16 +10,13 @@
  */
 package org.geomajas.plugin.deskmanager.domain.dto;
 
-import org.geomajas.annotation.Api;
 import org.geomajas.configuration.client.ClientUserDataInfo;
 
 /**
  * Extra information that is attached to the ApplicationInfo of deskmanager geodesks.
  *
  * @author Oliver May
- * @since 1.0.0
  */
-@Api(allMethods = true)
 public class DeskmanagerApplicationInfoUserData implements ClientUserDataInfo {
 
 	private String userApplicationKey;

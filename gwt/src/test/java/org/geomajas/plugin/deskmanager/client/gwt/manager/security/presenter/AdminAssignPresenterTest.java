@@ -2,12 +2,11 @@ package org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter;
 
 import junit.framework.Assert;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.security.UserMockTest;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.security.view.EditableLoadingView;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.UserDto;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

@@ -10,18 +10,14 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk.event;
 
-import org.geomajas.annotation.Api;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
-
 import com.google.gwt.event.shared.GwtEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
 
 /**
  * User application event thrown by the {@link UserApplicationHandler}.
  * 
  * @author Oliver May
- * @since 1.0.0
  */
-@Api
 public class UserApplicationEvent extends GwtEvent<UserApplicationHandler> {
 
 	public static final Type<UserApplicationHandler> TYPE = new Type<UserApplicationHandler>();

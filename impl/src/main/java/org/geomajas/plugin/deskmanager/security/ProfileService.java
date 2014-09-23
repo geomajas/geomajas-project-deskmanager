@@ -10,21 +10,23 @@
  */
 package org.geomajas.plugin.deskmanager.security;
 
-import java.util.List;
-
 import org.geomajas.annotation.Api;
+import org.geomajas.annotation.UserImplemented;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
+
+import java.util.List;
 
 /**
  * Provides a list of profiles that are valid for the current logged in user. These profiles can come from HTTP headers
  * or another database like single sign on.
  *
- * Better name would be TokenToProfileService.
- * 
+ * This is the main hook for using custom authentication.
+ *
  * @author Oliver May
  * @since 1.0.0
  */
 @Api(allMethods = true)
+@UserImplemented
 public interface ProfileService {
 
 	/**
@@ -35,19 +37,6 @@ public interface ProfileService {
 	 * @return the list of profiles, must not be null.
 	 */
 	List<Profile> getProfiles(String securityToken);
-
-	/**
-	 * Register profiles in a session and return a token.<br>
-	 *
-	 * @param session
-	 * @return token
-	 * @deprecated Deprecated because of the argument type LoginSession:
-	 * 	not api, should have been an interface at least.
-	 * This method should not be in the interface (can be in implementation).
-	 * Use {@link AuthenticationService} to generate tokens.
-	 */
-	@Deprecated
-	String registerProfilesForUser(LoginSession session);
 
 	/**
 	 * Create a default guest profile.

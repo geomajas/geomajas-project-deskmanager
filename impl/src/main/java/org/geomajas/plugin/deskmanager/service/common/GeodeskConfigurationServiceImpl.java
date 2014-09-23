@@ -31,7 +31,7 @@ import org.geomajas.plugin.deskmanager.domain.ClientLayer;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUserData;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.security.DeskmanagerSecurityContext;
+import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityContext;
 import org.geomajas.plugin.runtimeconfig.service.Rewirable;
 import org.geomajas.security.SecurityContext;
 import org.geomajas.service.DtoConverterService;

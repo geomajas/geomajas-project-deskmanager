@@ -1,15 +1,15 @@
 package org.geomajas.plugin.deskmanager.test.service.security;
 
 import org.geomajas.global.GeomajasException;
-import org.geomajas.plugin.deskmanager.domain.security.GroupMember;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.geomajas.plugin.deskmanager.domain.security.User;
+import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 import org.geomajas.plugin.deskmanager.service.common.DtoConverterService;
-import org.geomajas.plugin.deskmanager.service.security.GroupService;
-import org.geomajas.plugin.deskmanager.service.security.ProfileService;
-import org.geomajas.plugin.deskmanager.service.security.UserService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.GroupService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UsernamePasswordProfileService;
+import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
 import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
 import org.hibernate.SessionFactory;
@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Test the functions of {@link ProfileService} as implemented by
- * {@link org.geomajas.plugin.deskmanager.service.security.impl.ProfileServiceImpl}.
+ * Test the functions of {@link org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UsernamePasswordProfileService} as implemented by
+ * {@link org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.UsernamePasswordProfileServiceImpl}.
  *
  * @author Jan Venstermans
  */
@@ -46,7 +46,7 @@ public class ProfileServiceTest {
 	GroupService groupService;
 
 	@Autowired
-	ProfileService profileService;
+	UsernamePasswordProfileService profileService;
 
 	@Autowired
 	DtoConverterService dtoConverterService;

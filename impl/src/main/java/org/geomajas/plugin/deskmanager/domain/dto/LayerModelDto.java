@@ -10,21 +10,18 @@
  */
 package org.geomajas.plugin.deskmanager.domain.dto;
 
+import org.geomajas.configuration.client.ClientWidgetInfo;
+import org.geomajas.configuration.client.ScaleInfo;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.geomajas.annotation.Api;
-import org.geomajas.configuration.client.ClientWidgetInfo;
-import org.geomajas.configuration.client.ScaleInfo;
 
 /**
  * Dto object for the LayerModel.
  * 
  * @author Kristof Heirwegh
- * @since 1.0.0
  */
-@Api
 public class LayerModelDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -60,9 +57,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the id for this layermodel.
 	 * @return the id
-	 * @since 1.0.0
 	 */
-	@Api
 	public String getId() {
 		return id;
 	}
@@ -74,9 +69,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Is this layermodel active.
 	 * @return true if active
-	 * @since 1.0.0
 	 */
-	@Api
 	public boolean isActive() {
 		return active;
 	}
@@ -88,9 +81,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Is this layermodel public.
 	 * @return true if public
-	 * @since 1.0.0
 	 */
-	@Api
 	public boolean isPublic() {
 		return publiek;
 	}
@@ -102,9 +93,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the name of this layermodel.
 	 * @return the name
-	 * @since 1.0.0
 	 */
-	@Api
 	public String getName() {
 		return name;
 	}
@@ -116,9 +105,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the client layerid for this layermodel.
 	 * @return the id
-	 * @since 1.0.0
 	 */
-	@Api
 	public String getClientLayerId() {
 		return clientLayerId;
 	}
@@ -130,9 +117,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the minimum scale for this layermodel.
 	 * @return the minimum scale
-	 * @since 1.0.0
 	 */
-	@Api
 	public ScaleInfo getMinScale() {
 		return minScale;
 	}
@@ -144,9 +129,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the max scale for this layermodel.
 	 * @return the id
-	 * @since 1.0.0
 	 */
-	@Api
 	public ScaleInfo getMaxScale() {
 		return maxScale;
 	}
@@ -190,9 +173,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Is this layermodel default visible.
 	 * @return true if visible
-	 * @since 1.0.0
 	 */
-	@Api
 	public boolean isDefaultVisible() {
 		return defaultVisible;
 	}
@@ -240,9 +221,7 @@ public class LayerModelDto implements Serializable {
 	/**
 	 * Get the widget infos for this layermodel.
 	 * @return the widget infos
-	 * @since 1.0.0
 	 */
-	@Api
 	public Map<String, ClientWidgetInfo> getWidgetInfo() {
 		return widgetInfo;
 	}
