@@ -33,7 +33,7 @@ import java.io.IOException;
 @Controller("/genericFileUpload")
 public class GenericFileUploadController {
 
-	private final Logger log = LoggerFactory.getLogger(GenericFileUploadController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GenericFileUploadController.class);
 
 	@Autowired
 	protected GenericFileService genericFileService;
@@ -45,7 +45,7 @@ public class GenericFileUploadController {
 	public ModelAndView handleUpload(@RequestParam("uploadFormElement") MultipartFile file) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(GenericFileUploadView.VIEW_NAME);
-		log.info("Uploading file: " + file);
+		LOG.info("Uploading file: " + file);
 		String message;
 
 		if (file.isEmpty()) {

@@ -10,10 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.util;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.geomajas.configuration.client.ClientMapInfo;
 import org.geomajas.configuration.client.ClientWidgetInfo;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
@@ -23,11 +19,14 @@ import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Utility class that provides easy access to geodesk components.
- * 
+ *
  * @author Oliver May
- * 
  */
 public final class GeodeskDtoUtil {
 
@@ -37,9 +36,8 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from the blueprint's and geodesks main map. If clientWidgetInfo's are
 	 * defined on both blueprint and geodesk level, that defined in the geodesk is used.
-	 * 
-	 * @param geodesk
-	 *            the blueprint
+	 *
+	 * @param geodesk the blueprint
 	 * @return List of ClientWidgetInfo as defined in the blueprint
 	 */
 	public static Map<String, ClientWidgetInfo> getMainMapClientWidgetInfo(BaseGeodeskDto geodesk) {
@@ -59,9 +57,8 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from a userapplications main map. This consists of the widget infos
 	 * defined in the UserApplication itself, and those defined in the {@link UserApplicationInfo#getApplicationInfo()}.
-	 * 
-	 * @param uai
-	 *            the user application info
+	 *
+	 * @param uai the user application info
 	 * @return List of ClientWidgetInfo as defined in the user application
 	 */
 	public static Map<String, ClientWidgetInfo> getMainMapClientWidgetInfo(UserApplicationInfo uai) {
@@ -79,9 +76,8 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from the blueprint's and geodesks overview map. If clientWidgetInfo's are
 	 * defined on both blueprint and geodesk level, that defined in the geodesk is used.
-	 * 
-	 * @param geodesk
-	 *            the blueprint
+	 *
+	 * @param geodesk the blueprint
 	 * @return List of ClientWidgetInfo as defined in the blueprint
 	 */
 	public static Map<String, ClientWidgetInfo> getOverviewMapClientWidgetInfo(BaseGeodeskDto geodesk) {
@@ -99,9 +95,8 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from a userapplications overview map. This consists of the widget infos
 	 * defined in the UserApplication itself, and those defined in the {@link UserApplicationInfo#getApplicationInfo()}.
-	 * 
-	 * @param uai
-	 *            the user application info
+	 *
+	 * @param uai the user application info
 	 * @return List of ClientWidgetInfo as defined in the user application
 	 */
 	public static Map<String, ClientWidgetInfo> getOverviewMapClientWidgetInfo(UserApplicationInfo uai) {
@@ -119,9 +114,8 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from the blueprint's and geodesks application info. If clientWidgetInfo's
 	 * are defined on both blueprint and geodesk level, that defined in the geodesk is used.
-	 * 
-	 * @param geodesk
-	 *            the blueprint
+	 *
+	 * @param geodesk the blueprint
 	 * @return List of ClientWidgetInfo as defined in the blueprint
 	 */
 	public static Map<String, ClientWidgetInfo> getApplicationClientWidgetInfo(BaseGeodeskDto geodesk) {
@@ -138,11 +132,10 @@ public final class GeodeskDtoUtil {
 
 	/**
 	 * Retrieve the list of ClientWidgetInfo's from a userapplications application info. This consists of the widget
-	 * infos defined in the UserApplication itself, and those defined in the
-	 * {@link UserApplicationInfo#getApplicationInfo()}.
-	 * 
-	 * @param uai
-	 *            the user application info
+	 * infos defined in the UserApplication itself, and those defined in the {@link
+	 * UserApplicationInfo#getApplicationInfo()}.
+	 *
+	 * @param uai the user application info
 	 * @return List of ClientWidgetInfo as defined in the user application
 	 */
 	public static Map<String, ClientWidgetInfo> getApplicationClientWidgetInfo(UserApplicationInfo uai) {
@@ -155,9 +148,8 @@ public final class GeodeskDtoUtil {
 
 	/**
 	 * Retrieve the mapinfo from the geodesk's main map.
-	 * 
-	 * @param geodesk
-	 *            the geodesk
+	 *
+	 * @param geodesk the geodesk
 	 * @return the mapInfo
 	 */
 	public static ClientMapInfo getMainMap(BaseGeodeskDto geodesk) {
@@ -167,16 +159,14 @@ public final class GeodeskDtoUtil {
 	/**
 	 * Retrieve the main map layers from the geodesk. If it's a geodesk without layers, the layers from the blueprint
 	 * are retrieved.
-	 * 
-	 * @param geodesk
-	 *            the geodesk
+	 *
+	 * @param geodesk the geodesk
 	 * @return a list of layers
 	 */
 	public static List<LayerDto> getMainMapLayers(BaseGeodeskDto geodesk) {
-		if (geodesk instanceof GeodeskDto) {
-			if (geodesk.getMainMapLayers() == null || geodesk.getMainMapLayers().isEmpty()) {
-				return getMainMapLayers(((GeodeskDto) geodesk).getBlueprint());
-			}
+		if (geodesk instanceof GeodeskDto && (geodesk.getMainMapLayers() == null
+				|| geodesk.getMainMapLayers().isEmpty())) {
+			return getMainMapLayers(((GeodeskDto) geodesk).getBlueprint());
 		}
 		return geodesk.getMainMapLayers();
 	}

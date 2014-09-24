@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Component(AuthenticateUserRequest.COMMAND)
 public class AuthenticateUserCommand implements Command<AuthenticateUserRequest, AuthenticationResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(AuthenticateUserCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AuthenticateUserCommand.class);
 
 	@Autowired
 	private AuthenticationService authenticationService;
@@ -44,10 +44,10 @@ public class AuthenticateUserCommand implements Command<AuthenticateUserRequest,
 					username, request.getPassword());
 			response.setAuthenticationToken(token);
 			response.setUsername(username);
-			log.info("Authentication Request (via username and password) for user "
+			LOG.info("Authentication Request (via username and password) for user "
 					+ request.getUserName() + " successful.");
 		} catch (GeomajasSecurityException ex) {
-			log.info("Authentication exception for user " + username);
+			LOG.info("Authentication exception for user " + username);
 			// return an empty response, in compliance with static security
 		}
 	}

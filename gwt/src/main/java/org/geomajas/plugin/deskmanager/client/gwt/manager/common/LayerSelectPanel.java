@@ -10,14 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-
-import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
-import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
-
 import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.widgets.Img;
 import com.smartgwt.client.widgets.TransferImgButton;
@@ -27,17 +19,23 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.LayoutSpacer;
 import com.smartgwt.client.widgets.layout.VLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
+import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Contains two layertreepanels which are used to make a selection (target) of some layers (source).
- * 
+ *
  * @author Kristof Heirwegh
  */
 public class LayerSelectPanel extends HLayout {
 
 	private static final ManagerMessages MESSAGES = GWT.create(ManagerMessages.class);
 
-	
 	private LayerListGrid sourceLayersGrid;
 
 	private LayerListGrid targetLayersGrid;
@@ -92,13 +90,13 @@ public class LayerSelectPanel extends HLayout {
 
 	/**
 	 * Set data for the LayerSelectPanel.
-	 * 
+	 *
 	 * @param sourceLayers the available layers from the blueprint or userapplication
 	 * @param userLayers the available layers for the user
 	 * @param selectedLayers the layers already selected
 	 * @param includeNonPublic whether to include public layers.
 	 */
-	public void setValues(List<LayerDto> sourceLayers, List<LayerDto> userLayers, List<LayerDto> selectedLayers, 
+	public void setValues(List<LayerDto> sourceLayers, List<LayerDto> userLayers, List<LayerDto> selectedLayers,
 			boolean includeNonPublic) {
 		clearValues();
 		if (sourceLayers != null) {
@@ -106,45 +104,42 @@ public class LayerSelectPanel extends HLayout {
 			ListIterator<LayerDto> li = sourceLayers.listIterator(sourceLayers.size());
 			while (li.hasPrevious()) {
 				LayerDto layer = li.previous();
-				if (layer.getLayerModel().isPublic() || includeNonPublic) {
-					if (selectedLayers == null || !selectedLayers.contains(layer)) {
-						ListGridRecord record = new ListGridRecord();
-						if (layer.getClientLayerInfo() != null) {
-							record.setAttribute(LayerListGrid.FLD_NAME, layer.getClientLayerInfo().getLabel());
-						} else if (layer.getReferencedLayerInfo() != null) {
-							record.setAttribute(LayerListGrid.FLD_NAME, layer.getReferencedLayerInfo().getLabel());
-						}
-						record.setAttribute(LayerListGrid.FLD_PUBLIC, layer.getLayerModel().isPublic());
-						record.setAttribute(LayerListGrid.FLD_OBJECT, layer);
-						sourceLayersGrid.addData(record);
+				if ((layer.getLayerModel().isPublic() || includeNonPublic) && (selectedLayers == null ||
+						!selectedLayers.contains(layer))) {
+					ListGridRecord record = new ListGridRecord();
+					if (layer.getClientLayerInfo() != null) {
+						record.setAttribute(LayerListGrid.FLD_NAME, layer.getClientLayerInfo().getLabel());
+					} else if (layer.getReferencedLayerInfo() != null) {
+						record.setAttribute(LayerListGrid.FLD_NAME, layer.getReferencedLayerInfo().getLabel());
 					}
+					record.setAttribute(LayerListGrid.FLD_PUBLIC, layer.getLayerModel().isPublic());
+					record.setAttribute(LayerListGrid.FLD_OBJECT, layer);
+					sourceLayersGrid.addData(record);
 				}
 			}
 		}
-		
+
 		if (userLayers != null) {
 			//Reverse order
 			ListIterator<LayerDto> li = userLayers.listIterator(userLayers.size());
 			while (li.hasPrevious()) {
 				LayerDto layer = li.previous();
-				if (layer.getLayerModel().isPublic() || includeNonPublic) {
-					if ( (selectedLayers == null || !selectedLayers.contains(layer)) &&   
-							(sourceLayers == null || !sourceLayers.contains(layer)) ) {
-						ListGridRecord record = new ListGridRecord();
-						if (layer.getClientLayerInfo() != null) {
-							record.setAttribute(LayerListGrid.FLD_NAME, layer.getClientLayerInfo().getLabel());
-						} else if (layer.getReferencedLayerInfo() != null) {
-							record.setAttribute(LayerListGrid.FLD_NAME, layer.getReferencedLayerInfo().getLabel());
-						}
-						record.setAttribute(LayerListGrid.FLD_PUBLIC, layer.getLayerModel().isPublic());
-						record.setAttribute(LayerListGrid.FLD_OBJECT, layer);
-						record.setAttribute(LayerListGrid.FLD_USER, !layer.getLayerModel().isReadOnly());
-						sourceLayersGrid.addData(record);
+				if ((layer.getLayerModel().isPublic() || includeNonPublic) && ((selectedLayers == null ||
+						!selectedLayers.contains(layer)) && (sourceLayers == null || !sourceLayers.contains(layer)))) {
+					ListGridRecord record = new ListGridRecord();
+					if (layer.getClientLayerInfo() != null) {
+						record.setAttribute(LayerListGrid.FLD_NAME, layer.getClientLayerInfo().getLabel());
+					} else if (layer.getReferencedLayerInfo() != null) {
+						record.setAttribute(LayerListGrid.FLD_NAME, layer.getReferencedLayerInfo().getLabel());
 					}
+					record.setAttribute(LayerListGrid.FLD_PUBLIC, layer.getLayerModel().isPublic());
+					record.setAttribute(LayerListGrid.FLD_OBJECT, layer);
+					record.setAttribute(LayerListGrid.FLD_USER, !layer.getLayerModel().isReadOnly());
+					sourceLayersGrid.addData(record);
 				}
 			}
 		}
-		
+
 		if (selectedLayers != null) {
 			//Reverse order
 			ListIterator<LayerDto> li = selectedLayers.listIterator(selectedLayers.size());
@@ -166,7 +161,7 @@ public class LayerSelectPanel extends HLayout {
 	public List<LayerDto> getValues() {
 		// reverse order!
 		List<LayerDto> selectedLayers = new ArrayList<LayerDto>();
-		for (int i = targetLayersGrid.getRecords().length - 1 ; i >= 0 ; i--) {
+		for (int i = targetLayersGrid.getRecords().length - 1; i >= 0; i--) {
 			ListGridRecord record = targetLayersGrid.getRecord(i);
 			LayerDto layer = (LayerDto) record.getAttributeAsObject(LayerListGrid.FLD_OBJECT);
 			if (!selectedLayers.contains(layer)) {

@@ -48,7 +48,7 @@ public class ProcessShapeFileCommand implements Command<ProcessShapeFileRequest,
 	@Autowired
 	private LayerModelService layerModelService;
 
-	private final Logger log = LoggerFactory.getLogger(ProcessShapeFileCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProcessShapeFileCommand.class);
 
 	private static final String DB_LAYERNAME_PREFIX = "layer_";
 
@@ -64,7 +64,7 @@ public class ProcessShapeFileCommand implements Command<ProcessShapeFileRequest,
 
 		if (shapeZipFile == null) {
 			Exception e = new IllegalArgumentException(GenericFileUploadView.RESPONSE_INVALID_FILE);
-			log.warn(e.getLocalizedMessage());
+			LOG.warn(e.getLocalizedMessage());
 			throw e;
 		}
 
@@ -128,7 +128,7 @@ public class ProcessShapeFileCommand implements Command<ProcessShapeFileRequest,
 				}
 			}
 		} catch (Exception e) {
-			log.warn("Exception while processing shapefile", e);
+			LOG.warn("Exception while processing shapefile", e);
 		} finally {
 			tmpDirFile.delete();
 		}

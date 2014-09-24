@@ -85,12 +85,10 @@ public class UsernamePasswordProfileServiceImpl implements UsernamePasswordProfi
 		for (ProfileDto addProfile : addedProfiles) {
 			// check if it is not yet in the current profiles
 			Role addRole = addProfile.getRole();
-			if (!Role.ADMINISTRATOR.equals(addRole)) {
-				if (!roleListMap.containsKey(addRole) ||
-						!roleListMap.get(addRole).contains(addProfile.getTerritory().getId())) {
-					GroupMember addMember = converterService.fromProfileDto(addProfile, user);
-					groups.add(addMember);
-				}
+			if (!Role.ADMINISTRATOR.equals(addRole) && (!roleListMap.containsKey(addRole) ||
+				!roleListMap.get(addRole).contains(addProfile.getTerritory().getId()))) {
+				GroupMember addMember = converterService.fromProfileDto(addProfile, user);
+				groups.add(addMember);
 			}
 		}
 		for (ProfileDto removeProfile : removedProfiles) {
@@ -150,11 +148,9 @@ public class UsernamePasswordProfileServiceImpl implements UsernamePasswordProfi
 			if (user != null) {
 				boolean changed = false;
 				for (Role role : addedAssignments.get(userId)) {
-					if (!Role.ADMINISTRATOR.equals(role)) {
-						if (getGroupMemberOfUser(user, role, territory) == null) {
-							user.getGroups().add(new GroupMember(user, territory, role));
-							changed = true;
-						}
+					if (!Role.ADMINISTRATOR.equals(role) && getGroupMemberOfUser(user, role, territory) == null) {
+						user.getGroups().add(new GroupMember(user, territory, role));
+						changed = true;
 					}
 				}
 				if (changed) {

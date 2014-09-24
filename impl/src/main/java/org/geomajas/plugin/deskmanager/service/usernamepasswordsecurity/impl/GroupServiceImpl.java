@@ -171,7 +171,7 @@ public class GroupServiceImpl implements GroupService {
 				}
 			}
 		} catch (Exception e) {
-//			log.warn("Exception while processing shapefile", e);
+//			LOG.warn("Exception while processing shapefile", e);
 			int i = 5;
 		} finally {
 			FileUtils.deleteFolder(file.getParentFile()); // always clean up temporary files

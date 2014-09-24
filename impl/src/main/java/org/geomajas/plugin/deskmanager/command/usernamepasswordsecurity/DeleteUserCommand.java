@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component(DeleteUserRequest.COMMAND)
 public class DeleteUserCommand implements Command<DeleteUserRequest, DeleteUserResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(DeleteUserCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteUserCommand.class);
 
 	@Autowired
 	private UserService userService;
@@ -46,9 +46,9 @@ public class DeleteUserCommand implements Command<DeleteUserRequest, DeleteUserR
 		User user = userService.findById(request.getId());
 		if (user != null) {
 			userService.deleteUser(request.getId());
-			log.info("Deleted user " + user.getEmail());
+			LOG.info("Deleted user " + user.getEmail());
 		} else {
-			log.info("User with id " + request.getId() + " does not exist");
+			LOG.info("User with id " + request.getId() + " does not exist");
 		}
 	}
 

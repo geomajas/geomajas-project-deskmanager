@@ -27,7 +27,7 @@ public class GetRasterLayerConfigCommand implements
 		Command<GetRasterLayerConfigRequest, GetRasterLayerConfigResponse> {
 
 	@SuppressWarnings("unused")
-	private final Logger log = LoggerFactory.getLogger(GetRasterLayerConfigCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetRasterLayerConfigCommand.class);
 
 	@Autowired
 	private DiscoveryService discoServ;

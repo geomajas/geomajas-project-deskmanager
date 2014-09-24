@@ -32,7 +32,7 @@ public class GetGeotoolsVectorCapabilitiesCommand implements
 		Command<GetGeotoolsVectorCapabilitiesRequest, GetGeotoolsVectorCapabilitiesResponse> {
 
 	@SuppressWarnings("unused")
-	private final Logger log = LoggerFactory.getLogger(GetGeotoolsVectorCapabilitiesCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetGeotoolsVectorCapabilitiesCommand.class);
 
 	@Autowired
 	private DiscoveryService discoServ;

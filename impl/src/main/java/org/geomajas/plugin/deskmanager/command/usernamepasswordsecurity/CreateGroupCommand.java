@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component(CreateGroupRequest.COMMAND)
 public class CreateGroupCommand implements Command<CreateGroupRequest, CreateGroupResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CreateGroupCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CreateGroupCommand.class);
 
 	@Autowired
 	private GroupService groupService;
@@ -52,7 +52,7 @@ public class CreateGroupCommand implements Command<CreateGroupRequest, CreateGro
 	public void execute(CreateGroupRequest request, CreateGroupResponse response) throws Exception {
 		Territory group = groupService.createGroup(request.getName(), request.getKey(), request.getCrs(),
 				baseConverterService.toInternal(request.getGeometry()), null);
-		log.info("Created group " + group);
+		LOG.info("Created group " + group);
 		response.setGroup(converterService.toDto(group, false, false));
 	}
 

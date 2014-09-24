@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class DeleteGeodeskCommand implements Command<DeleteGeodeskRequest, CommandResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(DeleteGeodeskCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteGeodeskCommand.class);
 
 	@Autowired
 	private GeodeskService loketService;
@@ -41,14 +41,14 @@ public class DeleteGeodeskCommand implements Command<DeleteGeodeskRequest, Comma
 		try {
 			if (request.getGeodeskId() == null) {
 				Exception e = new IllegalArgumentException("No geodesk id given.");
-				log.error(e.getLocalizedMessage());
+				LOG.error(e.getLocalizedMessage());
 				throw e;
 			} else {
 
 				Geodesk bp = loketService.getGeodeskById(request.getGeodeskId());
 				if (bp == null) {
 					Exception e = new IllegalArgumentException("No geodesk found with id : " + request.getGeodeskId());
-					log.error(e.getLocalizedMessage());
+					LOG.error(e.getLocalizedMessage());
 					throw e;
 				} else {
 					loketService.deleteGeodesk(bp);
@@ -56,7 +56,7 @@ public class DeleteGeodeskCommand implements Command<DeleteGeodeskRequest, Comma
 			}
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error removing geodesk.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

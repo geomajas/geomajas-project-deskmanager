@@ -152,8 +152,7 @@ public class DeskmanagerAuthorization implements BaseAuthorization, AreaAuthoriz
 					}
 				}
 			} catch (GeomajasSecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.error("Error building authorization info, insuficcent rights.", e);
 			}
 		}
 	}
@@ -450,7 +449,7 @@ public class DeskmanagerAuthorization implements BaseAuthorization, AreaAuthoriz
 			try {
 				geodesk = geodeskService.getGeodeskByPublicId(geodeskId);
 			} catch (GeomajasSecurityException e) {
-				e.printStackTrace();
+				LOG.error("Error getting geodesk, insuficcent rights.", e);
 			}
 		}
 		return geodesk;

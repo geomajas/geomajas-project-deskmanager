@@ -18,6 +18,8 @@ import org.geomajas.configuration.client.ClientMapInfo;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
 import org.geomajas.plugin.printing.component.service.PrintConfigurationServiceImpl;
 import org.geomajas.security.GeomajasSecurityException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -27,6 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class DeskmanagerPrintConfigurationService extends PrintConfigurationServiceImpl {
+
+	private static final Logger LOG = LoggerFactory.getLogger(DeskmanagerPrintConfigurationService.class);
 
 	@Autowired
 	private GeodeskService geodeskService;
@@ -67,8 +71,7 @@ public class DeskmanagerPrintConfigurationService extends PrintConfigurationServ
 
 			}
 		} catch (GeomajasSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error("Could not get mapInfo, insufficent rights.", e);
 		}
 
 		return null;

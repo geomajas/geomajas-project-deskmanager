@@ -45,7 +45,7 @@ public class AdminAssignmentCommand implements Command<AdminAssignmentRequest, A
 	@Autowired
 	private DtoConverterService converterService;
 
-	private final Logger log = LoggerFactory.getLogger(AdminAssignmentCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AdminAssignmentCommand.class);
 
 	@Override
 	public AdminAssignmentResponse getEmptyCommandResponse() {
@@ -57,7 +57,7 @@ public class AdminAssignmentCommand implements Command<AdminAssignmentRequest, A
 		try {
 			profileService.updateAdmins(converterService.getIds(request.getAddedAdmins()),
 					converterService.getIds(request.getRemovedAdmins()));
-			log.info("Added ADMINISTRATOR role to " + request.getAddedAdmins().size() +
+			LOG.info("Added ADMINISTRATOR role to " + request.getAddedAdmins().size() +
 				"users {" + usersToString(request.getAddedAdmins()) + "}," +
 					" removed ADMINISTRATOR role from  " + request.getRemovedAdmins().size() +
 					" users {" + usersToString(request.getRemovedAdmins()) + "}.");

@@ -44,7 +44,7 @@ public class GroupAssignmentCommand implements Command<GroupAssignmentRequest, G
 	@Autowired
 	private DtoConverterService converterService;
 
-	private final Logger log = LoggerFactory.getLogger(GroupAssignmentCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GroupAssignmentCommand.class);
 
 	@Override
 	public GroupAssignmentResponse getEmptyCommandResponse() {
@@ -60,7 +60,7 @@ public class GroupAssignmentCommand implements Command<GroupAssignmentRequest, G
 		for (User user : users) {
 			response.getUsers().add(converterService.toDto(user, true));
 		}
-		log.info("Updated the profiles of a number of users, for group " + request.getTerritoryDto());
+		LOG.info("Updated the profiles of a number of users, for group " + request.getTerritoryDto());
 	}
 
 }

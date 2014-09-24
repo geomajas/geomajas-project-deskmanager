@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component(CreateUserRequest.COMMAND)
 public class CreateUserCommand implements Command<CreateUserRequest, CreateUserResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CreateUserCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CreateUserCommand.class);
 
 	@Autowired
 	private UserService userService;
@@ -49,7 +49,7 @@ public class CreateUserCommand implements Command<CreateUserRequest, CreateUserR
 	public void execute(CreateUserRequest request, CreateUserResponse response) throws Exception {
 		User user = userService.createUser(request.getName(), request.getSurname(), request.getEmail(),
 				request.getPassword());
-		log.info("Created user " + request.getEmail());
+		LOG.info("Created user " + request.getEmail());
 		response.setUser(converterService.toDto(user, false));
 	}
 

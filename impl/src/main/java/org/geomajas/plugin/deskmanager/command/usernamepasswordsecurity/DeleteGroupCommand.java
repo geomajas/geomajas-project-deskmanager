@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component(DeleteGroupRequest.COMMAND)
 public class DeleteGroupCommand implements Command<DeleteGroupRequest, DeleteGroupResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(DeleteGroupCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteGroupCommand.class);
 
 	@Autowired
 	private GroupService groupService;
@@ -46,9 +46,9 @@ public class DeleteGroupCommand implements Command<DeleteGroupRequest, DeleteGro
 		Territory territory = groupService.findById(request.getId());
 		if (territory != null) {
 			groupService.deleteGroup(request.getId());
-			log.info("Deleted group " + territory.getName());
+			LOG.info("Deleted group " + territory.getName());
 		} else {
-			log.info("Group with id " + request.getId() + " does not exist");
+			LOG.info("Group with id " + request.getId() + " does not exist");
 		}
 	}
 

@@ -35,7 +35,7 @@ public class GetWmsCapabilitiesCommand implements
 		Command<GetWmsCapabilitiesRequest, GetWmsCapabilitiesResponse> {
 
 	@SuppressWarnings("unused")
-	private final Logger log = LoggerFactory.getLogger(GetWmsCapabilitiesCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetWmsCapabilitiesCommand.class);
 
 	@Autowired
 	private DiscoveryService discoServ;

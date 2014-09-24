@@ -42,7 +42,7 @@ public class UpdateGroupCommand implements Command<UpdateGroupRequest, UpdateGro
 	@Autowired
 	private org.geomajas.service.DtoConverterService geomajasConverterService;
 
-	private final Logger log = LoggerFactory.getLogger(UpdateGroupCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UpdateGroupCommand.class);
 
 	@Override
 	public UpdateGroupResponse getEmptyCommandResponse() {
@@ -55,7 +55,7 @@ public class UpdateGroupCommand implements Command<UpdateGroupRequest, UpdateGro
 		groupService.updateGroup(group.getId(), group.getName(), group.getCode());
 		Territory result = groupService.updateGroupGeometry(group.getId(), group.getCrs(),
 				geomajasConverterService.toInternal(group.getGeometry()));
-		log.info("Updated group " + group.getName());
+		LOG.info("Updated group " + group.getName());
 		response.setGroup(converterService.toDto(result, false, false, true));
 	}
 }

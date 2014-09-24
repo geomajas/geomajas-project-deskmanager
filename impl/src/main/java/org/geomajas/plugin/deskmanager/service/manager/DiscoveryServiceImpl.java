@@ -91,7 +91,7 @@ import java.util.UUID;
 @Component
 public class DiscoveryServiceImpl implements DiscoveryService {
 
-	private final Logger log = LoggerFactory.getLogger(DiscoveryServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DiscoveryServiceImpl.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -145,27 +145,7 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 			if (store != null) {
 				List<VectorCapabilitiesInfo> res = new ArrayList<VectorCapabilitiesInfo>();
 				for (String typeName : store.getTypeNames()) {
-					VectorCapabilitiesInfo vci = new VectorCapabilitiesInfo();
-					vci.setTypeName(typeName);
-					String[] tt = typeName.split(":", 2);
-					if (tt.length == 2) {
-						vci.setNamespace(tt[0]);
-						vci.setName(tt[1]);
-					} else {
-						vci.setName(typeName);
-					}
-
-					try {
-						SimpleFeatureType sft = store.getSchema(typeName);
-						vci.setDescription((sft.getDescription() != null ? sft.getDescription().toString() : ""));
-						vci.setCrs(sft.getCoordinateReferenceSystem().getIdentifiers().iterator().next().toString());
-						vci.setGeometryType((sft.getGeometryDescriptor() != null ? sft.getGeometryDescriptor()
-								.getType().getBinding().getSimpleName() : "?"));
-					} catch (Exception e) {
-						vci.setDescription("[Failed retrieving metadata!]");
-						log.debug("Failed retrieving metadata: " + e.getMessage());
-					}
-					res.add(vci);
+					res.add(getVectorCapabilitiesInfo(store, typeName));
 				}
 				return res;
 			}
@@ -175,6 +155,30 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 		}
 
 		throw new DeskmanagerException(DeskmanagerException.NO_CONNECTION_TO_CAPABILITIES_SERVER, "Not found");
+	}
+
+	private VectorCapabilitiesInfo getVectorCapabilitiesInfo(DataStore store, String typeName) {
+		VectorCapabilitiesInfo vci = new VectorCapabilitiesInfo();
+		vci.setTypeName(typeName);
+		String[] tt = typeName.split(":", 2);
+		if (tt.length == 2) {
+			vci.setNamespace(tt[0]);
+			vci.setName(tt[1]);
+		} else {
+			vci.setName(typeName);
+		}
+
+		try {
+			SimpleFeatureType sft = store.getSchema(typeName);
+			vci.setDescription((sft.getDescription() != null ? sft.getDescription().toString() : ""));
+			vci.setCrs(sft.getCoordinateReferenceSystem().getIdentifiers().iterator().next().toString());
+			vci.setGeometryType((sft.getGeometryDescriptor() != null ? sft.getGeometryDescriptor()
+					.getType().getBinding().getSimpleName() : "?"));
+		} catch (Exception e) {
+			vci.setDescription("[Failed retrieving metadata!]");
+			LOG.debug("Failed retrieving metadata: ", e);
+		}
+		return vci;
 	}
 
 	@Override
@@ -292,7 +296,7 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 
 				return vlc;
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new DeskmanagerException(e, DeskmanagerException.NO_CONNECTION_TO_CAPABILITIES_SERVER,
 					e.getMessage());
 		}
@@ -323,7 +327,7 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 					try {
 						nonNativeLayers.add(dtoFactoryService.buildRasterCapabilitesInfoFromWms(wms, owsLayer, srs));
 					} catch (LayerException e) {
-						log.warn("Got unknown crs from wms server, ignoring: {}", srs);
+						LOG.warn("Got unknown crs from wms server, ignoring: {}", srs);
 					}
 				}
 			}
@@ -503,7 +507,7 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 		}
 		nsi = cloneService.clone(nsi);
 		if (nsi.getLabelStyle() == null || nsi.getFeatureStyles().size() < 1) {
-			log.warn("NamedStyleInfo is invalid (LabelStyle should not be null "
+			LOG.warn("NamedStyleInfo is invalid (LabelStyle should not be null "
 					+ "& there should be at least one FeatureStyle.)");
 		} else {
 			nsi.getLabelStyle().setLabelAttributeName(labelAttributeName);
@@ -583,12 +587,12 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 				|| java.util.Date.class.equals(classType) || Calendar.class.equals(classType)) {
 			return PrimitiveType.DATE;
 		} else {
-			log.warn("Unrecognized attribute type: " + classType.getName());
+			LOG.warn("Unrecognized attribute type: " + classType.getName());
 			return PrimitiveType.STRING;
 		}
 	}
 
-	private String getServerLayerName(String clientLayerName) throws Exception {
+	private String getServerLayerName(String clientLayerName) {
 		return clientLayerName + "_server";
 	}
 }

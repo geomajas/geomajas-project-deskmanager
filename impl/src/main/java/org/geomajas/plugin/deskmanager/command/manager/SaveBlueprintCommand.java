@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class SaveBlueprintCommand implements Command<SaveBlueprintRequest, BlueprintResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(SaveBlueprintCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SaveBlueprintCommand.class);
 
 	@Autowired
 	private DtoConverterService dtoService;
@@ -55,14 +55,14 @@ public class SaveBlueprintCommand implements Command<SaveBlueprintRequest, Bluep
 		try {
 			if (request.getBlueprint() == null) {
 				Exception e = new IllegalArgumentException("No blueprint id given.");
-				log.error(e.getLocalizedMessage());
+				LOG.error(e.getLocalizedMessage());
 				throw e;
 			} else {
 				Blueprint target = blueprintService.getBlueprintById(request.getBlueprint().getId());
 				if (target == null) {
 					Exception e = new IllegalArgumentException("No blueprint found for the given id: "
 							+ request.getBlueprint());
-					log.error(e.getLocalizedMessage());
+					LOG.error(e.getLocalizedMessage());
 					throw e;
 				} else {
 					Blueprint source = dtoService.fromDto(request.getBlueprint());
@@ -88,7 +88,7 @@ public class SaveBlueprintCommand implements Command<SaveBlueprintRequest, Bluep
 			throw e;
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error saving blueprint.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}
@@ -138,7 +138,7 @@ public class SaveBlueprintCommand implements Command<SaveBlueprintRequest, Bluep
 			if (conn != null) {
 				target.getTerritories().add(conn);
 			} else {
-				log.warn("Territory not found !? (id: " + discon.getId());
+				LOG.warn("Territory not found !? (id: " + discon.getId());
 			}
 		}
 	}

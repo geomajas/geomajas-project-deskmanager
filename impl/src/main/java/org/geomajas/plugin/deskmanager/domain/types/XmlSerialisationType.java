@@ -10,6 +10,13 @@
  */
 package org.geomajas.plugin.deskmanager.domain.types;
 
+import org.apache.commons.lang.SerializationUtils;
+import org.geomajas.geometry.Bbox;
+import org.hibernate.Hibernate;
+import org.hibernate.usertype.UserType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -25,13 +32,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-
-import org.apache.commons.lang.SerializationUtils;
-import org.geomajas.geometry.Bbox;
-import org.hibernate.Hibernate;
-import org.hibernate.usertype.UserType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Type for storing serializable objects in the database. Used for ClientWidgetInfo configurations.
@@ -53,7 +53,7 @@ public class XmlSerialisationType implements UserType {
 				}
 			}
 		} catch (IntrospectionException e) {
-			LOG.warn(e.getLocalizedMessage());
+			LoggerFactory.getLogger(XmlSerialisationType.class).warn(e.getLocalizedMessage());
 		}
 	}
 
@@ -79,7 +79,7 @@ public class XmlSerialisationType implements UserType {
 		return x.equals(y);
 	}
 
-	public int hashCode(Object x) {
+	public int hashCode(Object x) { // NOSONAR
 		if (x == null) {
 			return 0;
 		}
@@ -126,7 +126,6 @@ public class XmlSerialisationType implements UserType {
 			baos.close();
 			return result;
 		} catch (IOException e) {
-			e.printStackTrace();
 			IllegalArgumentException ex = new IllegalArgumentException("cannot disassemble the object", e);
 			throw ex;
 		}

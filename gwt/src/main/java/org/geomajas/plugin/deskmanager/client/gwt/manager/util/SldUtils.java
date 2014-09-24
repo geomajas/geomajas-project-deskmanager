@@ -47,27 +47,41 @@ import java.util.Map;
 
 /**
  * Some sld utilities.
- * 
+ *
  * @author Kristof Heirwegh
  */
 public final class SldUtils {
 
 	public static final String FILLCOLOR = "fill";
+
 	public static final String FILLOPACITY = "fill-opacity";
+
 	public static final String STROKECOLOR = "stroke";
+
 	public static final String STROKEOPACITY = "stroke-opacity";
+
 	public static final String STROKEWIDTH = "stroke-width";
+
 	public static final String SIZE = "size";
+
 	public static final String WELLKNOWNNAME = "well-known-name"; // MARK
+
 	public static final String STYLENAME = "style-name"; // default = namedStyleInfo.getName();
+
 	public static final String LABELFEATURENAME = "label-field-name";
 
 	public static final String DEFAULT_FILLCOLOR = "#CCCCCC";
+
 	public static final Float DEFAULT_FILLOPACITY = 0.5f;
+
 	public static final String DEFAULT_STROKECOLOR = "#000000";
+
 	public static final Float DEFAULT_STROKEOPACITY = 1f;
+
 	public static final Float DEFAULT_STROKEWIDTH = 1f;
+
 	public static final String DEFAULT_SIZE = "6"; // don't ask
+
 	public static final String DEFAULT_WELLKNOWNNAME = "circle"; // MARK
 
 	private SldUtils() {
@@ -80,7 +94,7 @@ public final class SldUtils {
 	 * @param properties configuration properties
 	 * @return the simple sld style
 	 */
-	public static UserStyleInfo createSimpleSldStyle(DynamicVectorLayerConfiguration dvc, 
+	public static UserStyleInfo createSimpleSldStyle(DynamicVectorLayerConfiguration dvc,
 			Map<String, Object> properties) {
 		UserStyleInfo usi = new UserStyleInfo();
 		usi.setTitle(getPropValue(STYLENAME, properties, dvc.getClientVectorLayerInfo().getNamedStyleInfo().getName()));
@@ -97,9 +111,9 @@ public final class SldUtils {
 	}
 
 	/**
-	 * Create one or more rules for the given layer type and properties.
-	 * (Multi)Point, linestring and polygons return a single rule, geometry returns three rules.
-	 * 
+	 * Create one or more rules for the given layer type and properties. (Multi)Point, linestring and polygons return a
+	 * single rule, geometry returns three rules.
+	 *
 	 * @param type the layer type
 	 * @param properties the configuration properties
 	 * @param geometryName the name of the geometry attribute
@@ -110,41 +124,40 @@ public final class SldUtils {
 		List<RuleInfo> rules = new ArrayList<RuleInfo>();
 
 		switch (type) {
-		case POINT:
-		case MULTIPOINT:
-			rules.add(createPointRule(properties));
-			break;
-		case LINESTRING:
-		case MULTILINESTRING:
-			rules.add(createLineStringRule(properties));
-			break;
-		case POLYGON:
-		case MULTIPOLYGON:
-			rules.add(createPolygonRule(properties));
-			break;
-		case GEOMETRY:
-			RuleInfo pointRule = createRules(LayerType.POINT, properties, geometryName).get(0);
-			pointRule.setName(pointRule.getName() + "_point");
-			pointRule.setChoice(createChoice(geometryName,
-					new String[] {Geometry.POINT, Geometry.MULTI_POINT}));
-			rules.add(pointRule);
+			case POINT:
+			case MULTIPOINT:
+				rules.add(createPointRule(properties));
+				break;
+			case LINESTRING:
+			case MULTILINESTRING:
+				rules.add(createLineStringRule(properties));
+				break;
+			case POLYGON:
+			case MULTIPOLYGON:
+				rules.add(createPolygonRule(properties));
+				break;
+			case GEOMETRY:
+				RuleInfo pointRule = createRules(LayerType.POINT, properties, geometryName).get(0);
+				pointRule.setName(pointRule.getName() + "_point");
+				pointRule.setChoice(createChoice(geometryName,
+						new String[]{Geometry.POINT, Geometry.MULTI_POINT}));
+				rules.add(pointRule);
 
-			RuleInfo lineRule = createRules(LayerType.LINESTRING, properties, geometryName).get(0);
-			lineRule.setName(lineRule.getName() + "_line");
-			lineRule.setChoice(createChoice(geometryName,
-					new String[]{Geometry.LINE_STRING, Geometry.MULTI_LINE_STRING}));
-			rules.add(lineRule);
+				RuleInfo lineRule = createRules(LayerType.LINESTRING, properties, geometryName).get(0);
+				lineRule.setName(lineRule.getName() + "_line");
+				lineRule.setChoice(createChoice(geometryName,
+						new String[]{Geometry.LINE_STRING, Geometry.MULTI_LINE_STRING}));
+				rules.add(lineRule);
 
-			RuleInfo polygonRule = createRules(LayerType.POLYGON, properties, geometryName).get(0);
-			polygonRule.setName(polygonRule.getName() + "_polygon");
-			polygonRule.setChoice(createChoice(geometryName,
-					new String[] {Geometry.POLYGON, Geometry.MULTI_POLYGON}));
-			rules.add(polygonRule);
-			break;
-		default:
-			GWT.log("unsupported geometrytype");
+				RuleInfo polygonRule = createRules(LayerType.POLYGON, properties, geometryName).get(0);
+				polygonRule.setName(polygonRule.getName() + "_polygon");
+				polygonRule.setChoice(createChoice(geometryName,
+						new String[]{Geometry.POLYGON, Geometry.MULTI_POLYGON}));
+				rules.add(polygonRule);
+				break;
+			default:
+				GWT.log("unsupported geometrytype");
 		}
-
 
 		// -- Add textsymbolizers
 		if (properties.containsKey(LABELFEATURENAME)) {
@@ -204,7 +217,7 @@ public final class SldUtils {
 
 	/**
 	 * This will extract the properties from the sld (first occurence / best effort (not every posibility is checked)).
-	 * 
+	 *
 	 * @return map of properties
 	 */
 	public static Map<String, Object> getProperties(UserStyleInfo usi) {
@@ -224,10 +237,9 @@ public final class SldUtils {
 				}
 			}
 			TextSymbolizerInfo textSym = extractTextSymbolizer(usi);
-			if (textSym != null && textSym.getLabel() != null && textSym.getLabel().getExpressionList().size() > 0) {
-				if (textSym.getLabel().getExpressionList().get(0) instanceof PropertyNameInfo) {
-					props.put(LABELFEATURENAME, textSym.getLabel().getExpressionList().get(0).getValue());
-				}
+			if (textSym != null && textSym.getLabel() != null && textSym.getLabel().getExpressionList().size() > 0 &&
+					textSym.getLabel().getExpressionList().get(0) instanceof PropertyNameInfo) {
+				props.put(LABELFEATURENAME, textSym.getLabel().getExpressionList().get(0).getValue());
 			}
 		}
 		return props;

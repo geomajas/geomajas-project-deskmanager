@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class SaveGeodeskCommand implements Command<SaveGeodeskRequest, GeodeskResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(SaveGeodeskCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SaveGeodeskCommand.class);
 
 	@Autowired
 	private DtoConverterService dtoService;
@@ -89,7 +89,7 @@ public class SaveGeodeskCommand implements Command<SaveGeodeskRequest, GeodeskRe
 			}
 		} catch (Exception e) {
 			response.getErrorMessages().add("Fout bij opslaan loket: " + e.getMessage());
-			log.error("fout bij opslaan loket.", e);
+			LOG.error("fout bij opslaan loket.", e);
 		}
 	}
 
@@ -153,7 +153,7 @@ public class SaveGeodeskCommand implements Command<SaveGeodeskRequest, GeodeskRe
 			if (conn != null) {
 				target.getTerritories().add(conn);
 			} else {
-				log.warn("Territory not found !? (id: " + discon.getId());
+				LOG.warn("Territory not found !? (id: " + discon.getId());
 			}
 		}
 	}

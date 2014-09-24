@@ -44,7 +44,7 @@ public class UserAssignmentCommand implements Command<UserAssignmentRequest, Use
 	@Autowired
 	private DtoConverterService converterService;
 
-	private final Logger log = LoggerFactory.getLogger(UserAssignmentCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserAssignmentCommand.class);
 
 	@Override
 	public UserAssignmentResponse getEmptyCommandResponse() {
@@ -61,7 +61,7 @@ public class UserAssignmentCommand implements Command<UserAssignmentRequest, Use
 			response.getProfiles().add(converterService.toProfileDto(groupMember));
 		}
 		response.setUserId(request.getUserId());
-		log.info("Updated the profiles of a user " + request.getUserId() +
+		LOG.info("Updated the profiles of a user " + request.getUserId() +
 				": Added " + request.getAddedProfiles().size() + " profiles, removed " +
 				request.getRemovedProfiles().size() + " profiles, user now has " +
 				response.getProfiles().size() + " profiles.");

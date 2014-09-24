@@ -10,6 +10,9 @@
  */
 package org.geomajas.plugin.deskmanager.utility;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,15 +24,14 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * TODO.
  * 
  * @author Jan De Moerloose
  *
+ * @deprecated remove, use commons.
  */
+@Deprecated
 public final class FileUtils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FileUtils.class);
@@ -97,7 +99,7 @@ public final class FileUtils {
 	/**
 	 * Deletes the given directory (including files).
 	 * 
-	 * @param path
+	 * @param folder
 	 * @return
 	 */
 	public static void deleteFolder(File folder) {

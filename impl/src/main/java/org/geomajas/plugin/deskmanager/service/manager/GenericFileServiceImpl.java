@@ -29,7 +29,7 @@ import java.util.UUID;
 @Component
 public class GenericFileServiceImpl implements GenericFileService {
 
-	private final Logger log = LoggerFactory.getLogger(GenericFileServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GenericFileServiceImpl.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class GenericFileServiceImpl implements GenericFileService {
 				fileLocations.put(uuid, f.getAbsolutePath());
 				return uuid;
 			} catch (Exception e) {
-				log.warn("Exception while processing file", e);
+				LOG.warn("Exception while processing file", e);
 			}
 		}
 		return null;

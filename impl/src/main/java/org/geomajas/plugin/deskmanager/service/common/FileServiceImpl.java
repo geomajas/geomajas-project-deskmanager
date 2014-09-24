@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class FileServiceImpl implements FileService {
 
 	@SuppressWarnings("unused")
-	private final Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FileServiceImpl.class);
 
 	private static final long serialVersionUID = 1L;
 

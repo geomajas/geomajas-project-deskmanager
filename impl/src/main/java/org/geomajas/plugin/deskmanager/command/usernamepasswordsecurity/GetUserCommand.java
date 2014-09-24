@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 @Component(GetUserRequest.COMMAND)
 public class GetUserCommand implements Command<GetUserRequest, GetUserResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetUserCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetUserCommand.class);
 
 	@Autowired
 	private UserService userService;
@@ -48,9 +48,9 @@ public class GetUserCommand implements Command<GetUserRequest, GetUserResponse> 
 		try {
 			User user = userService.findById(request.getId());
 			response.setUserDto(converterService.toDto(user, false));
-			log.info("found user " + user);
+			LOG.info("found user " + user);
 		} catch (Exception e) {
-			log.error("Unexpected error", e);
+			LOG.error("Unexpected error", e);
 			throw e;
 		}
 	}
