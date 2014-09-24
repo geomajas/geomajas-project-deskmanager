@@ -45,9 +45,15 @@ public class DeskmanagerSecurityServiceImpl implements DeskmanagerSecurityServic
 	@Override
 	public Authentication getAuthentication(String authenticationToken) {
 		if (authenticationToken == null || ("null").equals(authenticationToken)) {
-			DeskmanagerAuthentication auth = new DeskmanagerAuthentication(createGuestProfile());
+			DeskmanagerAuthentication auth = new DeskmanagerAuthentication(createUnassignedProfile());
 			auth.setAuthorizations(new BaseAuthorization[] { new DeskmanagerAuthorization(auth.getProfile(),
 					null, applicationContext) });
+			return auth;
+		} else if (authenticationToken.startsWith("guest-")) {
+			String geodeskId = authenticationToken.split("-")[1];
+			DeskmanagerAuthentication auth = new DeskmanagerAuthentication(createGuestProfile());
+			auth.setAuthorizations(new BaseAuthorization[] { new DeskmanagerAuthorization(auth.getProfile(),
+					geodeskId, applicationContext) });
 			return auth;
 		}
 		return tokenService.getAuthentication(authenticationToken);
@@ -73,5 +79,18 @@ public class DeskmanagerSecurityServiceImpl implements DeskmanagerSecurityServic
 
 		return profile;
 	}
+
+	/**
+	 * Utility method to create an unidentified profile. This means that the user has not chosen a role yet.
+	 *
+	 * @return the guest profile.
+	 */
+	public static Profile createUnassignedProfile() {
+		Profile profile = new Profile();
+		profile.setRole(Role.UNASSIGNED);
+
+		return profile;
+	}
+
 	
 }

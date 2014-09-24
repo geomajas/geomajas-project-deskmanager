@@ -21,6 +21,10 @@ import org.geomajas.annotation.Api;
 @Api
 public enum Role {
 	/**
+	 * User that is not assigned a role, only useful for the first commands.
+	 */
+	UNASSIGNED("Unassigned", "Unassigned"),
+	/**
 	 * Guest.
 	 */
 	GUEST("Guest", "Guest"),

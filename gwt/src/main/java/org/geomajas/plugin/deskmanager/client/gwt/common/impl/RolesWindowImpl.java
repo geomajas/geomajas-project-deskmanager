@@ -43,7 +43,7 @@ public class RolesWindowImpl implements HelperWindows.RolesChoiceWindow {
 	private static final CommonMessages MESSAGES = GWT.create(CommonMessages.class);
 
 	private final List<Role> roleOrderInWindow = Arrays.asList(Role.ADMINISTRATOR, Role.DESK_MANAGER, Role.EDITING_USER,
-			Role.CONSULTING_USER, Role.GUEST);
+			Role.CONSULTING_USER, Role.GUEST, Role.UNASSIGNED);
 
 	/**
 	 * Ask the user to select a role.
@@ -110,6 +110,8 @@ public class RolesWindowImpl implements HelperWindows.RolesChoiceWindow {
 
 	private String getRoleDescription(Role role) {
 		switch (role)  {
+			case UNASSIGNED:
+				return MESSAGES.roleUnassignedDescription();
 			case GUEST:
 				return MESSAGES.roleGuestDescription();
 			case ADMINISTRATOR:

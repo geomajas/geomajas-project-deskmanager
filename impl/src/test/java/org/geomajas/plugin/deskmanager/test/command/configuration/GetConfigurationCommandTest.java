@@ -76,7 +76,8 @@ public class GetConfigurationCommandTest extends LoginBeforeTestingWithPredefine
 		request.setApplicationId(ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE);
 
 		CommandResponse response = dispatcher.execute(
-				GetConfigurationRequest.COMMAND, request, null, "en");
+				GetConfigurationRequest.COMMAND, request,
+				"guest-" + ExampleDatabaseProvisioningServiceImpl.GEODESK_TEST_BE, "en");
 
 		Assert.assertTrue(response instanceof GetConfigurationResponse);
 		Assert.assertTrue(response.getErrorMessages().isEmpty());
@@ -86,5 +87,7 @@ public class GetConfigurationCommandTest extends LoginBeforeTestingWithPredefine
 		Assert.assertEquals(((DeskmanagerApplicationInfoUserData) ((GetConfigurationResponse) response).getApplication
 				().getUserData())
 				.getUserApplicationKey(), ExampleDatabaseProvisioningServiceImpl.CLIENTAPPLICATION_ID);
+		Assert.assertFalse(((GetConfigurationResponse) response).getApplication().getMaps().get(0).getLayers().isEmpty
+				());
 	}
 }
