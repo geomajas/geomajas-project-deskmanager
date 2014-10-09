@@ -55,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class DtoConverterServiceImpl implements DtoConverterService {
 
-	private final Logger log = LoggerFactory.getLogger(DtoConverterServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DtoConverterServiceImpl.class);
 
 	@Autowired
 	private List<UserApplicationInfo> userApplications;
@@ -453,7 +453,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 			dto.setReferencedLayerInfo((ClientLayerInfo) applicationContext.getBean(layer.getLayerModel()
 					.getClientLayerId()));
 		} catch (NoSuchBeanDefinitionException e) {
-			log.warn("DeskmanagerClientLayerInfo not found for layer: " + layer.getLayerModel().getClientLayerId()
+			LOG.warn("DeskmanagerClientLayerInfo not found for layer: " + layer.getLayerModel().getClientLayerId()
 					+ ", not adding clientLayerinfo. You might need to remove these layers");
 		}
 		dto.setClientLayerInfo(layer.getClientLayerInfo());

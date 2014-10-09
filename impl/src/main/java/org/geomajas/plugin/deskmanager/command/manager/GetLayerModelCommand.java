@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true, rollbackFor = { Exception.class })
 public class GetLayerModelCommand implements Command<GetLayerModelRequest, LayerModelResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetLayerModelCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetLayerModelCommand.class);
 
 	@Autowired
 	private LayerModelService layerModelService;
@@ -47,7 +47,7 @@ public class GetLayerModelCommand implements Command<GetLayerModelRequest, Layer
 					true));
 		} catch (Exception e) {
 			response.getErrorMessages().add("Error while fetching layermodel: " + e.getMessage());
-			log.error("Error while fetching layermodel.", e);
+			LOG.error("Error while fetching layermodel.", e);
 		}
 	}
 

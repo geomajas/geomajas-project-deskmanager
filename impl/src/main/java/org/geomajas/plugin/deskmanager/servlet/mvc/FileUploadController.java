@@ -38,7 +38,7 @@ import java.io.InputStream;
 @Controller("/fileUpload")
 public class FileUploadController {
 
-	private final Logger log = LoggerFactory.getLogger(FileUploadController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FileUploadController.class);
 
 	@Autowired
 	protected FileService service;
@@ -95,7 +95,7 @@ public class FileUploadController {
 			}
 
 		} catch (Exception e) {
-			log.warn("Exception while processing image", e);
+			LOG.warn("Exception while processing image", e);
 			return FileUploadView.RESPONSE_ERROR + " - " + e.getMessage();
 
 		} finally {
@@ -103,7 +103,7 @@ public class FileUploadController {
 				try {
 					is.close();
 				} catch (IOException e) {
-					log.warn("Fail: " + e.getMessage());
+					LOG.warn("Fail: " + e.getMessage());
 				}
 			}
 		}
@@ -123,7 +123,7 @@ public class FileUploadController {
 			return FileUploadView.RESPONSE_OK + "[" + id + "]";
 
 		} catch (Exception e) {
-			log.warn("Exception while processing binary file", e);
+			LOG.warn("Exception while processing binary file", e);
 			return FileUploadView.RESPONSE_ERROR + " - " + e.getMessage();
 
 		} finally {
@@ -131,7 +131,7 @@ public class FileUploadController {
 				try {
 					is.close();
 				} catch (IOException e) {
-					log.warn("Fail: " + e.getMessage());
+					LOG.warn("Fail: " + e.getMessage());
 				}
 			}
 		}

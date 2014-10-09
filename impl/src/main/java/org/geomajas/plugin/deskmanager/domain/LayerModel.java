@@ -10,9 +10,16 @@
  */
 package org.geomajas.plugin.deskmanager.domain;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import org.geomajas.annotation.Api;
+import org.geomajas.configuration.client.ClientWidgetInfo;
+import org.geomajas.configuration.client.ScaleInfo;
+import org.geomajas.layer.LayerType;
+import org.geomajas.plugin.deskmanager.domain.dto.DynamicLayerConfiguration;
+import org.geomajas.plugin.deskmanager.domain.security.Territory;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Index;
+import org.hibernate.annotations.MapKey;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,21 +33,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyClass;
 import javax.persistence.Table;
-
-import org.geomajas.annotation.Api;
-import org.geomajas.configuration.client.ClientWidgetInfo;
-import org.geomajas.configuration.client.ScaleInfo;
-import org.geomajas.layer.LayerType;
-import org.geomajas.plugin.deskmanager.domain.dto.DynamicLayerConfiguration;
-import org.geomajas.plugin.deskmanager.domain.security.Territory;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.MapKey;
-import org.hibernate.annotations.Type;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Domain object for a LayerModel.
- * 
+ *
+ * LayerModels are unique by name.
+ *
  * @author Oliver May
  * @since 1.0.0
  */
@@ -207,12 +208,19 @@ public class LayerModel implements Serializable, Comparable<LayerModel> {
 		this.clientLayerId = clientLayerId;
 	}
 
-	/**
-	 * Compare the layer models for natural sorting on the name.
-	 * @return order
-	 */
+	@Override
 	public int compareTo(LayerModel o) {
 		return name.compareTo(o.name);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return o instanceof LayerModel && name.equals(((LayerModel) o).name);
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
 	}
 
 	/**

@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class DeleteBlueprintCommand implements Command<DeleteBlueprintRequest, CommandResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(DeleteBlueprintCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteBlueprintCommand.class);
 
 	@Autowired
 	private BlueprintService blueprintService;
@@ -42,7 +42,7 @@ public class DeleteBlueprintCommand implements Command<DeleteBlueprintRequest, C
 		try {
 			if (request.getBlueprintId() == null) {
 				Exception e = new IllegalArgumentException("No blueprint id given.");
-				log.error(e.getLocalizedMessage());
+				LOG.error(e.getLocalizedMessage());
 				throw e;
 			} else {
 
@@ -50,7 +50,7 @@ public class DeleteBlueprintCommand implements Command<DeleteBlueprintRequest, C
 				if (bp == null) {
 					Exception e = new IllegalArgumentException("No blueprint found with the given id: "
 							+ request.getBlueprintId());
-					log.error(e.getLocalizedMessage());
+					LOG.error(e.getLocalizedMessage());
 					throw e;
 				} else {
 					blueprintService.deleteBlueprint(bp);
@@ -58,7 +58,7 @@ public class DeleteBlueprintCommand implements Command<DeleteBlueprintRequest, C
 			}
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error removing blueprint.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

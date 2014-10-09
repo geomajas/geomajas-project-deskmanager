@@ -40,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class CreateGeodeskCommand implements Command<CreateGeodeskRequest, GeodeskResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CreateGeodeskCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CreateGeodeskCommand.class);
 
 	@Autowired
 	private GeodeskService geodeskService;
@@ -62,14 +62,14 @@ public class CreateGeodeskCommand implements Command<CreateGeodeskRequest, Geode
 		try {
 			if (request.getBlueprintId() == null || "".equals(request.getBlueprintId())) {
 				Exception e = new IllegalArgumentException("No blueprint id given.");
-				log.error(e.getLocalizedMessage());
+				LOG.error(e.getLocalizedMessage());
 				throw e;
 			} else {
 				Blueprint bp = blueprintService.getBlueprintById(request.getBlueprintId());
 				if (bp == null) {
 					Exception e = new IllegalArgumentException("No blueprint found for the given id: "
 							+ request.getBlueprintId());
-					log.error(e.getLocalizedMessage());
+					LOG.error(e.getLocalizedMessage());
 					throw e;
 				}
 				Geodesk l = new Geodesk();
@@ -94,7 +94,7 @@ public class CreateGeodeskCommand implements Command<CreateGeodeskRequest, Geode
 			}
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error creating geodesk layer.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

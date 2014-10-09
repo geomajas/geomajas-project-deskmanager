@@ -11,11 +11,12 @@
 package org.geomajas.plugin.deskmanager.service.common;
 
 import org.geomajas.plugin.runtimeconfig.RuntimeConfigException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
 
 /**
  * Service that listens for ContextRefreshedEvent so that initialization of the spring context can be done when
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PostConstructService implements ApplicationListener<ContextRefreshedEvent> {
+
+	private static final Logger LOG = LoggerFactory.getLogger(PostConstructService.class);
 
 	@Autowired
 	private ApplicationStartupService applicationStartupService;
@@ -39,7 +42,7 @@ public class PostConstructService implements ApplicationListener<ContextRefreshe
 		try {
 			layerLoadService.loadDynamicLayers();
 		} catch (RuntimeConfigException e) {
-			e.printStackTrace();
+			LOG.error("Error while loading dynamic layers.", e);
 		}
 		applicationStartupService.onStartup();
 	}

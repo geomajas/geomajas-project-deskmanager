@@ -44,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class GeodeskServiceImpl implements GeodeskService {
 
 	@SuppressWarnings("unused")
-	private final Logger log = LoggerFactory.getLogger(GeodeskServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GeodeskServiceImpl.class);
 
 	@Autowired
 	private SessionFactory factory;

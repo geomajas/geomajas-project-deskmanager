@@ -31,11 +31,11 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 	@Autowired
 	private CacheService cacheService;
 
-	private final Logger log = LoggerFactory.getLogger(AuthenticationTokenServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationTokenServiceImpl.class);
 
 	@Override
 	public Authentication getAuthentication(String token) {
-		log.debug("Getting authentication for token {}", token);
+		LOG.debug("Getting authentication for token {}", token);
 		return cacheService.get(AuthenticationTokenServiceImpl.class.toString(), token, Authentication.class);
 	}
 
@@ -55,7 +55,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 	}
 
 	private String login(String token, DeskmanagerAuthentication authentication) {
-		log.debug("Registering token {} for authentication {}", token, authentication);
+		LOG.debug("Registering token {} for authentication {}", token, authentication);
 		if (null == token) {
 			return login(authentication);
 		}

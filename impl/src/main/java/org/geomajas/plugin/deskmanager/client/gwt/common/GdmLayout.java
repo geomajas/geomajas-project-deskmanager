@@ -16,7 +16,7 @@ package org.geomajas.plugin.deskmanager.client.gwt.common;
  * @author Oliver May
  * 
  */
-public final class GdmLayout {
+public final class GdmLayout { // NOSONAR
 
 	/**
 	 * The file download url.

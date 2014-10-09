@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component(GetGroupRequest.COMMAND)
 public class GetGroupCommand implements Command<GetGroupRequest, GetGroupResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetGroupCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetGroupCommand.class);
 
 	@Autowired
 	private GroupService groupService;
@@ -56,7 +56,7 @@ public class GetGroupCommand implements Command<GetGroupRequest, GetGroupRespons
 				throw new DeskmanagerException(DeskmanagerException.GROUP_NOT_FOUND, request.getId());
 			}
 		} catch (Exception e) {
-			log.error("Unexpected error", e);
+			LOG.error("Unexpected error", e);
 			throw e;
 		}
 	}

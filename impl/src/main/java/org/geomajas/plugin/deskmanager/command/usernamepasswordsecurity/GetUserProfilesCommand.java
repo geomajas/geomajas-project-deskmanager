@@ -32,7 +32,7 @@ import java.util.List;
 @Component(GetUserProfilesRequest.COMMAND)
 public class GetUserProfilesCommand implements Command<GetUserProfilesRequest, GetUserProfilesResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetUserProfilesCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetUserProfilesCommand.class);
 
 	@Autowired
 	private UserService userService;
@@ -52,9 +52,9 @@ public class GetUserProfilesCommand implements Command<GetUserProfilesRequest, G
 			for (GroupMember groupMember : groupMemberList) {
 				response.getProfiles().add(converterService.toProfileDto(groupMember));
 			}
-			log.info("found " + response.getProfiles().size() + " profiles for user " + request.getId());
+			LOG.info("found " + response.getProfiles().size() + " profiles for user " + request.getId());
 		} catch (Exception e) {
-			log.error("Unexpected error", e);
+			LOG.error("Unexpected error", e);
 			throw e;
 		}
 	}

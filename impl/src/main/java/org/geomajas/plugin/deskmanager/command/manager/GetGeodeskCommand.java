@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class GetGeodeskCommand implements Command<GetGeodeskRequest, GeodeskResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetGeodeskCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetGeodeskCommand.class);
 
 	@Autowired
 	private GeodeskService geodeskService;
@@ -45,7 +45,7 @@ public class GetGeodeskCommand implements Command<GetGeodeskRequest, GeodeskResp
 			response.setGeodesk(dtoService.toDto(geodeskService.getGeodeskById(request.getGeodeskId()), true));
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error fetching geodesk.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

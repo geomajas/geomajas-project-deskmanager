@@ -48,7 +48,7 @@ import java.util.Map;
 @Transactional(readOnly = true)
 public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 
-	private final Logger log = LoggerFactory.getLogger(DynamicLayerLoadServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DynamicLayerLoadServiceImpl.class);
 
 	@Autowired
 	private LayerModelService layerModelService;
@@ -82,7 +82,7 @@ public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 	// -------------------------------------------------
 
 	public void loadDynamicLayers() {
-		log.info("Loading dynamic layers");
+		LOG.info("Loading dynamic layers");
 
 		try {
 			// -- clientside / namedstyleinfo --
@@ -90,7 +90,7 @@ public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 			List<NamedObject> objects = new ArrayList<NamedObject>();
 			List<String> clientLayerIds = new ArrayList<String>();
 			for (LayerModel lm : layerModelService.getDynamicLayerModelsInternal()) {
-				log.info(" - creating a dynamic layer for: " + lm.getName());
+				LOG.info(" - creating a dynamic layer for: " + lm.getName());
 				try {
 					clientLayerIds.add(lm.getClientLayerId());
 
@@ -110,7 +110,7 @@ public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 					applicationInfo.getMaps().get(0).getLayers()
 							.add(clonedLayerConfiguration.getClientLayerInfo());
 				} catch (Exception e) {
-					log.warn("Error loading dynamic layers: " + e.getMessage());
+					LOG.warn("Error loading dynamic layers: " + e.getMessage());
 				}
 			}
 
@@ -121,9 +121,9 @@ public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 			holders.addAll(converterService.createBeanDefinitionsByIntrospection(objects));
 			activateBeans(holders, clientLayerIds);
 
-			log.info(" - finished loading dynamic layers into context.");
+			LOG.info(" - finished loading dynamic layers into context.");
 		} catch (Exception e) {
-			log.warn("Error activating dynamic layers: " + e.getMessage());
+			LOG.warn("Error activating dynamic layers: " + e.getMessage());
 		}
 	}
 
@@ -166,7 +166,7 @@ public class DynamicLayerLoadServiceImpl implements DynamicLayerLoadService {
 
 	private void activateBeans(List<BeanDefinitionHolder> defs, List<String> clientLayerIds) throws Exception {
 		if (defs.size() > 0) {
-			if (log.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				// -- write config out to XML --
 				((BeanDefinitionWriterServiceImpl) bser).setBaseResource(new FileSystemResource("."));
 				bser.persist("_dynamicConfig_", defs);

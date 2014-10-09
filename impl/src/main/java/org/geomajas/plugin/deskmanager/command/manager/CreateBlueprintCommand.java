@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class CreateBlueprintCommand implements Command<CreateBlueprintRequest, BlueprintResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CreateBlueprintCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CreateBlueprintCommand.class);
 
 	@Autowired
 	private BlueprintService blueprintService;
@@ -51,7 +51,7 @@ public class CreateBlueprintCommand implements Command<CreateBlueprintRequest, B
 			response.setBlueprint(dtoService.toDto(bp, false));
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error creating blueprint.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class SaveLayerModelCommand implements Command<SaveLayerModelRequest, LayerModelResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(SaveLayerModelCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SaveLayerModelCommand.class);
 
 	@Autowired
 	private DtoConverterService dtoService;
@@ -96,7 +96,7 @@ public class SaveLayerModelCommand implements Command<SaveLayerModelRequest, Lay
 		} catch (GeomajasSecurityException e) {
 			throw e;
 		} catch (Exception e) {
-			log.error("Error while saving layermodel.", e);
+			LOG.error("Error while saving layermodel.", e);
 			throw new GeomajasException(e);
 		}
 	}

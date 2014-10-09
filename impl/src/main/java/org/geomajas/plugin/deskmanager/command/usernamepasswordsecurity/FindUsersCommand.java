@@ -32,7 +32,7 @@ import java.util.List;
 @Component(FindUsersRequest.COMMAND)
 public class FindUsersCommand implements Command<FindUsersRequest, FindUsersResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(FindUsersCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FindUsersCommand.class);
 
 	@Autowired
 	private UserService userService;
@@ -53,10 +53,10 @@ public class FindUsersCommand implements Command<FindUsersRequest, FindUsersResp
 			for (User user : users) {
 				response.getUsers().add(converterService.toDto(user, includeProfiles));
 			}
-			log.info("Found " + users.size() + " users." +
+			LOG.info("Found " + users.size() + " users." +
 					(includeProfiles ? "Included profiles." : "Did not include profiles"));
 		} catch (Exception e) {
-			log.error("Unexpected error", e);
+			LOG.error("Unexpected error", e);
 			throw e;
 		}
 	}

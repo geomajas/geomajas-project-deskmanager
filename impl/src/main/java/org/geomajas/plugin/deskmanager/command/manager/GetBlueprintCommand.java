@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true, rollbackFor = { Exception.class })
 public class GetBlueprintCommand implements Command<GetBlueprintRequest, BlueprintResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetBlueprintCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetBlueprintCommand.class);
 
 	@Autowired
 	private BlueprintService blueprintService;
@@ -46,7 +46,7 @@ public class GetBlueprintCommand implements Command<GetBlueprintRequest, Bluepri
 			response.setBlueprint(dtoService.toDto(blueprintService.getBlueprintById(request.getBlueprintId()), true));
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error fetching blueprints.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

@@ -19,6 +19,8 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.DistinctRootEntityResultTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +41,8 @@ import java.util.UUID;
 @Repository
 @Transactional(rollbackFor = { Exception.class })
 public class AuthenticationSessionServiceImpl implements AuthenticationSessionService {
+
+	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationSessionServiceImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -69,7 +73,7 @@ public class AuthenticationSessionServiceImpl implements AuthenticationSessionSe
 			crit.setResultTransformer(DistinctRootEntityResultTransformer.INSTANCE);
 			return crit.list();
 		} catch (GeomajasSecurityException e) {
-			e.printStackTrace();
+			LOG.error("Error getting active sessions of user, user unknown.");
 		}
 		return new ArrayList<AuthenticationSession>();
 	}

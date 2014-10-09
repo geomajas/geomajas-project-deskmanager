@@ -59,7 +59,7 @@ import java.util.Map;
 @Transactional(readOnly = true, rollbackFor = { Exception.class })
 public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationService, Rewirable {
 
-	private final Logger log = LoggerFactory.getLogger(GeodeskConfigurationServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GeodeskConfigurationServiceImpl.class);
 
 	@Autowired
 	private BlueprintService blueprintService;
@@ -157,7 +157,7 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 						overviewMap.setMaxBounds(bounds);
 						overviewMap.setInitialBounds(bounds);
 					} catch (GeomajasException e) {
-						log.warn("Unable to apply loket territory bounds, falling back to default. {}",
+						LOG.warn("Unable to apply loket territory bounds, falling back to default. {}",
 								e.getLocalizedMessage());
 					}
 				} else if (geodesk.mustFilterByUserTerritory()) {
@@ -172,7 +172,7 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 							overviewMap.setInitialBounds(bounds);
 						}
 					} catch (GeomajasException e) {
-						log.warn("Unable to apply loket territory bounds, falling back to default. {}",
+						LOG.warn("Unable to apply loket territory bounds, falling back to default. {}",
 								e.getLocalizedMessage());
 					}
 				}
@@ -202,8 +202,7 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 			return appInfo;
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.warn("Error creating configuration: " + e.getMessage());
+			LOG.error("Error creating configuration: ", e);
 			return null;
 		}
 	}
@@ -268,7 +267,7 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 					// Register the style if a vectorlayer.
 					if (isVectorLayer) {
 						NamedStyleInfo nsi = ((ClientVectorLayerInfo) targetCli).getNamedStyleInfo();
-						log.debug("Registering style for layer: " + targetCli.getLabel());
+						LOG.debug("Registering style for layer: " + targetCli.getLabel());
 						nsi.setName(styleService.registerStyle(targetCli.getServerLayerId(), nsi));
 					}
 				}
@@ -315,7 +314,7 @@ public class GeodeskConfigurationServiceImpl implements GeodeskConfigurationServ
 			if (cli != null) {
 				clientLayers.add(cli);
 			} else {
-				log.error("Unknown client layer info for " + geodeskLayer.getId());
+				LOG.error("Unknown client layer info for " + geodeskLayer.getId());
 			}
 		}
 		return clientLayers;

@@ -88,22 +88,15 @@ public final class WizardUtil {
 	}
 
 	public static String getBaseOfUrl(String inputUrl) {
-		try {
-			// java.net.URL and com.google.gwt.http.client.URL cannot be used in this situation
-			if (inputUrl.contains("?")) {
-				return inputUrl.substring(0, inputUrl.indexOf("?"));
-			} else {
-				return inputUrl;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (inputUrl != null && inputUrl.contains("?")) {
+			return inputUrl.substring(0, inputUrl.indexOf("?"));
+		} else {
+			return inputUrl;
 		}
-		return null;
 	}
 
 	public static String getQueryPartOfUrl(String inputUrl) {
-		// java.net.URL and com.google.gwt.http.client.URL cannot be used in this situation
-		if (inputUrl.contains("?")) {
+		if (inputUrl != null && inputUrl.contains("?")) {
 			return inputUrl.substring(inputUrl.indexOf("?") + 1);
 		}
 		return null;

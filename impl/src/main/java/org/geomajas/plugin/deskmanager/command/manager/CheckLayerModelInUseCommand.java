@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class CheckLayerModelInUseCommand implements Command<CheckLayerModelInUseRequest, CheckLayerModelInUseResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CheckLayerModelInUseCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CheckLayerModelInUseCommand.class);
 
 	@Autowired
 	private LayerModelService service;
@@ -41,7 +41,7 @@ public class CheckLayerModelInUseCommand implements Command<CheckLayerModelInUse
 			throws Exception {
 		if (request.getLayerModelId() == null || "".equals(request.getLayerModelId())) {
 			Exception e = new IllegalArgumentException("No layermodel id given.");
-			log.error(e.getLocalizedMessage());
+			LOG.error(e.getLocalizedMessage());
 			throw e;
 		} else {
 			response.setLayerModelInUse(service.isLayerModelInUse(request.getLayerModelId()));

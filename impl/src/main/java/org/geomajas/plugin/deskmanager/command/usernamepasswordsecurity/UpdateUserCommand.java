@@ -38,7 +38,7 @@ public class UpdateUserCommand implements Command<UpdateUserRequest, UpdateUserR
 	@Autowired
 	private DtoConverterService converterService;
 
-	private final Logger log = LoggerFactory.getLogger(UpdateUserCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UpdateUserCommand.class);
 
 	@Override
 	public UpdateUserResponse getEmptyCommandResponse() {
@@ -50,10 +50,10 @@ public class UpdateUserCommand implements Command<UpdateUserRequest, UpdateUserR
 		userService.updateUser(converterService.fromDto(request.getUserDto(), false));
 		// reload
 		User user = userService.findById(request.getUserDto().getId());
-		log.info("Updated user " + request.getUserDto().getEmail());
+		LOG.info("Updated user " + request.getUserDto().getEmail());
 		if (request.getPassword() != null) {
 			userService.changePassword(request.getUserDto().getId(), request.getPassword());
-			log.info("Changed password of user " + request.getUserDto().getEmail());
+			LOG.info("Changed password of user " + request.getUserDto().getEmail());
 		}
 		response.setUser(converterService.toDto(user, false));
 	}

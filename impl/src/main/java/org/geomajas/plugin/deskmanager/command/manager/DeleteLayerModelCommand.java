@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class DeleteLayerModelCommand implements Command<DeleteLayerModelRequest, CommandResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(DeleteLayerModelCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeleteLayerModelCommand.class);
 
 	@Autowired
 	private LayerModelService layerModelService;
@@ -41,14 +41,14 @@ public class DeleteLayerModelCommand implements Command<DeleteLayerModelRequest,
 		try {
 			if (request.getId() == null) {
 				Exception e = new IllegalArgumentException("No layermodel id given.");
-				log.error(e.getLocalizedMessage());
+				LOG.error(e.getLocalizedMessage());
 				throw e;
 			} else {
 				LayerModel bp = layerModelService.getLayerModelById(request.getId());
 				if (bp == null) {
 					Exception e = new IllegalArgumentException("No datalayer found with the given id: "
 							+ request.getId());
-					log.error(e.getLocalizedMessage());
+					LOG.error(e.getLocalizedMessage());
 					throw e;
 				} else {
 					layerModelService.deleteLayerModel(bp);
@@ -56,7 +56,7 @@ public class DeleteLayerModelCommand implements Command<DeleteLayerModelRequest,
 			}
 		} catch (Exception orig) {
 			Exception e = new Exception("Unexpected error removing layer.", orig);
-			log.error(e.getLocalizedMessage(), orig);
+			LOG.error(e.getLocalizedMessage(), orig);
 			throw e;
 		}
 	}

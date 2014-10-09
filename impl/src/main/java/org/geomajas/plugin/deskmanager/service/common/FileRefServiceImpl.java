@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class FileRefServiceImpl implements FileRefService, FileStore {
 
-	private final Logger log = LoggerFactory.getLogger(FileRefServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FileRefServiceImpl.class);
 
 	@Autowired
 	private SessionFactory factory;
@@ -88,7 +88,7 @@ public class FileRefServiceImpl implements FileRefService, FileStore {
 
 			return baos.toByteArray();
 		} catch (Exception e) {
-			log.warn("Error reading from stream: " + e.getMessage());
+			LOG.warn("Error reading from stream: " + e.getMessage());
 			throw new Exception("Fout bij lezen data.");
 		}
 	}

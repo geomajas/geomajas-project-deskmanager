@@ -31,7 +31,7 @@ import java.util.Map;
 public class GetVectorLayerConfigCommand implements
 		Command<GetVectorLayerConfigRequest, GetVectorLayerConfigResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(GetVectorLayerConfigCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetVectorLayerConfigCommand.class);
 
 	@Autowired
 	private DiscoveryService discoServ;
@@ -42,7 +42,7 @@ public class GetVectorLayerConfigCommand implements
 		if (request.getConnectionProperties() == null || request.getConnectionProperties().size() < 1
 				|| request.getLayerName() == null || "".equals(request.getLayerName())) {
 			Exception e = new IllegalArgumentException("Missing parameter connection properties or layer name.");
-			log.error(e.getLocalizedMessage());
+			LOG.error(e.getLocalizedMessage());
 			throw e;
 		} else {
 			String sourceType = request.getConnectionProperties().get(DynamicLayerConfiguration.PARAM_SOURCE_TYPE);

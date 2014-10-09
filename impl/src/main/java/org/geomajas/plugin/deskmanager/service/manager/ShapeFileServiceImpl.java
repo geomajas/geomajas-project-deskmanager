@@ -82,7 +82,7 @@ import java.util.zip.ZipFile;
 @Component
 public class ShapeFileServiceImpl implements ShapeFileService {
 
-	private final Logger log = LoggerFactory.getLogger(ShapeFileServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ShapeFileServiceImpl.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -111,7 +111,7 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 	private ClientApplicationInfo defaultGeodesk;
 
 	public boolean importShapeFile(File shpFile, String layerName) throws GeomajasException {
-		log.info("Importing Shapefile using Geotools: " + shpFile.getName());
+		LOG.info("Importing Shapefile using Geotools: " + shpFile.getName());
 		Transaction tr = new DefaultTransaction("transaction");
 		ShapefileDataStore sourceStore = null;
 		try {
@@ -248,7 +248,7 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 
 			zipFile.close();
 		} catch (IOException e) {
-			log.warn("Failed unzipping shapefile archive.", e);
+			LOG.warn("Failed unzipping shapefile archive.", e);
 			return false;
 		} finally {
 			try {
@@ -295,7 +295,6 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 				sfs.addFeatures(collection);
 				transaction.commit();
 			} catch (Exception e) {
-				e.printStackTrace();
 				transaction.rollback();
 				throw e;
 			} finally {
@@ -362,13 +361,13 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 				return "Date";
 
 			default:
-				log.warn("Unsupported Shapefile Type: " + type.toString());
+				LOG.warn("Unsupported Shapefile Type: " + type.toString());
 				return "String";
 		}
 	}
 
 	private List<Geometry> fromShpToGeometries(String shpFileName, String toCrs) {
-		log.info("Extracting Geometries from Shapefile using Geotools: " + shpFileName);
+		LOG.info("Extracting Geometries from Shapefile using Geotools: " + shpFileName);
 		ShapefileDataStore sourceStore = null;
 		try {
 			//Read shapefile
@@ -393,14 +392,14 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 					geometries.add(geometry2);
 				}
 			} catch (Exception e) {
-				log.warn("Failed reading features from ShapeFile", e);
+				LOG.warn("Failed reading features from ShapeFile", e);
 			} finally {
 				//writer.close();
 				reader.close();
 			}
 			return geometries;
 		} catch (Exception e) {
-			log.warn("Failed collecting geometries from ShapeFile", e);
+			LOG.warn("Failed collecting geometries from ShapeFile", e);
 
 		} finally {
 			try {

@@ -17,7 +17,7 @@ package org.geomajas.plugin.deskmanager.client.gwt.common.util;
  * @author Dosi Bingov
  *
  */
-public final class DeskmanagerLayout {
+public final class DeskmanagerLayout {  // NOSONAR
 
 	private DeskmanagerLayout() {
 	}

@@ -37,7 +37,7 @@ public class GetTerritoryFromShpCommand implements Command<GetTerritoryFromShpRe
 	@Autowired
 	private org.geomajas.service.DtoConverterService geomajasConverterService;
 
-	private final Logger log = LoggerFactory.getLogger(GetTerritoryFromShpCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetTerritoryFromShpCommand.class);
 
 	@Override
 	public GetTerritoryFromShpResponse getEmptyCommandResponse() {
@@ -49,7 +49,7 @@ public class GetTerritoryFromShpCommand implements Command<GetTerritoryFromShpRe
 		Geometry geometry = geomajasConverterService.
 				toDto(groupService.getGeometryOfShpFile(request.getShpFileToken(), request.getToCrs()));
 		response.setGeometry(geometry);
-		log.info("shapefile contains geometry: " + geometry);
+		LOG.info("shapefile contains geometry: " + geometry);
 	}
 
 }

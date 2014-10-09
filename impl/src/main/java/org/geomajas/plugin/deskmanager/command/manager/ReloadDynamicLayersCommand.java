@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class ReloadDynamicLayersCommand implements Command<EmptyCommandRequest, CommandResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(ReloadDynamicLayersCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ReloadDynamicLayersCommand.class);
 
 	@Autowired
 	private DynamicLayerLoadService loadService;
@@ -43,7 +43,7 @@ public class ReloadDynamicLayersCommand implements Command<EmptyCommandRequest, 
 		try {
 			loadService.loadDynamicLayers();
 		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
+			LOG.error(e.getLocalizedMessage());
 			throw e;
 		}
 	}

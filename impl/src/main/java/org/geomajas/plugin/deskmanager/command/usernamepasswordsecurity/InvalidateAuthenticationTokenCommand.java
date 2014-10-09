@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class InvalidateAuthenticationTokenCommand implements
 		Command<InvalidateAuthenticationTokenRequest, AuthenticationResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(InvalidateAuthenticationTokenCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InvalidateAuthenticationTokenCommand.class);
 
 	@Autowired
 	private AuthenticationService authenticationService;
@@ -41,6 +41,6 @@ public class InvalidateAuthenticationTokenCommand implements
 			throws Exception {
 		String authenticationToken = request.getAuthenticationSessionToken();
 		authenticationService.removeAuthenticationSession(authenticationToken);
-		log.info("Authentication Invalidation of token " + authenticationToken + " successful.");
+		LOG.info("Authentication Invalidation of token " + authenticationToken + " successful.");
 	}
 }

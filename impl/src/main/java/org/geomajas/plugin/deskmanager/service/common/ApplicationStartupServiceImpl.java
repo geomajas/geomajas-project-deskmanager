@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ApplicationStartupServiceImpl implements ApplicationStartupService {
 
-	private final Logger log = LoggerFactory.getLogger(ApplicationStartupServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ApplicationStartupServiceImpl.class);
 
 	@Autowired
 	private LayerModelService layerModelService;
@@ -59,7 +59,7 @@ public class ApplicationStartupServiceImpl implements ApplicationStartupService 
 	// -------------------------------------------------
 
 	private void updateSystemLayers() {
-		log.info("Updating systemlayers");
+		LOG.info("Updating systemlayers");
 		try {
 			Map<String, LayerModel> models = toMap(layerModelService.getLayerModelsInternal());
 			for (ClientLayerInfo cli : layerMap.values()) {
@@ -67,15 +67,15 @@ public class ApplicationStartupServiceImpl implements ApplicationStartupService 
 					try {
 						LayerModel lm = toLayerModel(cli);
 						layerModelService.saveOrUpdateLayerModelInternal(lm);
-						log.info(" - updated layermodel for: " + cli.getLabel());
+						LOG.info(" - updated layermodel for: " + cli.getLabel());
 					} catch (Exception e) {
-						log.error("Error creating layer, invalid configuration (service not available?): "
+						LOG.error("Error creating layer, invalid configuration (service not available?): "
 								+ cli.getLabel());
 					}
 				}
 			}
 		} catch (Exception e) {
-			log.warn("Error updating system layers: " + e.getMessage());
+			LOG.warn("Error updating system layers: " + e.getMessage());
 		}
 	}
 

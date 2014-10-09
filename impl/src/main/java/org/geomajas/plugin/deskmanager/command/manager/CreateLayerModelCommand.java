@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = { Exception.class })
 public class CreateLayerModelCommand implements Command<CreateLayerModelRequest, LayerModelResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(CreateLayerModelCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CreateLayerModelCommand.class);
 
 	@Autowired
 	private LayerModelService layerModelService;
@@ -57,7 +57,7 @@ public class CreateLayerModelCommand implements Command<CreateLayerModelRequest,
 		if (request.getConfiguration() == null || request.getConfiguration().getClientLayerInfo() == null
 				|| request.getConfiguration().getClientLayerInfo().getUserData() == null) {
 			Exception e = new IllegalArgumentException("Error while saving layermodel: configuration is required.");
-			log.error(e.getLocalizedMessage());
+			LOG.error(e.getLocalizedMessage());
 			throw e;
 		}
 

@@ -42,7 +42,7 @@ import java.util.List;
 @Component(RetrieveRolesRequest.COMMAND)
 public class RetrieveRolesCommand implements Command<RetrieveRolesRequest, RetrieveRolesResponse> {
 
-	private final Logger log = LoggerFactory.getLogger(RetrieveRolesCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RetrieveRolesCommand.class);
 
 	@Autowired
 	private DeskmanagerSecurityService securityService;
@@ -70,7 +70,7 @@ public class RetrieveRolesCommand implements Command<RetrieveRolesRequest, Retri
 		String geodeskId = request.getGeodeskId();
 		if (geodeskId == null) {
 			Exception e = new IllegalArgumentException("Error retrieving roles: geodesk id is required.");
-			log.error(e.getLocalizedMessage());
+			LOG.error(e.getLocalizedMessage());
 			throw e;
 		// non-manager geodesk
 		} else if (!RetrieveRolesRequest.MANAGER_ID.equals(geodeskId)) {
