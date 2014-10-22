@@ -23,6 +23,12 @@
 			</roles>
 		</developer>
 	</developers>
+	
+	<scm>
+		<connection>scm:git:git@github.com:geomajas/geomajas-project-deskmanager.git</connection>
+		<developerConnection>scm:git:git@github.com:geomajas/geomajas-project-deskmanager.git</developerConnection>
+		<url>https://github.com/geomajas/geomajas-project-deskmanager.git</url>
+	</scm>	
 
 	<modules>
 		<module>impl</module>
