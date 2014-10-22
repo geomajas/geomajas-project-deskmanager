@@ -198,12 +198,10 @@ public class LayerConfigurationWindow extends Window {
 		opacitySlider.setMaxValue(100);
 		opacitySlider.setVertical(false);
 
-		if (config.getStyle() != null && !"".equals(config.getStyle())) {
-			try {
-				opacitySlider.setValue(Float.parseFloat(config.getStyle()) * 100);
-			} catch (NumberFormatException e) {
-				opacitySlider.setValue(100);
-			}
+		try {
+			opacitySlider.setValue(Float.parseFloat(config.getStyle()) * 100);
+		} catch (NumberFormatException e) {
+			opacitySlider.setValue(100);
 		}
 
 		vl.addMember(opacitySlider);
