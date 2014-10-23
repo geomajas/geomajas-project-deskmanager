@@ -63,6 +63,9 @@ public class GetMapConfigurationCommand extends org.geomajas.command.configurati
 		} else {
 			throw new GeomajasException(ExceptionCode.APPLICATION_NOT_FOUND, request.getApplicationId());
 		}
+		if (response.getMapInfo() == null) {
+			throw new GeomajasException(ExceptionCode.MAP_NOT_FOUND, request.getMapId());
+		}
 		
 	}
 
