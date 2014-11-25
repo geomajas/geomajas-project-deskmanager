@@ -30,8 +30,14 @@ public class Profile implements Serializable {
 
 	private Territory territory;
 
+	/**
+	 * The surname of the user that is associated with the profile.
+	 */
 	private transient String surname;
 
+	/**
+	 * The first name of the user that is associated with the profile.
+	 */
 	private transient String name;
 
 	private transient String id;
