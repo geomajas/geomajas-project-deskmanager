@@ -517,6 +517,11 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		Profile profile = new Profile();
 		profile.setRole(groupMember.getRole());
 		profile.setTerritory(groupMember.getGroup());
+		User user = groupMember.getUser();
+		if (user != null) {
+			profile.setFirstName(user.getName());
+			profile.setSurname(user.getSurname());
+		}
 		return profile;
 	}
 
