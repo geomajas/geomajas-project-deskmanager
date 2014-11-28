@@ -498,6 +498,27 @@ public final class ManagerCommandService {
 				});
 	}
 
+	public static void processShapeFileUpload(String fileId,
+			LayerModelDto lmd, final DataCallback<ProcessShapeFileResponse>
+			onFinish) {
+		ProcessShapeFileRequest request = new ProcessShapeFileRequest();
+		request.setFileId(fileId);
+		request.setLayerName(lmd.getClientLayerId());
+
+		GwtCommand command = new GwtCommand(ProcessShapeFileRequest.COMMAND);
+		command.setCommandRequest(request);
+
+		GwtCommandDispatcher.getInstance().execute(command,
+				new AbstractCommandCallback<ProcessShapeFileResponse>() {
+					@Override
+					public void execute(ProcessShapeFileResponse commandResponse) {
+						if (onFinish != null) {
+							onFinish.execute(commandResponse);
+						}
+					}
+				});
+	}
+
 	public static void createUser(String email, String name,
 								  String surname, String password,
 								  DataCallback<UserDto> onFinish) {

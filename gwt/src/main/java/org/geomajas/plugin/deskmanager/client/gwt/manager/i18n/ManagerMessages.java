@@ -267,6 +267,7 @@ public interface ManagerMessages extends Messages {
 	//----------------------------------------------
 
 	String layerSettingsLayerName();
+	String layerSettingsLayerId();
 	String layerSettingsPublic();
 	String layerSettingsPublicTooltip();
 	String layerSettingsActive();
@@ -449,6 +450,5 @@ public interface ManagerMessages extends Messages {
 	String adminAssignAssignedUsersTooltip();
 
 	String securityGroupWarningTerritoryWithoutGeometryOnSave();
-
 
 }
