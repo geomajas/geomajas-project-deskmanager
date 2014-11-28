@@ -11,9 +11,12 @@
 package org.geomajas.plugin.deskmanager.client.gwt.manager.datalayer;
 
 import com.google.gwt.core.client.GWT;
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Dialog;
+import com.smartgwt.client.widgets.HTMLFlow;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.common.AbstractConfigurationLayout;
@@ -21,6 +24,8 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.common.SaveButtonBar;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.datalayer.panels.GenericUploadForm;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
+import org.geomajas.plugin.deskmanager.command.manager.dto.ProcessShapeFileResponse;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
 
 /**
@@ -36,6 +41,8 @@ public class DatalayerShapeUpload extends AbstractConfigurationLayout {
 	private SaveButtonBar buttonBar;
 
 	private LayerModelDto lmd;
+
+	private Dialog loadDialog;
 
 	public DatalayerShapeUpload() {
 		super();
@@ -80,10 +87,17 @@ public class DatalayerShapeUpload extends AbstractConfigurationLayout {
 					if (value) {
 						form.upload(new DataCallback<String>() {
 
-							public void execute(String result) {
+							public void execute(String fileId) {
+								showProcessingDialog();
 
-								buttonBar.doCancelClick(null); // could do saveClick, but nothing changed so no
-																// point in reloading everything
+								ManagerCommandService.processShapeFileUpload(fileId, lmd,
+										new DataCallback<ProcessShapeFileResponse>() {
+									@Override
+									public void execute(ProcessShapeFileResponse commandResult) {
+										hideProcessingDialog();
+										buttonBar.doCancelClick(null);
+									}
+								});
 							}
 						});
 					}
@@ -116,4 +130,31 @@ public class DatalayerShapeUpload extends AbstractConfigurationLayout {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	private void showProcessingDialog() {
+		if (loadDialog == null) {
+			HTMLFlow msg = new HTMLFlow(MESSAGES.uploadShapefileUploadingFile());
+			msg.setWidth100();
+			msg.setHeight100();
+			msg.setAlign(Alignment.CENTER);
+			msg.setPadding(20);
+			msg.setOverflow(Overflow.HIDDEN);
+			loadDialog = new Dialog();
+			loadDialog.setShowCloseButton(false);
+			loadDialog.setWidth(330);
+			loadDialog.setHeight(100);
+			loadDialog.setIsModal(true);
+			loadDialog.setShowModalMask(true);
+			loadDialog.setTitle(MESSAGES.titlePleaseWait());
+			loadDialog.addItem(msg);
+		}
+		loadDialog.show();
+	}
+
+	private void hideProcessingDialog() {
+		if (loadDialog != null) {
+			loadDialog.hide();
+		}
+	}
+
 }
