@@ -242,8 +242,10 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = (ZipEntry) entries.nextElement();
-				copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(tmpDir
-						+ "/" + entry.getName())));
+				if (isShpZipEntryName(entry.getName())) {
+					copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(tmpDir
+							+ "/" + entry.getName())));
+				}
 			}
 
 			zipFile.close();
@@ -273,6 +275,32 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 	}
 
 	// ----------------------------------------------------------
+
+	/**
+	 * Checks whether a zip file name (relative to zip root folder) can be accepted as a shapefile element.
+	 * Only files that are in the main zip folder are retained and only those with specific shapefile extensions.
+	 *
+	 * @param zipEntryName
+	 * @return whether or not the relative file path is of a shp file element
+	 */
+	public boolean isShpZipEntryName(String zipEntryName) {
+		File file = new File(zipEntryName);
+		if (!file.isDirectory() && file.getParent() == null) {
+			// mandatory file
+			if (zipEntryName.endsWith(".shp") || zipEntryName.endsWith(".shx") || zipEntryName.endsWith(".dbf")) {
+				return true;
+			}
+			// optional files
+			if (zipEntryName.endsWith(".prj") || zipEntryName.endsWith(".sbn") || zipEntryName.endsWith(".sbx") ||
+					zipEntryName.endsWith(".fbn") || zipEntryName.endsWith(".fbx") || zipEntryName.endsWith(".ain") ||
+					zipEntryName.endsWith(".aih") || zipEntryName.endsWith(".ixs") || zipEntryName.endsWith(".mxs") ||
+					zipEntryName.endsWith(".atx") || zipEntryName.endsWith(".shp.xml") ||
+					zipEntryName.endsWith(".cpg") || zipEntryName.endsWith(".qix")) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void buildShapeFile(File shapeFile, VectorLayer layer, SimpleFeatureCollection collection,
 								SimpleFeatureType type) throws Exception, DeskmanagerException {
