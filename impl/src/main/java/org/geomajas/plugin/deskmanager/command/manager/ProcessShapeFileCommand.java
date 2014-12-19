@@ -95,9 +95,11 @@ public class ProcessShapeFileCommand implements Command<ProcessShapeFileRequest,
 		if (dataSourceName != null) {
 			try {
 				File shapeFile = unzipFile(shapeZipFile);
-				//this will add the data of the shapefile to the database
-				shapeFileService.importShapeFile(shapeFile, dataSourceName);
-				response.setLayerName(dataSourceName);
+				if (shapeFile != null) {
+					//this will add the data of the shapefile to the database
+					shapeFileService.importShapeFile(shapeFile, dataSourceName);
+					response.setLayerName(dataSourceName);
+				}
 			} finally {
 				FileUtils.deleteFolder(new File(shapeZipFile.getParent())); // always clean up temporary files
 			}
