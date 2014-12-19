@@ -243,8 +243,8 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = (ZipEntry) entries.nextElement();
 				try {
-					copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(tmpDir
-							+ "/" + entry.getName())));
+					copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(
+							new FileOutputStream(tmpDir + File.separator + entry.getName())));
 				} catch (IOException ioe) {
 					// do nothing, skip this one file
 				}
