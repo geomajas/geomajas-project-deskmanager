@@ -12,7 +12,6 @@ package org.geomajas.widget.advancedviews.editor.client;
 
 import org.geomajas.configuration.client.ClientWidgetInfo;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.editor.BaseGeodeskWidgetEditor;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.util.GeodeskDtoUtil;
 import org.geomajas.plugin.deskmanager.domain.dto.BaseGeodeskDto;
 import org.geomajas.widget.advancedviews.configuration.client.ThemesInfo;
 
@@ -68,6 +67,6 @@ public class ThemeConfigurationEditor implements BaseGeodeskWidgetEditor {
 
 	@Override
 	public void setBaseGeodesk(BaseGeodeskDto geodesk) {
-		panel.setMainMap(GeodeskDtoUtil.getMainMap(geodesk));
+		panel.setGeodesk(geodesk);
 	}
 }
