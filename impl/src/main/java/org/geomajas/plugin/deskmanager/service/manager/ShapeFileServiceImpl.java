@@ -43,6 +43,7 @@ import org.geotools.jdbc.JDBCDataStoreFactory;
 import org.geotools.referencing.CRS;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
+import org.opengis.filter.Filter;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
@@ -148,6 +149,9 @@ public class ShapeFileServiceImpl implements ShapeFileService {
 
 			//Write features
 			SimpleFeatureStore store = (SimpleFeatureStore) dataStore.getFeatureSource(layerName);
+			// remove all existing features first
+			store.removeFeatures(Filter.INCLUDE);
+			// add the new features
 			store.addFeatures(reprojectedCollection);
 
 		} catch (Exception e) {
