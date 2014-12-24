@@ -59,6 +59,7 @@ import org.geotools.data.wms.WebMapServer;
 import org.geotools.feature.type.GeometryDescriptorImpl;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.jdbc.JDBCDataStoreFactory;
+import org.geotools.ows.ServiceException;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
 import org.opengis.feature.type.AttributeType;
@@ -306,13 +307,12 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 	@Override
 	public List<RasterCapabilitiesInfo> getRasterCapabilities(Map<String, String> connectionProperties)
 			throws Exception {
-		URL url = new URL(connectionProperties.get(GetWmsCapabilitiesRequest.GET_CAPABILITIES_URL));
-		SimpleHttpClient httpClient = new SimpleHttpClient();
-		if (connectionProperties.containsKey(WmsLayerBeanFactory.WMS_USERNAME)) {
-			httpClient.setUser(connectionProperties.get(WmsLayerBeanFactory.WMS_USERNAME));
-			httpClient.setPassword(connectionProperties.get(WmsLayerBeanFactory.WMS_PASSWORD));
-		}
-		WebMapServer wms = new WebMapServer(url, httpClient);
+		String urlString = connectionProperties.get(GetWmsCapabilitiesRequest.GET_CAPABILITIES_URL);
+		String username = connectionProperties.containsKey(WmsLayerBeanFactory.WMS_USERNAME) ?
+				connectionProperties.get(WmsLayerBeanFactory.WMS_USERNAME) : null;
+		String password = connectionProperties.containsKey(WmsLayerBeanFactory.WMS_PASSWORD) ?
+				connectionProperties.get(WmsLayerBeanFactory.WMS_PASSWORD) : null;
+		WebMapServer wms = createWebMapServer(urlString, username, password);
 		WMSCapabilities capabilities = wms.getCapabilities();
 		List<RasterCapabilitiesInfo> layers = new ArrayList<RasterCapabilitiesInfo>();
 
@@ -336,6 +336,25 @@ public class DiscoveryServiceImpl implements DiscoveryService {
 		return layers;
 	}
 
+	/**
+	 * Public method (thus usable in test), but not part of the official interface.
+	 * @param urlString
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws IOException
+	 * @throws ServiceException
+	 */
+	public WebMapServer createWebMapServer(String urlString, String username, String password)
+			throws IOException, ServiceException {
+		URL url = new URL(urlString);
+		SimpleHttpClient httpClient = new SimpleHttpClient();
+		if (username != null) {
+			httpClient.setUser(username);
+			httpClient.setPassword(password);
+		}
+		return new WebMapServer(url, httpClient);
+	}
 
 
 	@Override
