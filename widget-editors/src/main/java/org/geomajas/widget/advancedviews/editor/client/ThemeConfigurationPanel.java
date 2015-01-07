@@ -10,25 +10,24 @@
  */
 package org.geomajas.widget.advancedviews.editor.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.smartgwt.client.widgets.IButton;
-import org.geomajas.configuration.client.ClientMapInfo;
-import org.geomajas.widget.advancedviews.client.AdvancedViewsMessages;
-import org.geomajas.widget.advancedviews.configuration.client.ThemesInfo;
-import org.geomajas.widget.advancedviews.configuration.client.themes.LayerConfig;
-import org.geomajas.widget.advancedviews.configuration.client.themes.RangeConfig;
-import org.geomajas.widget.advancedviews.configuration.client.themes.ViewConfig;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.Layout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import org.geomajas.plugin.deskmanager.domain.dto.BaseGeodeskDto;
+import org.geomajas.widget.advancedviews.client.AdvancedViewsMessages;
+import org.geomajas.widget.advancedviews.configuration.client.ThemesInfo;
+import org.geomajas.widget.advancedviews.configuration.client.themes.LayerConfig;
+import org.geomajas.widget.advancedviews.configuration.client.themes.RangeConfig;
+import org.geomajas.widget.advancedviews.configuration.client.themes.ViewConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Panel to allow theme configuration.
@@ -48,7 +47,7 @@ public class ThemeConfigurationPanel extends VLayout {
 
 	private State state = new State();
 
-	private ClientMapInfo mainMap;
+	private BaseGeodeskDto geodesk;
 
 	public static final int LEFT_WIDTH = 400;
 
@@ -123,12 +122,12 @@ public class ThemeConfigurationPanel extends VLayout {
 		return state.getThemesInfo();
 	}
 	
-	public void setMainMap(ClientMapInfo mainMap) {
-		this.mainMap = mainMap;
+	public void setGeodesk(BaseGeodeskDto geodesk) {
+		this.geodesk = geodesk;
 	}
 
-	public ClientMapInfo getMainMap() {
-		return mainMap;
+	public BaseGeodeskDto getGeodesk() {
+		return geodesk;
 	}
 
 	private void hideAllPanels() {

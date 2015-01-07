@@ -41,11 +41,16 @@ import org.geomajas.configuration.client.ScaleInfo;
 import org.geomajas.gwt.client.util.WidgetLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.common.FileUploadForm;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.util.GeodeskDtoUtil;
+import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
 import org.geomajas.widget.advancedviews.client.AdvancedViewsMessages;
 import org.geomajas.widget.advancedviews.configuration.client.themes.LayerConfig;
 import org.geomajas.widget.advancedviews.configuration.client.themes.RangeConfig;
 import org.geomajas.widget.advancedviews.editor.client.LayerAddWindow.LayerAddCallback;
 import org.geomajas.widget.advancedviews.editor.client.ThemeConfigurationPanel.State;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Panel to configura a theme range.
@@ -274,17 +279,29 @@ public class RangeConfigPanel extends Layout {
 			// clear
 			grid.deselectAllRecords();
 			grid.setData(new ListGridRecord[] {});
+			// get client layer id of layers that are currently on the map
+			List<String> currentMapLayerClientIdList = getClientLayerIdListInCurrentMap();
 			// fill
 			for (LayerConfig config : rangeConfig.getLayerConfigs()) {
-				ListGridRecord record = new ListGridRecord();
+				if (currentMapLayerClientIdList.contains(config.getLayer().getId())) {
+					ListGridRecord record = new ListGridRecord();
 
-				record.setAttribute(FLD_LAYER, config.getLayer().getLabel());
-				record.setAttribute(FLD_VISIBLE, config.isVisible());
-				record.setAttribute(FLD_OPACITY, NumberFormat.getPercentFormat().format(config.getOpacity()));
+					record.setAttribute(FLD_LAYER, config.getLayer().getLabel());
+					record.setAttribute(FLD_VISIBLE, config.isVisible());
+					record.setAttribute(FLD_OPACITY, NumberFormat.getPercentFormat().format(config.getOpacity()));
 
-				record.setAttribute(FLD_OBJECT, config);
-				grid.addData(record);
+					record.setAttribute(FLD_OBJECT, config);
+					grid.addData(record);
+				}
 			}
+		}
+
+		private List<String> getClientLayerIdListInCurrentMap() {
+			List<String> clientLayerIdList = new ArrayList<String>();
+			for (LayerDto layerDto : GeodeskDtoUtil.getMainMapLayers(themeConfigurationPanel.getGeodesk())) {
+				clientLayerIdList.add(layerDto.getClientLayerIdReference());
+			}
+			return clientLayerIdList;
 		}
 
 		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {

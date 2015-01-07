@@ -13,6 +13,11 @@ package org.geomajas.widget.advancedviews.editor.client;
 import java.util.LinkedHashMap;
 
 import org.geomajas.configuration.client.ClientLayerInfo;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.util.GeodeskDtoUtil;
+import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
+import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
 import org.geomajas.widget.advancedviews.client.AdvancedViewsMessages;
 
 import com.google.gwt.core.client.GWT;
@@ -59,9 +64,15 @@ public class LayerAddWindow extends Window {
 		layerSelect.setTitle(MESSAGES.themeConfigLayerSelect());
 		layerSelect.addChangedHandler(new ChangedHandler() {
 			public void onChanged(ChangedEvent event) {
-				for (ClientLayerInfo layer : themeConfiguration.getMainMap().getLayers()) {
-					if (layer.getId().equals(layerSelect.getValueAsString())) {
-						callback.execute(layer);
+				for (LayerDto layerDto : GeodeskDtoUtil.getMainMapLayers(themeConfiguration.getGeodesk())) {
+					if (layerDto.getLayerModel().getId().equals(layerSelect.getValueAsString())) {
+						ManagerCommandService.getLayerModel(layerDto.getLayerModel().getId(),
+								new DataCallback<LayerModelDto>() {
+
+							public void execute(LayerModelDto result) {
+								callback.execute(result.getLayerConfiguration().getClientLayerInfo());
+							}
+						});
 						break;
 					}
 				}
@@ -71,8 +82,8 @@ public class LayerAddWindow extends Window {
 		});
 		
 		LinkedHashMap<String, String> layers = new LinkedHashMap<String, String>();
-		for (ClientLayerInfo layer : themeConfiguration.getMainMap().getLayers()) {
-			layers.put(layer.getId(), layer.getLabel());
+		for (LayerDto layerDto : GeodeskDtoUtil.getMainMapLayers(themeConfiguration.getGeodesk())) {
+			layers.put(layerDto.getLayerModel().getId(), layerDto.getLayerModel().getName());
 		}
 		layerSelect.setValueMap(layers);
 		
