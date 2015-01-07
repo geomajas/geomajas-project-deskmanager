@@ -398,7 +398,7 @@ public final class ManagerCommandService {
 		GwtCommandDispatcher.getInstance().execute(command, new AbstractCommandCallback<CommandResponse>() {
 
 			public void execute(CommandResponse response) {
-				Whiteboard.fireEvent(new GeodeskEvent(geodesk, true, false));
+				Whiteboard.fireEvent(new GeodeskEvent(geodesk, GeodeskEvent.Action.DELETE));
 			}
 		});
 	}
@@ -418,7 +418,7 @@ public final class ManagerCommandService {
 		GwtCommandDispatcher.getInstance().execute(command, new AbstractCommandCallback<GeodeskResponse>() {
 
 			public void execute(GeodeskResponse response) {
-				Whiteboard.fireEvent(new GeodeskEvent(response.getGeodesk(), false, true));
+				Whiteboard.fireEvent(new GeodeskEvent(response.getGeodesk(), GeodeskEvent.Action.CREATE));
 			}
 		});
 	}
@@ -438,7 +438,7 @@ public final class ManagerCommandService {
 		GwtCommandDispatcher.getInstance().execute(command, new AbstractCommandCallback<GeodeskResponse>() {
 
 			public void execute(GeodeskResponse response) {
-				Whiteboard.fireEvent(new GeodeskEvent(response.getGeodesk()));
+				Whiteboard.fireEvent(new GeodeskEvent(response.getGeodesk(), GeodeskEvent.Action.CHANGE));
 			}
 		});
 	}
