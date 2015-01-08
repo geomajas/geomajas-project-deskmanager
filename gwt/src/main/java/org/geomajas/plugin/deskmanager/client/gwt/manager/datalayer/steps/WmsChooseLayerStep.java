@@ -153,6 +153,7 @@ public class WmsChooseLayerStep extends WizardStepPanel implements DataReceiverW
 					}, new DataCallback<String>() {
 
 						public void execute(String result) {
+							grid.setShowEmptyMessage(false);
 							reset();
 							warnings.setVisible(true);
 							warnings.setContents("<b><i>" + result + "</i></b>");
