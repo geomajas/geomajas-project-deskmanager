@@ -15,22 +15,20 @@
 	<description>Geomajas Deskmanager Project - GWT</description>
 
 	<dependencies>
+		<!-- Geomajas dependencies -->
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-project-deskmanager</artifactId>
 		</dependency>
 
-		<!-- Geomajas dependencies -->
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-gwt-client</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-plugin-runtimeconfig-gwt</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.geomajas.project</groupId>
 			<artifactId>geomajas-project-sld-editor-expert-gwt</artifactId>
@@ -41,23 +39,19 @@
 			<artifactId>geomajas-plugin-editing-gwt</artifactId>
 		</dependency>
 
+		<!-- validation dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<classifier>sources</classifier>
-			<version>4.0.2.GA</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.2.GA</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
 		</dependency>
 
 		<!-- Google dependencies -->
@@ -72,6 +66,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -85,13 +80,11 @@
 		<dependency>
 			<groupId>com.google.gwt.gwtmockito</groupId>
 			<artifactId>gwtmockito</artifactId>
-			<version>1.1.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
  	</dependencies>
