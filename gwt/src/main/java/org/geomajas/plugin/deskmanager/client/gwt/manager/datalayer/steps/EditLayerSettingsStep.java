@@ -240,8 +240,8 @@ public class EditLayerSettingsStep extends WizardStepPanel {
 
 	/**
 	 * Returns whether or not the specific {@link DynamicLayerConfiguration} is of a raster type of layer.
-	 * @param layerConfig
-	 * @return
+	 * @param layerConfig the layer configuration to check
+	 * @return true if layerConfig is a raster layer
 	 */
 	private boolean isRasterLayer(DynamicLayerConfiguration layerConfig) {
 		return layerConfig instanceof DynamicRasterLayerConfiguration;
@@ -250,8 +250,8 @@ public class EditLayerSettingsStep extends WizardStepPanel {
 	/**
 	 * Returns whether or not the {@link RasterCapabilitiesInfo} contains at least one feature info format.
 	 *
-	 * @param rasterCapabilitiesInfo
-	 * @return
+	 * @param rasterCapabilitiesInfo the {@link RasterCapabilitiesInfo} to check
+	 * @return true if the rasterCapabilitiesInfo contains info formats for feature info.
 	 */
 	private boolean containsFeatureInfoFormats(RasterCapabilitiesInfo rasterCapabilitiesInfo) {
 		return rasterCapabilitiesInfo != null && rasterCapabilitiesInfo.getGetFeatureInfoFormats() != null
