@@ -79,8 +79,8 @@ public class LayerAttributesGrid extends VLayout {
 		grid.setSelectionType(SelectionStyle.SIMPLE);
 		grid.setSelectionAppearance(SelectionAppearance.CHECKBOX);
 		grid.setCanEdit(true);
-		grid.setEditEvent(ListGridEditEvent.CLICK);
-		grid.setEditByCell(true);
+		grid.setEditEvent(ListGridEditEvent.NONE);
+		grid.setEditByCell(false);
 		grid.setShowEmptyMessage(true);
 		grid.setEmptyMessage("<i>" + MESSAGES.layerAttributesGridLoadingText() +
 				" <img src='" + Geomajas.getIsomorphicDir()
@@ -103,6 +103,15 @@ public class LayerAttributesGrid extends VLayout {
 		identifyingFld.setType(ListGridFieldType.BOOLEAN);
 		identifyingFld.setCanEdit(true);
 		identifyingFld.setPrompt(MESSAGES.layerAttributesGridColumnCoreInfoTooltip());
+		identifyingFld.addChangeHandler(new ChangeHandler() {
+
+			public void onChange(ChangeEvent event) {
+				Object value = event.getValue();
+				if (value instanceof Boolean && Boolean.TRUE.equals(value)) {
+					grid.selectRecord(grid.getRecord(event.getRowNum()));
+				}
+			}
+		});
 
 		ListGridField idFieldFld = new ListGridField(FLD_IDFIELD, MESSAGES.layerAttributesGridColumnIdField());
 		idFieldFld.setType(ListGridFieldType.BOOLEAN);
@@ -113,10 +122,13 @@ public class LayerAttributesGrid extends VLayout {
 			public void onChange(ChangeEvent event) {
 				ListGridRecord lgr = grid.getRecord(event.getRowNum());
 				if (!lgr.equals(currentIdField)) {
+					// deselect id checkbox in former id field
 					currentIdField.setAttribute(FLD_IDFIELD, false);
+					// update currentIdField
 					currentIdField = lgr;
-				} else {
-					event.cancel();
+					if (!isRecordSelected(lgr)) {
+						grid.selectRecord(lgr);
+					}
 				}
 			}
 		});
@@ -130,10 +142,13 @@ public class LayerAttributesGrid extends VLayout {
 			public void onChange(ChangeEvent event) {
 				ListGridRecord lgr = grid.getRecord(event.getRowNum());
 				if (!lgr.equals(currentLabelField)) {
+					// deselect label checkbox in former label field
 					currentLabelField.setAttribute(FLD_LABELFIELD, false);
+					// update currentLabelField
 					currentLabelField = lgr;
-				} else {
-					event.cancel();
+					if (!isRecordSelected(lgr)) {
+						grid.selectRecord(lgr);
+					}
 				}
 			}
 		});
@@ -148,18 +163,12 @@ public class LayerAttributesGrid extends VLayout {
 		grid.addSelectionChangedHandler(new SelectionChangedHandler() {
 
 			public void onSelectionChanged(SelectionEvent event) {
-				ListGridRecord lgr = (ListGridRecord) event.getRecord();
-				if (!grid.isSelected(lgr)) { // deselected
-					if (lgr.equals(currentIdField)) {
-						warnings.setVisible(true);
-						warnings.setContents(MESSAGES.layerAttributesGriDeselectIdAttribute());
-						grid.selectRecord(lgr);
-					} else if (lgr.equals(currentLabelField)) {
-						warnings.setVisible(true);
-						warnings.setContents(MESSAGES.layerAttributesGriDeselectLabelAttribute());
-						grid.selectRecord(lgr);
-					}
+				ListGridRecord lgr = event.getRecord();
+				// on deselection of record, set FLD_IDENTIFYING false
+				if (!isRecordSelected(lgr)) {
+					lgr.setAttribute(FLD_IDENTIFYING, false);
 				}
+				checkSelectionStatusOfRecordForIdAndLabelFields(event.getRecord());
 			}
 		});
 
@@ -256,5 +265,30 @@ public class LayerAttributesGrid extends VLayout {
 			values.put(type.toString(), type.toString());
 		}
 		return values;
+	}
+
+	/**
+	 * Checks whether {@link ListGridRecord} can be deselected. When deselected, but the record
+	 * contains id or label check, the record is selected again and a warning is shown.
+	 *
+	 * @param lgr
+	 */
+	private void checkSelectionStatusOfRecordForIdAndLabelFields(ListGridRecord lgr) {
+		if (!isRecordSelected(lgr)) { // deselected
+			warnings.setVisible(false);
+			if (lgr.equals(currentIdField)) {
+				warnings.setContents(MESSAGES.layerAttributesGriDeselectIdAttribute());
+				warnings.setVisible(true);
+				grid.selectRecord(lgr);
+			} else if (lgr.equals(currentLabelField)) {
+				warnings.setContents(MESSAGES.layerAttributesGriDeselectLabelAttribute());
+				warnings.setVisible(true);
+				grid.selectRecord(lgr);
+			}
+		}
+	}
+
+	private boolean isRecordSelected(ListGridRecord lgr) {
+		return grid.isSelected(lgr);
 	}
 }
