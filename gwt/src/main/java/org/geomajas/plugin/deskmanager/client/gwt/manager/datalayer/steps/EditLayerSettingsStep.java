@@ -35,6 +35,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 /**
  * @author Kristof Heirwegh
+ * @author Jan Venstermans
  */
 public class EditLayerSettingsStep extends WizardStepPanel {
 	
@@ -170,15 +171,13 @@ public class EditLayerSettingsStep extends WizardStepPanel {
 			layerConfig.getClientLayerInfo().setLabel(info.getName());
 		}
 
-		if (layerConfig instanceof DynamicRasterLayerConfiguration) {
+		if (isRasterLayer(layerConfig) && containsFeatureInfoFormats(info)) {
 			featureInfoFormatItem.setValueMap(info.getGetFeatureInfoFormats().toArray(new String[0]));
 		} else {
 			featureInfoForm.hide();
 		}
 
 		isValid();
-
-
 	}
 
 	public DynamicLayerConfiguration getData() {
@@ -186,7 +185,7 @@ public class EditLayerSettingsStep extends WizardStepPanel {
 			form.getData();
 			maxBoundsForm.getData();
 
-			if (layerConfig instanceof DynamicRasterLayerConfiguration) {
+			if (isRasterLayer(layerConfig) && containsFeatureInfoFormats(info)) {
 				Boolean enableFeatureInfoSupport = enableFeatureInfoItem.getValueAsBoolean();
 				layerConfig.getParameters().add(new Parameter(WMS_LAYER_BEAN_FACTORY_ENABLE_FEATURE_INFO,
 						enableFeatureInfoSupport.toString()));
@@ -237,5 +236,25 @@ public class EditLayerSettingsStep extends WizardStepPanel {
 	@Override
 	public boolean stepFinished() {
 		return true;
+	}
+
+	/**
+	 * Returns whether or not the specific {@link DynamicLayerConfiguration} is of a raster type of layer.
+	 * @param layerConfig the layer configuration to check
+	 * @return true if layerConfig is a raster layer
+	 */
+	private boolean isRasterLayer(DynamicLayerConfiguration layerConfig) {
+		return layerConfig instanceof DynamicRasterLayerConfiguration;
+	}
+
+	/**
+	 * Returns whether or not the {@link RasterCapabilitiesInfo} contains at least one feature info format.
+	 *
+	 * @param rasterCapabilitiesInfo the {@link RasterCapabilitiesInfo} to check
+	 * @return true if the rasterCapabilitiesInfo contains info formats for feature info.
+	 */
+	private boolean containsFeatureInfoFormats(RasterCapabilitiesInfo rasterCapabilitiesInfo) {
+		return rasterCapabilitiesInfo != null && rasterCapabilitiesInfo.getGetFeatureInfoFormats() != null
+				&& !rasterCapabilitiesInfo.getGetFeatureInfoFormats().isEmpty();
 	}
 }
