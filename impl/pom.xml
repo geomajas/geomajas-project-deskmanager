@@ -64,7 +64,7 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 		</dependency>
-		<!-- Voor import -->
+		<!-- for import -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
@@ -80,18 +80,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-parent</artifactId>
-		</dependency>
--->
-<!--
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-		</dependency>
--->
+		<!-- geomajas dependencies -->
 		<!-- Needed at compile time because we extend the default security manager and context -->
 		<dependency>
 			<groupId>org.geomajas</groupId>
@@ -114,8 +103,12 @@
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-layer-hibernate</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.geomajas.plugin</groupId>
+			<artifactId>geomajas-layer-openstreetmap</artifactId>
+		</dependency>
 
-		<!-- Need to depend on printing plugin because we override the print service to inject our own configuration -->
+		<!-- Need to depend on print plugin because we override the print service to inject our own configuration -->
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-plugin-print</artifactId>
@@ -193,19 +186,12 @@
 		<dependency>
 			<groupId>com.google.gwt.gwtmockito</groupId>
 			<artifactId>gwtmockito</artifactId>
-			<version>1.1.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-layer-openstreetmap</artifactId>
 		</dependency>
 	</dependencies>
 
