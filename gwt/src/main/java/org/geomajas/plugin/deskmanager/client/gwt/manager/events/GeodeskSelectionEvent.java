@@ -13,37 +13,26 @@ package org.geomajas.plugin.deskmanager.client.gwt.manager.events;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 
 /**
- * Event for some action on a {@link GeodeskDto}.
- * 
- * @author Jan De Moerloose
+ * Event that indicates a change in selection of current
+ * {@link org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto} in the grid.
+ *
  * @author Jan Venstermans
  *
  */
-public class GeodeskEvent {
-
-	/**
-	 * Action that triggered the event.
-	 */
-	public enum Action {
-		CREATE,
-		DELETE,
-		CHANGE
-	}
+public class GeodeskSelectionEvent {
 
 	private final GeodeskDto geodesk;
 
-	private final Action action;
-
-	public GeodeskEvent(GeodeskDto geodesk, Action action) {
+	/**
+	 *
+	 * @param geodesk currently selected geodesk. If no selected, pass null.
+	 */
+	public GeodeskSelectionEvent(GeodeskDto geodesk) {
 		this.geodesk = geodesk;
-		this.action = action;
 	}
 
 	public GeodeskDto getGeodesk() {
 		return geodesk;
 	}
 
-	public Action getAction() {
-		return action;
-	}
 }
