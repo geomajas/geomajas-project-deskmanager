@@ -333,7 +333,7 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 
 		// Only react on selection, not deselection.
 		// Smartgwt always seems to throw both selection and deselection event for SAME record!
-		if (selected) {
+		if (selected && !sameGeodesk(selectedGeodeskId, geodeskId)) {
 			selectedGeodeskId = geodeskId;
 			Whiteboard.fireSelectionChangeEvent(new GeodeskSelectionEvent(getGeodeskDto(geodeskId)));
 		//} else if (geodeskId != null && geodeskId.equals(selectedGeodeskId)) { // current geodesk deselected
@@ -383,5 +383,19 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Returns whether there is a difference between the two selected geodesk ids. Null check is performed.
+	 * @param currentGeodeskId
+	 * @param newGeodeskId
+	 * @return
+	 */
+	private boolean sameGeodesk(String currentGeodeskId, String newGeodeskId) {
+		if (currentGeodeskId != null) {
+			return currentGeodeskId.equals(newGeodeskId);
+		} else {
+			return newGeodeskId == null;
+		}
 	}
 }
