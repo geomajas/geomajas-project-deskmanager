@@ -79,8 +79,8 @@ public class LayerAttributesGrid extends VLayout {
 		grid.setSelectionType(SelectionStyle.SIMPLE);
 		grid.setSelectionAppearance(SelectionAppearance.CHECKBOX);
 		grid.setCanEdit(true);
-		grid.setEditEvent(ListGridEditEvent.NONE);
-		grid.setEditByCell(false);
+		grid.setEditEvent(ListGridEditEvent.CLICK);
+		grid.setEditByCell(true);
 		grid.setShowEmptyMessage(true);
 		grid.setEmptyMessage("<i>" + MESSAGES.layerAttributesGridLoadingText() +
 				" <img src='" + Geomajas.getIsomorphicDir()
