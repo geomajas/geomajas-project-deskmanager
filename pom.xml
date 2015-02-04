@@ -6,6 +6,7 @@
 		<version>2.2.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>org.geomajas.project</groupId>
 	<artifactId>geomajas-project-deskmanager-all</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -61,17 +62,17 @@
 		<dependencies>
 			<!-- Artifacts within this project (exclude documentation) -->
 			<dependency>
-				<groupId>org.geomajas</groupId>
-				<artifactId>geomajas-project-deskmanager</artifactId>
+				<groupId>org.geomajas.project</groupId>
+				<artifactId>geomajas-project-deskmanager-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.geomajas</groupId>
+				<groupId>org.geomajas.project</groupId>
 				<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.geomajas</groupId>
+				<groupId>org.geomajas.project</groupId>
 				<artifactId>geomajas-project-deskmanager-widget-editors</artifactId>
 				<version>${project.version}</version>
 			</dependency>
