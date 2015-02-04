@@ -47,7 +47,6 @@ public interface ManagerMessages extends Messages {
 	String mainTabGeodesks();
 	String mainTabDataLayers();
 	String mainTabBlueprints();
-	String mainTabUsers();
 
 	//Geodesks main Tab
 	String newGeodeskButtonText();
@@ -354,101 +353,9 @@ public interface ManagerMessages extends Messages {
 	String wmsPreviewLayerStepTitle();
 	String wmsPreviewLayerStepNextStepNotFound();
 
-	/* ## tab labels ## */
-	String securityUsersTab();
-	String securityGroupsTab();
-	String securityAdminsTab();
-	String securityUserDetailTab();
-	String securityGroupDetailTab();
-	String securityUserAssignTab();
-	String securityGroupAssignTab();
-
-	/* new item buttons */
-	String securityNewUserButtonText();
-	String securityNewGroupButtonText();
-
-	/* user grid */
-	String securityUserGridColumnEmail();
-	String securityUserGridColumnName();
-	String securityUserGridColumnActions();
-	String securityUserGridColumnActionsTooltip();
-	String securityUserGridColumnActiv();
-	String securityUserGridColumnSurname();
-	String securityUserGridActivTooltip();
-
-	/* group grid */
-	String securityGroupGridColumnActions();
-	String securityGroupGridColumnActionsTooltip();
-	String securityGroupGridColumnKey();
-	String securityGroupGridColumnName();
-	String securityGroupGridColumnTerritory();
-	String securityGroupGridColumnTerritoryTooltip();
-
-	/* user detail */
-	String securityUserDetailEmail();
-	String securityUserDetailName();
-	String securityUserDetailSurname();
-	String securityUserDetailOldPassword();
-	String securityUserDetailPassword();
-	String securityUserDetailPasswordConfirm();
-
-	/* group detail */
-	String securityGroupDetailKey();
-	String securityGroupDetailName();
-	String securityGroupDetailTerritoryText();
-	String securityGroupDetailTerritoryHint();
-	String securityGroupImportWindowTitle();
-	String securityGroupImportWindowButtonText();
-
-	String securityGroupWarningCantImportFile();
-	String securityGroupWarningStopEditingFirst();
-	String securityGroupWarningOnlyOneGeometryAllowed();
-	String securityGroupWarningNoGeometryToEdit();
-	String securityGroupWarningNoGeometryToDelete();
-	String securityGroupWarningNoChangesToSave();
-	String securityGroupWarningCantZoomToGeometry();
-	String securityGroupWarningExceptionDuringEditing(String exceptionMessage);
-
-	/* roles text */
-	String securityRoleAdministratorText();
-	String securityRoleReadOnlyText();
-	String securityRoleDeskManagerText();
-	String securityRoleReadWriteText();
-
-	/* groups */
-	String groupSelectAssignedGroups();
-	String groupSelectAssignedGroupsHelpText();
-	String groupSelectAssignedGroupsTooltip();
-	String groupSelectAvailableGroups();
-	String groupsLoading();
-	String groupGridActionsColumnRemoveTooltip();
-	String groupGridRemoveConfirmQuestion(String name);
-
-	/* users */
-	String userSelectAssignedUsers();
-	String userSelectAssignedUsersHelpText();
-	String userSelectAssignedUsersTooltip();
-	String userSelectAvailableUsers();
-	String usersLoading();
-	String userGridActionsColumnRemoveTooltip();
-	String usersGridRemoveConfirmQuestion(String name);
-	String securityUserDetailErrorEmailSyntax();
-	String securityUserDetailErrorPasswordSyntax();
-	String securityUserDetailErrorPasswordsDoNotMatch();
-	String securityUserDetailActiveLabel();
-	String securityUserDetailActiveTooltip();
-
-	String deleteUserFailedWarnMessage();
 	String layerSettingsEnableFeatureInfo();
 	String layerSettingsEnableFeatureInfoTooltip();
 	String layerSettingsFeatureInfoFormat();
 	String layerSettingsFeatureInfoFormatTooltip();
-
-	String adminAssignHelpText();
-	String adminAssignAvailableUsers();
-	String adminAssignAssignedUsers();
-	String adminAssignAssignedUsersTooltip();
-
-	String securityGroupWarningTerritoryWithoutGeometryOnSave();
 
 }
