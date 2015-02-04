@@ -6,8 +6,8 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.geomajas</groupId>
-	<artifactId>geomajas-project-deskmanager</artifactId>
+
+	<artifactId>geomajas-project-deskmanager-impl</artifactId>
 	<packaging>jar</packaging>
 	<name>Geomajas Deskmanager Project - Implementation</name>
 	<description>Geomajas Deskmanager Project - Implementation</description>
