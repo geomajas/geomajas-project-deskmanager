@@ -26,9 +26,7 @@ public final class Whiteboard {
 
 	private static final Set<BlueprintHandler> BLUEPRINT_HANDLERS = new LinkedHashSet<BlueprintHandler>();
 
-	private static final Set<UserHandler> USER_HANDLERS = new LinkedHashSet<UserHandler>();
-
-	private static final Set<BlueprintSelectionHandler> BLUEPRINT_SELECTION_HANDLERS = 
+	private static final Set<BlueprintSelectionHandler> BLUEPRINT_SELECTION_HANDLERS =
 		new LinkedHashSet<BlueprintSelectionHandler>();
 
 	private static final Set<GeodeskHandler> GEODESK_HANDLERS = new LinkedHashSet<GeodeskHandler>();
@@ -109,16 +107,6 @@ public final class Whiteboard {
 				bph.onBlueprintSelectionChange(e);
 			} catch (Exception e2) {
 				Log.logWarn("EventHandlerException (BlueprintEvent)", e2);
-			}
-		}
-	}
-
-	public static void fireEvent(UserEvent e) {
-		for (UserHandler bph : USER_HANDLERS) {
-			try {
-				bph.onUserChange(e);
-			} catch (Exception e2) {
-				Log.logWarn("EventHandlerException (UserEvent)", e2);
 			}
 		}
 	}

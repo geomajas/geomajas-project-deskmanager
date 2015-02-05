@@ -12,11 +12,12 @@ package org.geomajas.plugin.deskmanager.test.security;
 
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
+import org.geomajas.plugin.deskmanager.security.ProfileService;
 import org.geomajas.plugin.deskmanager.security.internal.DeskmanagerSecurityServiceImpl;
 import org.geomajas.plugin.deskmanager.service.common.TerritoryService;
-import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.TokenToProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,12 +27,15 @@ import java.util.UUID;
  * @author Oliver May
  *
  */
-public class StubProfileService extends TokenToProfileServiceImpl {
+public class StubProfileService implements ProfileService {
+
+	private ArrayList<Profile> predefinedProfiles;
 
 	@Autowired
 	private TerritoryService groupService;
 
-	public List<Profile> getPredefinedProfiles() {
+	@PostConstruct
+	private void createPredefinedProfiles() {
 		ArrayList<Profile> profiles = new ArrayList<Profile>();
 
 		Profile admin = new Profile();
@@ -68,7 +72,7 @@ public class StubProfileService extends TokenToProfileServiceImpl {
 
 		profiles.add(DeskmanagerSecurityServiceImpl.createGuestProfile());
 
-		return profiles;
+		predefinedProfiles = profiles;
 	}
 
 	/**
@@ -77,11 +81,23 @@ public class StubProfileService extends TokenToProfileServiceImpl {
 	 * @return the profile
 	 */
 	public Profile getProfileByRole(Role role) {
-		for (Profile p : getPredefinedProfiles()) {
+		for (Profile p : predefinedProfiles) {
 			if (p.getRole().equals(role)) {
 				return p;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Profile> getProfiles(String securityToken) {
+		return predefinedProfiles;
+	}
+
+	@Override
+	public Profile createGuestProfile() {
+		Profile profile = new Profile();
+		profile.setRole(Role.GUEST);
+		return profile;
 	}
 }

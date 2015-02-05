@@ -56,7 +56,7 @@ public class BlueprintServiceTest extends SecurityContainingTestBase {
 	public void testLoadBlueprints() throws Exception {
 
 		String token = ((DeskmanagerSecurityService) securityService).registerProfile(
-				RetrieveRolesRequest.MANAGER_ID, ((StubProfileService) profileService).getPredefinedProfiles().get(1));
+				RetrieveRolesRequest.MANAGER_ID, ((StubProfileService) profileService).getProfiles(null).get(1));
 		securityManager.createSecurityContext(token);
 
 		List<Blueprint> blueprints = blueprintService.getBlueprints();
