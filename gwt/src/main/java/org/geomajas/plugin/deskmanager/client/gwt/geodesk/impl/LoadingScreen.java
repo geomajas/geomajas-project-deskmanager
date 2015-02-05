@@ -33,7 +33,7 @@ import org.geomajas.gwt.client.map.event.MapModelChangedEvent;
 import org.geomajas.gwt.client.map.event.MapModelChangedHandler;
 import org.geomajas.gwt.client.widget.MapWidget;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.GwtUserApplication;
 import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.GeodeskInitializationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationEvent;
@@ -147,7 +147,7 @@ public class LoadingScreen extends VLayout implements GeodeskInitializationHandl
 		addMember(hCenter);
 	}
 
-	public void registerGeodesk(final UserApplication geoDesk) {
+	public void registerGeodesk(final GwtUserApplication geoDesk) {
 		if (geoDesk != null) {
 			onLoadLoketRegistration = geoDesk.addUserApplicationLoadedHandler(new UserApplicationHandler() {
 

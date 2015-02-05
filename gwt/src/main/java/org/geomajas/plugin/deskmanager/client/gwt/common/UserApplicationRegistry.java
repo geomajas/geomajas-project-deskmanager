@@ -10,14 +10,14 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.common;
 
+import org.geomajas.annotation.Api;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.geomajas.annotation.Api;
-
 /**
- * Registry where different {@link UserApplication}s can be registered. UserApplications registered here are available
- * for use in the management interface.
+ * Registry where different {@link UserApplicationConfiguration}s can be registered.
+ * UserApplications registered here are available for use in the management interface.
  * 
  * @author Oliver May
  * @since 1.0.0
@@ -27,7 +27,8 @@ public final class UserApplicationRegistry {
 
 	private static final UserApplicationRegistry INSTANCE = new UserApplicationRegistry();
 
-	private Map<String, UserApplication> userApplications = new LinkedHashMap<String, UserApplication>();
+	private Map<String, UserApplicationConfiguration> userApplications =
+			new LinkedHashMap<String, UserApplicationConfiguration>();
 
 	private UserApplicationRegistry() {
 	}
@@ -39,7 +40,7 @@ public final class UserApplicationRegistry {
 	 * @param userApplication
 	 *            the user application to register.
 	 */
-	public void register(UserApplication userApplication) {
+	public void register(UserApplicationConfiguration userApplication) {
 		if (null != userApplication) {
 			register(userApplication.getClientApplicationKey(), userApplication);
 		}
@@ -53,7 +54,7 @@ public final class UserApplicationRegistry {
 	 * @param userApplication
 	 *            the user application
 	 */
-	public void register(String key, UserApplication userApplication) {
+	public void register(String key, UserApplicationConfiguration userApplication) {
 		userApplications.put(key, userApplication);
 	}
 
@@ -63,7 +64,7 @@ public final class UserApplicationRegistry {
 	 * @param key the key
 	 * @return the user applications.
 	 */
-	public UserApplication get(String key) {
+	public UserApplicationConfiguration get(String key) {
 		return userApplications.get(key);
 	}
 
@@ -81,7 +82,7 @@ public final class UserApplicationRegistry {
 	 * 
 	 * @return the user applications.
 	 */
-	public Map<String, UserApplication> getUserApplications() {
+	public Map<String, UserApplicationConfiguration> getUserApplications() {
 		return userApplications;
 	}
 
@@ -92,7 +93,7 @@ public final class UserApplicationRegistry {
 	 */
 	public LinkedHashMap<String, String> getUserApplicationNames() {
 		LinkedHashMap<String, String> loketNames = new LinkedHashMap<String, String>();
-		for (UserApplication ca : getUserApplications().values()) {
+		for (UserApplicationConfiguration ca : getUserApplications().values()) {
 			loketNames.put(ca.getClientApplicationKey(), ca.getClientApplicationName());
 		}
 		return loketNames;

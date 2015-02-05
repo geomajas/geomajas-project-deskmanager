@@ -51,7 +51,7 @@ public class GetMapConfigurationCommand extends org.geomajas.command.configurati
 		}
 
 		// this checks if geodesk is allowed
-		Geodesk loket = geodeskService.getGeodeskByPublicId(request.getApplicationId()); 
+		Geodesk loket = geodeskService.getGeodeskByPublicId(request.getApplicationId());
 
 		if (loket != null) {
 			ClientApplicationInfo loketConfig = configurationService.createClonedGeodeskConfiguration(loket, true);

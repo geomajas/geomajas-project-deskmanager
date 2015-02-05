@@ -3,6 +3,7 @@
 	<inherits name="org.geomajas.sld.editor.expert.GeomajasSldExpertSmartGwt"/>
 	<inherits name="org.geomajas.plugin.editing.gwt.Editing"/>
 	<inherits name="org.geomajas.gwt.GeomajasCommonSmartGwt"/>
+	<inherits name="org.geomajas.plugin.deskmanager.Geodesk"/>
 
 	<source path="client/gwt/common" />
 	<source path="client/gwt/manager" />
