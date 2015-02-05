@@ -86,7 +86,7 @@ public class GeodeskConfigurationServiceTest extends SecurityContainingTestBase 
 	public void setup() throws Exception {
 		// First profile in list is admin
 		String token = ((DeskmanagerSecurityService) securityService).registerProfile("42",
-				((StubProfileService) profileService).getPredefinedProfiles().get(0));
+				((StubProfileService) profileService).getProfiles(null).get(0));
 		// Log in
 		securityManager.createSecurityContext(token);
 
