@@ -8,7 +8,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.geomajas</groupId>
 	<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 	<packaging>jar</packaging>
 	<name>Geomajas Deskmanager Project - GWT</name>
