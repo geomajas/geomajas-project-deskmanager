@@ -10,12 +10,24 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.blueprints;
 
-import java.util.Map;
-
+import com.google.gwt.core.client.GWT;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.AnimationEffect;
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.types.Side;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionEvent;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
 import org.geomajas.configuration.client.ClientWidgetInfo;
 import org.geomajas.gwt.client.Geomajas;
 import org.geomajas.gwt.client.util.Log;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationConfiguration;
 import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationRegistry;
 import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.common.AbstractWoaHandler;
@@ -37,20 +49,7 @@ import org.geomajas.plugin.deskmanager.command.manager.dto.SaveBlueprintRequest;
 import org.geomajas.plugin.deskmanager.domain.dto.BaseGeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 
-import com.google.gwt.core.client.GWT;
-import com.smartgwt.client.types.Alignment;
-import com.smartgwt.client.types.AnimationEffect;
-import com.smartgwt.client.types.Overflow;
-import com.smartgwt.client.types.Side;
-import com.smartgwt.client.widgets.Label;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
-import com.smartgwt.client.widgets.grid.events.SelectionEvent;
-import com.smartgwt.client.widgets.layout.HLayout;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.tab.Tab;
-import com.smartgwt.client.widgets.tab.TabSet;
+import java.util.Map;
 
 /**
  * Detail panel for a blueprint, contains the different configuration tabs and automatically adds widget editors that
@@ -201,7 +200,8 @@ public class BlueprintDetail extends HLayout implements SelectionChangedHandler,
 	 *            the blueprint.
 	 */
 	private void loadWidgetTabs(BaseGeodeskDto bp) {
-		UserApplication ua = UserApplicationRegistry.getInstance().get(bp.getUserApplicationInfo().getKey());
+		UserApplicationConfiguration ua
+				= UserApplicationRegistry.getInstance().get(bp.getUserApplicationInfo().getKey());
 		for (String key : ua.getSupportedApplicationWidgetKeys()) {
 			try {
 				addWidgetTab(WidgetEditorFactoryRegistry.getApplicationRegistry().get(key),

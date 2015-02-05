@@ -15,7 +15,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import org.geomajas.configuration.client.ClientApplicationInfo;
 import org.geomajas.gwt.client.GwtCommandCallback;
 import org.geomajas.gwt.client.command.GwtCommandDispatcher;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.GwtUserApplication;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.impl.DeskmanagerGwtCommandCallback;
@@ -29,7 +29,7 @@ import java.util.List;
  * 
  * @author Oliver May
  */
-public abstract class AbstractUserApplication implements UserApplication {
+public abstract class AbstractGwtUserApplication implements GwtUserApplication {
 
 	private HandlerManager handlerManager;
 
@@ -40,7 +40,7 @@ public abstract class AbstractUserApplication implements UserApplication {
 	/**
 	 * Construct an abstract application and initialize handlers.
 	 */
-	public AbstractUserApplication() {
+	public AbstractGwtUserApplication() {
 		handlerManager = new HandlerManager(this);
 		GwtCommandCallback cb = new DeskmanagerGwtCommandCallback();
 		GwtCommandDispatcher.getInstance().setCommandExceptionCallback(cb);

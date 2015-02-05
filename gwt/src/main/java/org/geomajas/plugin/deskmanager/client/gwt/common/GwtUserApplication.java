@@ -21,7 +21,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationH
  * 
  * @author Oliver May
  */
-public interface UserApplication extends UserApplicationConfiguration {
+public interface GwtUserApplication extends UserApplicationConfiguration {
 
 	/**
 	 * This method acts as the entrypoint for a deskmanager user application. When all initialization is done, this
