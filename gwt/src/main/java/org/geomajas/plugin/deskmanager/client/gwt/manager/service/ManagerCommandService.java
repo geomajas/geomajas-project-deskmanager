@@ -50,14 +50,11 @@ import org.geomajas.plugin.deskmanager.command.manager.dto.ReloadDynamicLayersRe
 import org.geomajas.plugin.deskmanager.command.manager.dto.SaveBlueprintRequest;
 import org.geomajas.plugin.deskmanager.command.manager.dto.SaveGeodeskRequest;
 import org.geomajas.plugin.deskmanager.command.manager.dto.SaveLayerModelRequest;
-import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.FindUsersRequest;
-import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.FindUsersResponse;
 import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 import org.geomajas.plugin.deskmanager.domain.dto.DynamicLayerConfiguration;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 import java.util.List;
 
@@ -465,21 +462,6 @@ public final class ManagerCommandService {
 				});
 	}
 
-	public static void getUsers(final DataCallback<List<UserDto>> onFinish) {
-		FindUsersRequest request = new FindUsersRequest();
-		GwtCommand command = new GwtCommand(FindUsersRequest.COMMAND);
-		command.setCommandRequest(request);
-		GwtCommandDispatcher.getInstance().execute(command,
-				new AbstractCommandCallback<FindUsersResponse>() {
-
-					public void execute(FindUsersResponse response) {
-						if (onFinish != null) {
-							onFinish.execute(response.getUsers());
-						}
-					}
-				});
-	}
-
 	public static void processShapeFileUpload(String fileId, final DataCallback<ProcessShapeFileResponse> onFinish) {
 		ProcessShapeFileRequest request = new ProcessShapeFileRequest();
 		request.setFileId(fileId);
@@ -517,24 +499,5 @@ public final class ManagerCommandService {
 						}
 					}
 				});
-	}
-
-	public static void createUser(String email, String name,
-								  String surname, String password,
-								  DataCallback<UserDto> onFinish) {
-
-	}
-	
-	public static void updateUser(UserDto user) {
-		
-	}
-	
-	public static void deleteUser(UserDto user) {
-		
-	}
-
-	public static void getUser(long id, DataCallback<UserDto> dataCallback) {
-		// TODO Auto-generated method stub
-		
 	}
 }
