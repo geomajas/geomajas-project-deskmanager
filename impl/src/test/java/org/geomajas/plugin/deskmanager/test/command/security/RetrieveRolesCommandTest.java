@@ -13,11 +13,6 @@ package org.geomajas.plugin.deskmanager.test.command.security;
 import org.geomajas.command.CommandDispatcher;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesResponse;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
-import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.AuthenticationService;
-import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.UserService;
-import org.geomajas.plugin.deskmanager.test.service.ExampleDatabaseProvisioningServiceImpl;
-import org.geomajas.security.GeomajasSecurityException;
 import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,36 +34,12 @@ public class RetrieveRolesCommandTest {
 	private CommandDispatcher dispatcher;
 
 	@Autowired
-	UserService userService;
-
-	@Autowired
-	AuthenticationService authenticationService;
-
-	@Autowired
 	SessionFactory sessionFactory;
 
 	@Test
-	public void testGetRolesWithNullToken() {
+	public void testGetRoles() {
 		RetrieveRolesRequest request = new RetrieveRolesRequest();
 		request.setGeodeskId(RetrieveRolesRequest.MANAGER_ID);
-
-		RetrieveRolesResponse response = (RetrieveRolesResponse) dispatcher.execute(RetrieveRolesRequest.COMMAND,
-				request, null, "en");
-
-		Assert.assertTrue(response.getErrors().isEmpty());
-		Assert.assertNotNull(response.getRoles());
-		Assert.assertTrue(response.getRoles().size() == 0);
-	}
-
-	@Test
-	public void testGetRolesWithActiveAuthenticationToken() throws GeomajasSecurityException {
-		User user = userService.findByAddress(ExampleDatabaseProvisioningServiceImpl.USER_NIKO_EMAIL);
-		String authenticationToken = authenticationService.authenticateUsernamePassword(user.getEmail(),
-				ExampleDatabaseProvisioningServiceImpl.USER_NIKO_PASSWORD);
-
-		RetrieveRolesRequest request = new RetrieveRolesRequest();
-		request.setGeodeskId(RetrieveRolesRequest.MANAGER_ID);
-		request.setSecurityToken(authenticationToken);
 
 		RetrieveRolesResponse response = (RetrieveRolesResponse) dispatcher.execute(RetrieveRolesRequest.COMMAND,
 				request, null, "en");
@@ -77,8 +48,6 @@ public class RetrieveRolesCommandTest {
 		Assert.assertNotNull(response.getRoles());
 		Assert.assertTrue(response.getRoles().size() > 0);
 
-		//remove the session
-		authenticationService.removeAuthenticationSession(authenticationToken);
 	}
 
 	@Test
