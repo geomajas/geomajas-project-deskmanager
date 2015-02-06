@@ -17,9 +17,8 @@
 		<!-- Geomajas dependencies -->
 		<dependency>
 			<groupId>org.geomajas.project</groupId>
-			<artifactId>geomajas-project-deskmanager</artifactId>
+			<artifactId>geomajas-project-deskmanager-impl</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-gwt-client</artifactId>
