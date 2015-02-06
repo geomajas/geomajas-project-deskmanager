@@ -10,21 +10,21 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk;
 
-import org.geomajas.gwt.client.util.WidgetLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.common.ManagerTab;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
-
 import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
+import org.geomajas.gwt.client.util.WidgetLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.common.ManagerTab;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
 
 /**
  * 
@@ -74,7 +74,7 @@ public class Geodesks extends VLayout implements EditSessionHandler, ManagerTab 
 		});
 
 		grid = new GeodeskGrid();
-		grid.addSelectionChangedHandler(detail);
+		Whiteboard.registerHandler((GeodeskSelectionHandler) detail);
 
 		topContainer.addMember(buttonNew);
 		topContainer.addMember(grid);

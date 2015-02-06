@@ -10,22 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import org.geomajas.plugin.deskmanager.client.gwt.manager.ManagerApplicationLoader;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.common.AbstractConfigurationLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.common.SaveButtonBar;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
-import org.geomajas.plugin.deskmanager.command.manager.dto.SaveGeodeskRequest;
-import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
-import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
-import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
@@ -45,6 +29,21 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.validator.CustomValidator;
 import com.smartgwt.client.widgets.form.validator.Validator;
 import com.smartgwt.client.widgets.layout.VLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.ManagerApplicationLoader;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.common.AbstractConfigurationLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.common.SaveButtonBar;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
+import org.geomajas.plugin.deskmanager.command.manager.dto.SaveGeodeskRequest;
+import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
+import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
+import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
+
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * 
@@ -327,7 +326,8 @@ public class GeodeskSettings extends AbstractConfigurationLayout implements Geod
 		return true;
 	}
 
-	public void onGeodeskSelectionChange(GeodeskEvent geodeskEvent) {
+	@Override
+	public void onGeodeskSelectionChange(GeodeskSelectionEvent geodeskEvent) {
 		setGeodesk(geodeskEvent.getGeodesk());
 	}
 	

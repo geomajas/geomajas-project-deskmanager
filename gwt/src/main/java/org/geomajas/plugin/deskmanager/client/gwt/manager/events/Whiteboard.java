@@ -133,12 +133,12 @@ public final class Whiteboard {
 		}
 	}
 	
-	public static void fireChangeEvent(GeodeskEvent e) {
+	public static void fireSelectionChangeEvent(GeodeskSelectionEvent e) {
 		for (GeodeskSelectionHandler gdh : GEODESK_SELECTION_HANDLERS) {
 			try {
 				gdh.onGeodeskSelectionChange(e);
 			} catch (Exception e2) {
-				Log.logWarn("EventHandlerException (GeodeskEvent)", e2);
+				Log.logWarn("EventHandlerException (GeodeskSelectionEvent)", e2);
 			}
 		}
 	}

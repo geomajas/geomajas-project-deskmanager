@@ -27,6 +27,8 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionEven
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
@@ -43,9 +45,6 @@ import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
-import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
@@ -57,7 +56,7 @@ import com.smartgwt.client.widgets.tab.TabSet;
  * @author Kristof Heirwegh
  * @author Oliver May
  */
-public class GeodeskDetail extends VLayout implements SelectionChangedHandler, EditSessionHandler, GeodeskHandler {
+public class GeodeskDetail extends VLayout implements GeodeskSelectionHandler, EditSessionHandler, GeodeskHandler {
 
 	private static final ManagerMessages MESSAGES = GWT.create(ManagerMessages.class);
 
@@ -145,22 +144,21 @@ public class GeodeskDetail extends VLayout implements SelectionChangedHandler, E
 		Whiteboard.registerHandler((GeodeskHandler) this);
 	}
 
+	@Override
 	public void destroy() {
 		Whiteboard.unregisterHandler((EditSessionHandler) this);
 		Whiteboard.unregisterHandler((GeodeskHandler) this);
 		super.destroy();
 	}
 
-	public void onSelectionChanged(SelectionEvent event) {
+	@Override
+	public void onGeodeskSelectionChange(GeodeskSelectionEvent geodeskSelectionEvent) {
 		setDisabled(true);
-		if (event.getState()) { // true == selected
-			ListGridRecord record = (ListGridRecord) event.getRecord();
-			if (record != null && record.getAttributeAsString(ID_ATTRIBUTE) != null
-					&& record.getAttributeAsString(ID_ATTRIBUTE).length() != 0) {
-				loadRecord(record.getAttributeAsString(GeodeskGrid.FLD_ID));
-			} else {
-				setGeodesk(null);
-			}
+		GeodeskDto geodeskDto = geodeskSelectionEvent.getGeodesk();
+		if (geodeskDto != null) {
+			loadRecord(geodeskDto.getId());
+		} else {
+			setGeodesk(null);
 		}
 	}
 
@@ -200,10 +198,11 @@ public class GeodeskDetail extends VLayout implements SelectionChangedHandler, E
 			setDisabled(false);
 		}
 		setLoaded();
-		Whiteboard.fireChangeEvent(new GeodeskEvent(geodesk));
 	}
 
 	// -- EditSessionHandler --------------------------------------------------------
+
+	@Override
 	public void onEditSessionChange(EditSessionEvent ese) {
 		boolean disabled = ese.isSessionStart();
 		for (Tab tab : tabset.getTabs()) {
@@ -222,13 +221,18 @@ public class GeodeskDetail extends VLayout implements SelectionChangedHandler, E
 	}
 
 	// -- GeodeskHandler ---------------------------------------------------------
+
+	@Override
 	public void onGeodeskChange(GeodeskEvent le) {
 		// refresh data if it's the same record
 		if (geodesk != null && geodesk.getId().equals(le.getGeodesk().getId())) {
-			if (le.isDeleted()) {
-				setGeodesk(null);
-			} else {
-				loadRecord(geodesk.getId());
+			switch (le.getAction()) {
+				case DELETE:
+					setGeodesk(null);
+					break;
+				default:
+					loadRecord(geodesk.getId());
+					break;
 			}
 		}
 	}
@@ -317,7 +321,7 @@ public class GeodeskDetail extends VLayout implements SelectionChangedHandler, E
 
 				@Override
 				public boolean onCancelClick(ClickEvent event) {
-					onGeodeskChange(new GeodeskEvent(geodesk));
+					onGeodeskChange(new GeodeskEvent(geodesk, GeodeskEvent.Action.CHANGE));
 					return true;
 				}
 

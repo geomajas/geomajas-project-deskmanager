@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 import org.geomajas.gwt.client.Geomajas;
 import org.geomajas.gwt.client.util.WidgetLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
@@ -22,6 +24,7 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
@@ -49,12 +52,12 @@ import com.smartgwt.client.widgets.grid.events.RecordDoubleClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 
 /**
- * TODO.
+ * Extension of {@link ListGrid} for displaying a list of {@link GeodeskDto}s.
  *
  * @author Jan De Moerloose
  *
  */
-public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHandler {
+public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHandler, SelectionChangedHandler {
 	private static final ManagerMessages MESSAGES = GWT.create(ManagerMessages.class);
 
 	public static final String FLD_ID = "id";
@@ -83,6 +86,11 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 	private HLayout rollOverCanvas;
 
 	private Map<String, GeodeskDto> geodesks = new HashMap<String, GeodeskDto>();
+
+	/**
+	 * Id of currently selected geodesk.
+	 */
+	private String selectedGeodeskId;
 
 	public GeodeskGrid() {
 		super();
@@ -151,6 +159,7 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 				com.google.gwt.user.client.Window.open(url, "_blank", null);
 			}
 		});
+		addSelectionChangedHandler(this);
 	}
 
 	@Override
@@ -248,9 +257,9 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 		});
 	}
 
-	void clearData() {
+	private void clearData() {
 		deselectAllRecords();
-		setData(new ListGridRecord[] {});
+		setData(new ListGridRecord[]{});
 		geodesks.clear();
 	}
 
@@ -272,23 +281,35 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 
 	// -- Handlers --
 
-	public void onGeodeskChange(GeodeskEvent le) {
-		GeodeskDto old = geodesks.remove(le.getGeodesk().getId());
+	@Override
+	public void onGeodeskChange(GeodeskEvent geodeskEvent) {
+		String geodeskId = geodeskEvent.getGeodesk().getId();
+		GeodeskDto old = geodesks.remove(geodeskId);
 		if (old != null && getRecordList() != null) {
 			Record oldr = getRecordList().find(FLD_ID, old.getId());
 			removeData(oldr);
 		}
-		if (!le.isDeleted()) {
-			geodesks.put(le.getGeodesk().getId(), le.getGeodesk());
-			ListGridRecord record = toGridRecord(le.getGeodesk());
-			addData(record);
-			if (le.isNewInstance()) {
-				deselectAllRecords();
-				selectRecord(record);
-			}
+		switch (geodeskEvent.getAction()) {
+			case DELETE:
+				if (selectedGeodeskId.equals(geodeskId)) {
+					selectedGeodeskId = null;
+					Whiteboard.fireSelectionChangeEvent(new GeodeskSelectionEvent(null));
+				}
+				// do nothing further, old geodesk is already removed
+				break;
+			default:
+				geodesks.put(geodeskId, geodeskEvent.getGeodesk());
+				ListGridRecord record = toGridRecord(geodeskEvent.getGeodesk());
+				addData(record);
+				if (GeodeskEvent.Action.CREATE.equals(geodeskEvent.getAction())) {
+					selectedGeodeskId = geodeskId;
+				}
+				break;
 		}
+		selectCurrentGeodesk();
 	}
 
+	@Override
 	public void onBlueprintChange(BlueprintEvent bpe) {
 		if (!bpe.isDeleted() && !bpe.isNewInstance()) { // just changed
 			for (Record r : getDataAsRecordList().toArray()) {
@@ -302,6 +323,79 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 					}
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onSelectionChanged(SelectionEvent selectionEvent) {
+		String geodeskId = getGeodeskIdOfSelectionEvent(selectionEvent);
+		boolean selected = selectionEvent.getState();
+
+		// Only react on selection, not deselection.
+		// Smartgwt always seems to throw both selection and deselection event for SAME record!
+		if (selected && !sameGeodesk(selectedGeodeskId, geodeskId)) {
+			selectedGeodeskId = geodeskId;
+			Whiteboard.fireSelectionChangeEvent(new GeodeskSelectionEvent(getGeodeskDto(geodeskId)));
+		//} else if (geodeskId != null && geodeskId.equals(selectedGeodeskId)) { // current geodesk deselected
+		//	selectedGeodeskId = null;
+//			Whiteboard.fireSelectionChangeEvent(new GeodeskSelectionEvent(null));
+		}
+	}
+
+	public String getSelectedGeodeskId() {
+		return selectedGeodeskId;
+	}
+
+	private String getGeodeskIdOfSelectionEvent(SelectionEvent selectionEvent) {
+		ListGridRecord record = selectionEvent.getRecord();
+		if (record != null && record.getAttributeAsString(FLD_ID) != null
+				&& record.getAttributeAsString(FLD_ID).length() != 0) {
+			return record.getAttributeAsString(GeodeskGrid.FLD_ID);
+		}
+		return null;
+	}
+
+	private GeodeskDto getGeodeskDto(String geodeskId) {
+		GeodeskDto geodeskDto = null;
+		if (geodeskId != null && geodesks.containsKey(geodeskId)) {
+			geodeskDto = geodesks.get(geodeskId);
+		}
+		return geodeskDto;
+	}
+
+	private void selectCurrentGeodesk() {
+		ListGridRecord gridSelected = getSelectedRecord();
+		ListGridRecord modelSelected = getListGridRecordOfSelectedDeskId();
+		if (modelSelected == null) {
+			deselectAllRecords();
+		} else if (modelSelected != gridSelected) {
+			deselectAllRecords();
+			selectRecord(modelSelected);
+		}
+	}
+
+	private ListGridRecord getListGridRecordOfSelectedDeskId() {
+		if (getSelectedGeodeskId() != null) {
+			for (ListGridRecord listGridRecord : getRecords()) {
+				if (getSelectedGeodeskId().equals(listGridRecord.getAttributeAsString(FLD_ID))) {
+					return listGridRecord;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns whether there is a difference between the two selected geodesk ids. Null check is performed.
+	 * @param currentGeodeskId
+	 * @param newGeodeskId
+	 * @return
+	 */
+	private boolean sameGeodesk(String currentGeodeskId, String newGeodeskId) {
+		if (currentGeodeskId != null) {
+			return currentGeodeskId.equals(newGeodeskId);
+		} else {
+			return newGeodeskId == null;
 		}
 	}
 }

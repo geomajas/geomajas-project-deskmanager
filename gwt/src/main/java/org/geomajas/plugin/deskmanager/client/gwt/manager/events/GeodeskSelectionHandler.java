@@ -21,8 +21,8 @@ public interface GeodeskSelectionHandler {
 	/**
 	 * Called when the selection of the geodesk changes.
 	 * 
-	 * @param geodeskevent
+	 * @param geodeskSelectionEvent
 	 */
-	void onGeodeskSelectionChange(GeodeskEvent geodeskEvent);
+	void onGeodeskSelectionChange(GeodeskSelectionEvent geodeskSelectionEvent);
 
 }
