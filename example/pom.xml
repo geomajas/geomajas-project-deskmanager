@@ -13,7 +13,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.geomajas</groupId>
+			<groupId>org.geomajas.project</groupId>
 			<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 		</dependency>
 		<dependency>
