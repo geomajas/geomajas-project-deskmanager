@@ -10,6 +10,8 @@
 
 	<inherits name="org.geomajas.plugin.deskmanager.Geodesk"/>
 
+	<inherits name="org.geomajas.project.deskmanager.example.ExampleCommonEntryPoint" />
+
 	<collapse-all-properties />
 
 	<!--<set-property-fallback name="locale" value="en"/>-->

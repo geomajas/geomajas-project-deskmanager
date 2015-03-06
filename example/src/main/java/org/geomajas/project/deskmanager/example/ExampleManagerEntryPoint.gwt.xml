@@ -6,6 +6,8 @@
 
 	<inherits name="com.smartclient.theme.enterprise.Enterprise"/>
 
+	<inherits name="org.geomajas.project.deskmanager.example.ExampleCommonEntryPoint" />
+
 	<entry-point class="org.geomajas.project.deskmanager.example.manager.client.ExampleManagerEntryPoint"/>
 
 	<collapse-all-properties />

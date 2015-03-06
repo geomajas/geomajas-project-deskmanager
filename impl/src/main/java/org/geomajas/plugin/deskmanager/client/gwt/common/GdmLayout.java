@@ -50,12 +50,30 @@ public final class GdmLayout { // NOSONAR
 
 	// CHECKSTYLE VISIBILITY MODIFIER: OFF
 
-	/**
-	 * The url prefix of a desk.
-	 * 
-	 * Attention! Update from rule in urlrewrite.xml when changing. Must end with a /!
-	 */
-	public static String geodeskPrefix = "desk/";
+	/** The geodesk url builder. **/
+	public static GeodeskIdUtil geodeskIdUtil = new GeodeskIdUtil() {
+
+		String geodeskPrefix = "desk/";
+
+		@Override
+		public String parseGeodeskId(String url) {
+			if (!url.contains(geodeskPrefix)) {
+				return null;
+			}
+			String geodeskId = url.substring(url.indexOf(geodeskPrefix)
+					+ geodeskPrefix.length());
+			//Remove trailing slash and everything after.
+			if (geodeskId.contains("/")) {
+				geodeskId = geodeskId.substring(0, geodeskId.indexOf('/'));
+			}
+			return geodeskId;
+		}
+
+		@Override
+		public String buildGeodeskUrl(String geodeskId) {
+			return geodeskPrefix + geodeskId;
+		}
+	};
 
 	/**
 	 * The url prefix of the manager application.

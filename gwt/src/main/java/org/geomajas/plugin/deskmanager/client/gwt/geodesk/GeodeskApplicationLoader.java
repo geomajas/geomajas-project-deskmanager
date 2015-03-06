@@ -22,7 +22,6 @@ import org.geomajas.plugin.deskmanager.client.gwt.common.HasTokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationConfiguration;
 import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationRegistry;
 import org.geomajas.plugin.deskmanager.client.gwt.common.impl.DeskmanagerTokenRequestHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.common.util.GeodeskUrlUtil;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.i18n.GeodeskMessages;
@@ -34,8 +33,10 @@ import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUser
  * application, if it's needed asking for a login role.
  * 
  * The entrypoint listens to Mapwidget and MapModel events to set some generic configuration options.
- * 
+ *
  * @author Oliver May
+ *
+ *
  */
 public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 
@@ -91,7 +92,7 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 		loadScreen.setZIndex(GdmLayout.loadingZindex);
 		loadScreen.draw();
 
-		String geodeskId = GeodeskUrlUtil.getGeodeskId();
+		String geodeskId = GdmLayout.geodeskIdUtil.parseGeodeskId(Window.Location.getHref());
 		if (geodeskId == null) {
 			Window.alert(MESSAGES.noGeodeskIdGivenError());
 			return;

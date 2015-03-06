@@ -21,7 +21,7 @@ public final class CodeServer {
 	public static String getCodeServer() {
 		String codeServer = com.google.gwt.user.client.Window.Location.getParameter("gwt.codesvr");
 		if (codeServer != null) {
-			codeServer = "?gwt.codesvr=" + codeServer;
+			codeServer = "gwt.codesvr=" + codeServer;
 		} else {
 			codeServer = "";
 		}

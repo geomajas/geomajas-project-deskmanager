@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -20,6 +20,7 @@ import org.geomajas.gwt.client.command.TokenRequestHandler;
 import org.geomajas.gwt.client.command.event.TokenChangedEvent;
 import org.geomajas.gwt.client.command.event.TokenChangedHandler;
 import org.geomajas.gwt2.client.GeomajasServerExtension;
+import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesRequest;
 import org.geomajas.plugin.deskmanager.command.usernamepasswordsecurity.dto.RetrieveRolesResponse;
 
@@ -30,7 +31,7 @@ public class ExampleGeodeskEntryPoint implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		final String geodeskId = com.google.gwt.user.client.Window.Location.getParameter("geodesk");
+		final String geodeskId = GdmLayout.geodeskIdUtil.parseGeodeskId("");
 		GeomajasServerExtension.getInstance().getCommandService().setTokenRequestHandler(new TokenRequestHandler() {
 			@Override
 			public void login(final TokenChangedHandler tokenChangedHandler) {
