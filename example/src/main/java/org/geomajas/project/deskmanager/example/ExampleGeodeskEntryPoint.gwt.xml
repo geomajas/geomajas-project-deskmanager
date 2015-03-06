@@ -12,10 +12,6 @@
 
 	<inherits name="org.geomajas.project.deskmanager.example.ExampleCommonEntryPoint" />
 
-	<collapse-all-properties />
-
-	<!--<set-property-fallback name="locale" value="en"/>-->
-
 	<entry-point class="org.geomajas.project.deskmanager.example.geodesk.client.ExampleGeodeskEntryPoint"/>
 
 	<source path="geodesk/client"/>

@@ -10,8 +10,6 @@
 
 	<entry-point class="org.geomajas.project.deskmanager.example.manager.client.ExampleManagerEntryPoint"/>
 
-	<collapse-all-properties />
-
     <set-property-fallback name="locale" value="en"/>
 
     <source path="manager/client"/>
