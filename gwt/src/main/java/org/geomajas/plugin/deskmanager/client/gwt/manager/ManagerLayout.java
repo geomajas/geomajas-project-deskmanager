@@ -11,13 +11,10 @@
 package org.geomajas.plugin.deskmanager.client.gwt.manager;
 
 import com.smartgwt.client.widgets.layout.HLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.blueprints.Blueprints;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.common.ManagerTab;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.datalayer.Datalayers;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk.Geodesks;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 
@@ -29,10 +26,13 @@ import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
 import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
 
+import java.util.List;
+
 /**
+ * The main layout of the manager console, containing tabs.
  * 
  * @author Oliver May
- *
+ * @author Jan Venstermans
  */
 public class ManagerLayout extends VLayout implements EditSessionHandler {
 	private static final ManagerMessages MESSAGES = GWT.create(ManagerMessages.class);
@@ -54,19 +54,13 @@ public class ManagerLayout extends VLayout implements EditSessionHandler {
 		tabSet.setWidth100();
 		tabSet.setHeight100();
 
-		Tab loketten = new Tab(MESSAGES.mainTabGeodesks());
-		loketten.setPane(new Geodesks());
-		tabSet.addTab(loketten);
-
-		Tab lagenBeheerTab = new Tab(MESSAGES.mainTabDataLayers());
-		lagenBeheerTab.setPane(new Datalayers());
-		tabSet.addTab(lagenBeheerTab);
-		if (Role.ADMINISTRATOR.equals(ManagerApplicationLoader.getInstance().getUserProfile()
-				.getRole())) {
-			// manage blueprints
-			Tab blueprintTab = new Tab(MESSAGES.mainTabBlueprints());
-			blueprintTab.setPane(new Blueprints());
-			tabSet.addTab(blueprintTab);
+		for (ManagerTabRegistry.ManagerTabData managerTabData :
+				ManagerTabRegistry.getTabRegistry().getManagerTabDataList()) {
+			if (isCurrentUserAllowedToSeeTab(managerTabData.getVisibleForRoles())) {
+				Tab tab = new Tab(managerTabData.getTabName());
+				tab.setPane(managerTabData.getCanvas());
+				tabSet.addTab(tab);
+			}
 		}
 
 		addMember(tabSet);
@@ -99,6 +93,23 @@ public class ManagerLayout extends VLayout implements EditSessionHandler {
 				tab.setDisabled(disabled);
 			}
 		}
+	}
+
+	// -- private methods--------------------------------------------------------
+
+	/**
+	 * Indicates whether current logged in user can see a tab, based on a role list.
+	 * Will return true is role list is null or when logged in user's role is in the role list.
+	 * Will return false when user's role is not in the provided role list.
+	 *
+	 * @param allowedRoleList list of roles
+	 * @return can see tab
+	 */
+	private boolean isCurrentUserAllowedToSeeTab(List<Role> allowedRoleList) {
+		if (allowedRoleList == null) {
+			return true;
+		}
+		return allowedRoleList.contains(ManagerApplicationLoader.getInstance().getUserProfile().getRole());
 	}
 
 }
