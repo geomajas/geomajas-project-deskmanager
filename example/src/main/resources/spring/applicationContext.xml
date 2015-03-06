@@ -14,6 +14,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<import resource="userApplications.xml" />
 	<import resource="dynamicLayersApplication.xml" />
 	<import resource="properties.xml" />
+	<import resource="cacheLocation.xml" />
 
 	<context:component-scan base-package="org.geomajas.project.deskmanager.example"
 							name-generator="org.geomajas.spring.GeomajasBeanNameGenerator" />
