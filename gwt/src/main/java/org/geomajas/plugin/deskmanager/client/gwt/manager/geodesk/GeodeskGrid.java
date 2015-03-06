@@ -154,7 +154,7 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 			public void onRecordDoubleClick(RecordDoubleClickEvent event) {
 				String id = event.getRecord().getAttribute(FLD_GEODESKID);
 				String url = GeodeskUrlUtil.createPreviewUrl(id);
-				com.google.gwt.user.client.Window.open(url, "_blank", null);
+				com.google.gwt.user.client.Window.open(url, "_blank", "");
 			}
 		});
 		addSelectionChangedHandler(this);
