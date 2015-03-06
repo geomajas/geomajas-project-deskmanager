@@ -4,11 +4,10 @@
 
 	<parent>
 		<groupId>org.geomajas.project</groupId>
-		<artifactId>geomajas-project-deskmanager</artifactId>
+		<artifactId>geomajas-project-deskmanager-all</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.geomajas</groupId>
 	<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 	<packaging>jar</packaging>
 	<name>Geomajas Deskmanager Project - GWT</name>
@@ -17,10 +16,9 @@
 	<dependencies>
 		<!-- Geomajas dependencies -->
 		<dependency>
-			<groupId>org.geomajas</groupId>
-			<artifactId>geomajas-project-deskmanager</artifactId>
+			<groupId>org.geomajas.project</groupId>
+			<artifactId>geomajas-project-deskmanager-impl</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-gwt-client</artifactId>

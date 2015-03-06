@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -10,7 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.service.common;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.MissingResourceException;
@@ -28,15 +27,12 @@ import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.TerritoryCategory;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.CategoryDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -82,6 +78,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 
 	}
 
+	@Override
 	public Blueprint fromDto(BlueprintDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -125,6 +122,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return bp;
 	}
 
+	@Override
 	public BlueprintDto toDto(Blueprint blueprint, boolean includeReferences) throws GeomajasException {
 		if (blueprint == null) {
 			return null;
@@ -181,6 +179,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return null;
 	}
 
+	@Override
 	public LayerModel fromDto(LayerModelDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -199,6 +198,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return lm;
 	}
 
+	@Override
 	public LayerModelDto toDto(LayerModel layerModel, boolean includeReferences) throws GeomajasException {
 		if (layerModel == null) {
 			return null;
@@ -236,6 +236,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return messages.getString(key);
 	}
 
+	@Override
 	public Geodesk fromDto(GeodeskDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -278,6 +279,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return l;
 	}
 
+	@Override
 	public GeodeskDto toDto(Geodesk geodesk, boolean includeReferences) throws GeomajasException {
 		if (geodesk == null) {
 			return null;
@@ -325,6 +327,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return lDto;
 	}
 
+	@Override
 	public Territory fromDto(TerritoryDto dto, boolean includeBlueprints, boolean includegeodesks)
 			throws GeomajasException {
 		if (dto == null) {
@@ -353,6 +356,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return g;
 	}
 
+	@Override
 	public TerritoryDto toDto(Territory territory, boolean includeBlueprints, boolean includeGeodesks)
 			throws GeomajasException {
 		if (territory == null) {
@@ -380,7 +384,8 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		}
 		return gDto;
 	}
-	
+
+	@Override
 	public TerritoryDto toDto(Territory territory, boolean includeBlueprints,
 							  boolean includeGeodesks, boolean includeGeometry)
 			throws GeomajasException {
@@ -394,6 +399,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return gDto;
 	}
 
+	@Override
 	public TerritoryCategory fromDto(CategoryDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -405,6 +411,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return c;
 	}
 
+	@Override
 	public CategoryDto toDto(TerritoryCategory category) throws GeomajasException {
 		if (category == null) {
 			return null;
@@ -416,6 +423,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return cDto;
 	}
 
+	@Override
 	public Profile fromDto(ProfileDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -429,6 +437,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return p;
 	}
 
+	@Override
 	public ProfileDto toDto(Profile profile) throws GeomajasException {
 		if (profile == null) {
 			return null;
@@ -442,6 +451,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return pDto;
 	}
 
+	@Override
 	public LayerDto toDto(ClientLayer layer) throws GeomajasException {
 		if (layer == null) {
 			return null;
@@ -461,6 +471,7 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		return dto;
 	}
 
+	@Override
 	public ClientLayer fromDto(LayerDto dto) throws GeomajasException {
 		if (dto == null) {
 			return null;
@@ -470,73 +481,5 @@ public class DtoConverterServiceImpl implements DtoConverterService {
 		layer.setLayerModel(fromDto(dto.getLayerModel()));
 		layer.getWidgetInfo().putAll(dto.getWidgetInfo());
 		return layer;
-	}
-
-	@Override
-	public UserDto toDto(User user, boolean includeProfiles) throws GeomajasException {
-		UserDto dto = new UserDto();
-		dto.setId(user.getId());
-		dto.setEmail(user.getEmail());
-		dto.setName(user.getName());
-		dto.setSurname(user.getSurname());
-		dto.setActive(user.isActive());
-		if (includeProfiles) {
-			for (GroupMember member : user.getGroups())  {
-				dto.getProfiles().add(toProfileDto(member));
-			}
-		}
-		return dto;
-	}
-
-	@Override
-	public User fromDto(UserDto dto, boolean includeProfiles) throws GeomajasException {
-		User user = new User();
-		user.setId(dto.getId());
-		user.setEmail(dto.getEmail());
-		user.setName(dto.getName());
-		user.setSurname(dto.getSurname());
-		user.setActive(dto.isActive());
-		if (includeProfiles) {
-			for (ProfileDto profileDto : dto.getProfiles()) {
-				user.getGroups().add(fromProfileDto(profileDto, user));
-			}
-		}
-		return user;
-	}
-
-	@Override
-	public ProfileDto toProfileDto(GroupMember groupMember) throws GeomajasException {
-		ProfileDto profileDto = new ProfileDto();
-		profileDto.setRole(groupMember.getRole());
-		profileDto.setTerritory(toDto(groupMember.getGroup(), false, false, false));
-		return profileDto;
-	}
-
-	@Override
-	public Profile toProfile(GroupMember groupMember) throws GeomajasException {
-		Profile profile = new Profile();
-		profile.setRole(groupMember.getRole());
-		profile.setTerritory(groupMember.getGroup());
-		User user = groupMember.getUser();
-		if (user != null) {
-			profile.setFirstName(user.getName());
-			profile.setSurname(user.getSurname());
-		}
-		return profile;
-	}
-
-	@Override
-	public GroupMember fromProfileDto(ProfileDto profileDto, User user) throws GeomajasException {
-		Territory group = fromDto(profileDto.getTerritory(), false, false);
-		return new GroupMember(user, group, profileDto.getRole());
-	}
-
-	@Override
-	public List<Long> getIds(List<UserDto> users) {
-		List<Long> userIds = new ArrayList<Long>();
-		for (UserDto userDto : users) {
-			userIds.add(userDto.getId());
-		}
-		return userIds;
 	}
 }

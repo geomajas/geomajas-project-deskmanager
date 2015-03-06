@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -56,7 +56,7 @@ public class BlueprintServiceTest extends SecurityContainingTestBase {
 	public void testLoadBlueprints() throws Exception {
 
 		String token = ((DeskmanagerSecurityService) securityService).registerProfile(
-				RetrieveRolesRequest.MANAGER_ID, ((StubProfileService) profileService).getPredefinedProfiles().get(1));
+				RetrieveRolesRequest.MANAGER_ID, ((StubProfileService) profileService).getProfiles(null).get(1));
 		securityManager.createSecurityContext(token);
 
 		List<Blueprint> blueprints = blueprintService.getBlueprints();

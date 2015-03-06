@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -23,12 +23,8 @@ import org.geomajas.geometry.service.WktService;
 import org.geomajas.global.GeomajasException;
 import org.geomajas.plugin.deskmanager.domain.Blueprint;
 import org.geomajas.plugin.deskmanager.domain.Geodesk;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.TerritoryCategory;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
-import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
-import org.geomajas.plugin.deskmanager.service.usernamepasswordsecurity.impl.UserServiceImpl;
 import org.geomajas.service.DtoConverterService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +53,6 @@ public class ExampleDatabaseProvisioningServiceImpl implements DeskmanagerExampl
 	private static final String EPSG_3857 = "EPSG:3857";
 
 	public static final String CLIENTAPPLICATION_NAME;
-
-	public static final String USER_NIKO_EMAIL = "niko.haak@gmail.com";
-	public static final String USER_NIKO_PASSWORD = "kaah";
-
-	public static final String USER_ADMIN_EMAIL = "admin@admin.com";
-	public static final String USER_ADMIN_PASSWORD = "admin";
 
 	private static final String BE =
 			"POLYGON((408632.623169 6759429.725585,689708.137665 6701252.358792,631632.574341 " +
@@ -241,25 +231,6 @@ public class ExampleDatabaseProvisioningServiceImpl implements DeskmanagerExampl
 		geodesk4.setGeodeskId(GEODESK_TEST_DE_PRIVATE);
 
 		session.getCurrentSession().saveOrUpdate(geodesk4);
-
-		// create user in group Netherlands, CONSULTING_USER
-		User user = new User();
-		user.setActive(true);
-		user.setEmail(USER_NIKO_EMAIL);
-		user.setName("niko");
-		user.setSurname("haak");
-		user.setPassword(UserServiceImpl.encodePassword(user.getEmail(), USER_NIKO_PASSWORD));
-		session.getCurrentSession().save(user);
-		GroupMember nlMember = user.join(nlGroup, Role.CONSULTING_USER);
-
-		User adminUser = new User();
-		adminUser.setActive(true);
-		adminUser.setEmail(USER_ADMIN_EMAIL);
-		adminUser.setName("admin");
-		adminUser.setSurname("admin");
-		adminUser.setPassword(UserServiceImpl.encodePassword(adminUser.getEmail(), USER_ADMIN_PASSWORD));
-		adminUser.getGroups().add(new GroupMember(adminUser, beGroup, Role.ADMINISTRATOR));
-		session.getCurrentSession().save(adminUser);
 	}
 
 	private static void initMessages() {

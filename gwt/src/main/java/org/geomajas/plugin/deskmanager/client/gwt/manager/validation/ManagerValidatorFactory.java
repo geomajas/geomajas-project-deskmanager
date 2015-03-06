@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -18,7 +18,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.validation.client.AbstractGwtValidatorFactory;
 import com.google.gwt.validation.client.GwtValidation;
 import com.google.gwt.validation.client.impl.AbstractGwtValidator;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
 
 /**
  * @author Jan De Moerloose
@@ -28,7 +27,7 @@ public final class ManagerValidatorFactory extends AbstractGwtValidatorFactory {
 	/**
 	 * @author Jan De Moerloose
 	 */
-	  @GwtValidation({TerritoryDto.class, UserDto.class })
+	  @GwtValidation({TerritoryDto.class })
 	  public interface GwtValidator extends Validator {
 	  }
 

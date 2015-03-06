@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -19,17 +19,12 @@ import org.geomajas.plugin.deskmanager.domain.dto.BlueprintDto;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerDto;
 import org.geomajas.plugin.deskmanager.domain.dto.LayerModelDto;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.GroupMember;
 import org.geomajas.plugin.deskmanager.domain.security.Profile;
 import org.geomajas.plugin.deskmanager.domain.security.Territory;
 import org.geomajas.plugin.deskmanager.domain.security.TerritoryCategory;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.User;
 import org.geomajas.plugin.deskmanager.domain.security.dto.CategoryDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.ProfileDto;
 import org.geomajas.plugin.deskmanager.domain.security.dto.TerritoryDto;
-import org.geomajas.plugin.deskmanager.domain.usernamepasswordsecurity.dto.UserDto;
-
-import java.util.List;
 
 /**
  * Converts between DTOs and server-side objects.
@@ -71,19 +66,5 @@ public interface DtoConverterService {
 	Profile fromDto(ProfileDto dto) throws GeomajasException;
 
 	ProfileDto toDto(Profile profile) throws GeomajasException;
-
-	User fromDto(UserDto dto, boolean includeProfiles) throws GeomajasException;
-
-	UserDto toDto(User user, boolean includeProfiles) throws GeomajasException;
-
-	ProfileDto toProfileDto(GroupMember groupMember) throws GeomajasException;
-
-	Profile toProfile(GroupMember groupMember) throws GeomajasException;
-
-	GroupMember fromProfileDto(ProfileDto profileDto, User user) throws GeomajasException;
-
-	List<Long> getIds(List<UserDto> users);
-
-	// ----------------------------------------------------------
 
 }

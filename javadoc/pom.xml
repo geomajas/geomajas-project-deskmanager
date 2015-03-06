@@ -1,7 +1,7 @@
 <!--
   ~ This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
   ~
-  ~ Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+  ~ Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
   ~
   ~ The program is available in open source according to the GNU Affero
   ~ General Public License. All contributions in this program are covered
@@ -14,18 +14,22 @@
 
 	<parent>
 		<groupId>org.geomajas.project</groupId>
-		<artifactId>geomajas-project-deskmanager</artifactId>
+		<artifactId>geomajas-project-deskmanager-all</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>geomajas-client-gwt-plugin-deskmanager-javadoc</artifactId>
+	<artifactId>geomajas-project-deskmanager-javadoc</artifactId>
 	<packaging>jar</packaging>
-	<name>Geomajas GWT client: Plugin Deskmanager - Javadoc</name>
-	<description>Geomajas GWT client: Plugin Deskmanager - Javadoc</description>
+	<name>Geomajas Deskmanager Project - Javadoc</name>
+	<description>Geomajas Deskmanager Project - Javadoc</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.geomajas</groupId>
+			<groupId>org.geomajas.project</groupId>
+			<artifactId>geomajas-project-deskmanager-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.geomajas.project</groupId>
 			<artifactId>geomajas-project-deskmanager-gwt</artifactId>
 		</dependency>
 		<dependency>

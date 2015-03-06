@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -86,7 +86,7 @@ public class GeodeskConfigurationServiceTest extends SecurityContainingTestBase 
 	public void setup() throws Exception {
 		// First profile in list is admin
 		String token = ((DeskmanagerSecurityService) securityService).registerProfile("42",
-				((StubProfileService) profileService).getPredefinedProfiles().get(0));
+				((StubProfileService) profileService).getProfiles(null).get(0));
 		// Log in
 		securityManager.createSecurityContext(token);
 

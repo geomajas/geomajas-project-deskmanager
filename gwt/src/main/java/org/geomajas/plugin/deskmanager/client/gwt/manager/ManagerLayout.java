@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -19,7 +19,6 @@ import org.geomajas.plugin.deskmanager.client.gwt.manager.events.EditSessionHand
 import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk.Geodesks;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.security.presenter.UsersAndGroupsPresenter;
 import org.geomajas.plugin.deskmanager.domain.security.dto.Role;
 
 import com.google.gwt.core.client.GWT;
@@ -68,11 +67,6 @@ public class ManagerLayout extends VLayout implements EditSessionHandler {
 			Tab blueprintTab = new Tab(MESSAGES.mainTabBlueprints());
 			blueprintTab.setPane(new Blueprints());
 			tabSet.addTab(blueprintTab);
-			// manage users/groups
-			UsersAndGroupsPresenter usersAndGroupsPresenter = new UsersAndGroupsPresenter();
-			Tab userGroups = new Tab(MESSAGES.mainTabUsers());
-			userGroups.setPane((Canvas) usersAndGroupsPresenter.getView());
-			tabSet.addTab(userGroups);
 		}
 
 		addMember(tabSet);
