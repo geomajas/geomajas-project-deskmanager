@@ -40,7 +40,7 @@ public final class GeodeskUrlUtil {
 	}
 
 	static boolean isRelative(String url) {
-		return url.startsWith("http");
+		return !url.startsWith("http");
 	}
 	
 }
