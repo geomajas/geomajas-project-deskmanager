@@ -1,4 +1,4 @@
-Geomajas Deskmanager project
+Geomajas Deskmanager project [![Build Status](https://travis-ci.org/geomajas/geomajas-project-deskmanager.svg?branch=OM_GDM-222_GeodeskUrlConfigurable)](https://travis-ci.org/geomajas/geomajas-project-deskmanager)
 ===============
 
 What is Geomajas
