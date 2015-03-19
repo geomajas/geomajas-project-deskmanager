@@ -10,12 +10,11 @@
  */
 package org.geomajas.plugin.deskmanager.service.common;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.google.gwt.user.server.rpc.SerializationPolicy;
 import org.geomajas.gwt.server.GeomajasServiceImpl;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
 
-import com.google.gwt.user.server.rpc.SerializationPolicy;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Hack for. http://stackoverflow.com/questions/1517290/problem-with-gwt-behind-a-reverse-proxy-either-nginx-or-apache
@@ -38,7 +37,7 @@ public class DeskmanagerGeomajasServiceImpl extends GeomajasServiceImpl {
 			moduleBaseURL = moduleBaseURLHdr;
 		}
 
-		moduleBaseURL = moduleBaseURL.replaceFirst(GdmLayout.geodeskPrefix + "[^/]*", "");
+//		moduleBaseURL = moduleBaseURL.replaceFirst(GdmLayout.geodeskPrefix + "[^/]*", "");
 		moduleBaseURL = moduleBaseURL.replaceFirst(GdmLayout.managerPrefix + "[^/]*", "");
 		return super.doGetSerializationPolicy(request, moduleBaseURL, strongName);
 	}

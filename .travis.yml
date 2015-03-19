@@ -9,5 +9,5 @@ cache:
   directories:
   - $HOME/.m2
 install: true
-script: "mvn verify -B -V --settings target/geomajas-build-tools/settings.xml"
 env: MAVEN_OPTS="-XX:MaxPermSize=512m"
+script: "mvn verify -B -V --settings target/geomajas-build-tools/settings.xml -Dgwt.compiler.localWorkers=1"

@@ -11,7 +11,7 @@
 package org.geomajas.plugin.deskmanager.client.gwt.geodesk.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.GwtUserApplication;
 
 /**
  * User application event thrown by the {@link UserApplicationHandler}.
@@ -22,14 +22,14 @@ public class UserApplicationEvent extends GwtEvent<UserApplicationHandler> {
 
 	public static final Type<UserApplicationHandler> TYPE = new Type<UserApplicationHandler>();
 
-	private UserApplication userApplication;
+	private GwtUserApplication userApplication;
 
 	/**
 	 * Construct a new user applicaiton event.
 	 * 
 	 * @param userApplication the application
 	 */
-	public UserApplicationEvent(UserApplication userApplication) {
+	public UserApplicationEvent(GwtUserApplication userApplication) {
 		this.setUserApplication(userApplication);
 	}
 
@@ -38,7 +38,7 @@ public class UserApplicationEvent extends GwtEvent<UserApplicationHandler> {
 	 * 
 	 * @param userApplication the user application.
 	 */
-	public void setUserApplication(UserApplication userApplication) {
+	public void setUserApplication(GwtUserApplication userApplication) {
 		this.userApplication = userApplication;
 	}
 
@@ -47,7 +47,7 @@ public class UserApplicationEvent extends GwtEvent<UserApplicationHandler> {
 	 * 
 	 * @return the user application/
 	 */
-	public UserApplication getUserApplication() {
+	public GwtUserApplication getUserApplication() {
 		return userApplication;
 	}
 

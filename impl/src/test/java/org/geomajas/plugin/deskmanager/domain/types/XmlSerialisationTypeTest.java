@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2015 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -10,17 +10,16 @@
  */
 package org.geomajas.plugin.deskmanager.domain.types;
 
-import java.beans.IntrospectionException;
+import org.geomajas.geometry.Bbox;
+import org.geomajas.geometry.service.BboxService;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
-
-import org.geomajas.geometry.Bbox;
-import org.geomajas.geometry.service.BboxService;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * @author Jan De Moerloose

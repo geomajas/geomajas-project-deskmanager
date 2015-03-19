@@ -10,27 +10,6 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
-import com.smartgwt.client.widgets.grid.events.SelectionEvent;
-import org.geomajas.gwt.client.Geomajas;
-import org.geomajas.gwt.client.util.WidgetLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
-import org.geomajas.plugin.deskmanager.client.gwt.common.util.GeodeskUrlUtil;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionEvent;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
-import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
-import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
-
 import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.Alignment;
@@ -49,7 +28,27 @@ import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.RecordDoubleClickEvent;
 import com.smartgwt.client.widgets.grid.events.RecordDoubleClickHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 import com.smartgwt.client.widgets.layout.HLayout;
+import org.geomajas.gwt.client.Geomajas;
+import org.geomajas.gwt.client.util.WidgetLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.common.util.GeodeskUrlUtil;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.BlueprintHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskHandler;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.GeodeskSelectionEvent;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.events.Whiteboard;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.i18n.ManagerMessages;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.DataCallback;
+import org.geomajas.plugin.deskmanager.client.gwt.manager.service.ManagerCommandService;
+import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Extension of {@link ListGrid} for displaying a list of {@link GeodeskDto}s.
@@ -154,7 +153,6 @@ public class GeodeskGrid extends ListGrid implements GeodeskHandler, BlueprintHa
 		addRecordDoubleClickHandler(new RecordDoubleClickHandler() {
 			public void onRecordDoubleClick(RecordDoubleClickEvent event) {
 				String id = event.getRecord().getAttribute(FLD_GEODESKID);
-				//FIXME: preview URL
 				String url = GeodeskUrlUtil.createPreviewUrl(id);
 				com.google.gwt.user.client.Window.open(url, "_blank", "");
 			}

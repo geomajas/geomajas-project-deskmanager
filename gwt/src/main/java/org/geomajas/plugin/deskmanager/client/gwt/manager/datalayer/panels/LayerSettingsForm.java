@@ -35,6 +35,8 @@ public class LayerSettingsForm extends DynamicForm {
 
 	private TextItem name;
 
+	private TextItem id;
+
 	private DeskmanagerClientLayerInfo extraLayerInfo;
 
 	private DynamicLayerConfiguration layerConfig;
@@ -51,6 +53,11 @@ public class LayerSettingsForm extends DynamicForm {
 		name.setWidth(250);
 		name.setRequired(true);
 
+		id = new TextItem();
+		id.setTitle(MESSAGES.layerSettingsLayerId());
+		id.setWidth(250);
+		id.setDisabled(true);
+
 		publicLayer = new CheckboxItem();
 		publicLayer.setTitle(MESSAGES.layerSettingsPublic());
 		publicLayer.setTooltip(MESSAGES.layerSettingsPublicTooltip());
@@ -65,7 +72,7 @@ public class LayerSettingsForm extends DynamicForm {
 
 		// -------------------------------------------------
 
-		setFields(name, publicLayer, active, visible);
+		setFields(name, id, publicLayer, active, visible);
 	}
 
 	public void setData(DynamicLayerConfiguration layerConfig) {
@@ -75,6 +82,7 @@ public class LayerSettingsForm extends DynamicForm {
 		publicLayer.setValue(extraLayerInfo.isPublic());
 		active.setValue(extraLayerInfo.isActive());
 		visible.setValue(layerConfig.getClientLayerInfo().isVisible());
+		id.setValue(layerConfig.getClientLayerInfo().getId());
 	}
 
 	public DynamicLayerConfiguration getData() {
@@ -91,7 +99,9 @@ public class LayerSettingsForm extends DynamicForm {
 		publicLayer.setValue(model.isPublic());
 		active.setValue(model.isActive());
 		visible.setValue(model.isDefaultVisible());
+		id.setValue(layerModel.getId());
 	}
+
 
 	public LayerModelDto getLayerModel() {
 		layerModel.setActive(active.getValueAsBoolean());

@@ -17,11 +17,11 @@ import com.google.gwt.user.client.ui.Widget;
 import org.geomajas.command.dto.GetConfigurationResponse;
 import org.geomajas.gwt.client.command.TokenRequestHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
+import org.geomajas.plugin.deskmanager.client.gwt.common.GwtUserApplication;
 import org.geomajas.plugin.deskmanager.client.gwt.common.HasTokenRequestHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationConfiguration;
 import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationRegistry;
 import org.geomajas.plugin.deskmanager.client.gwt.common.impl.DeskmanagerTokenRequestHandler;
-import org.geomajas.plugin.deskmanager.client.gwt.common.util.GeodeskUrlUtil;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationEvent;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.event.UserApplicationHandler;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.i18n.GeodeskMessages;
@@ -33,14 +33,16 @@ import org.geomajas.plugin.deskmanager.domain.dto.DeskmanagerApplicationInfoUser
  * application, if it's needed asking for a login role.
  * 
  * The entrypoint listens to Mapwidget and MapModel events to set some generic configuration options.
- * 
+ *
  * @author Oliver May
+ *
+ *
  */
 public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 
 	private static final GeodeskMessages MESSAGES = GWT.create(GeodeskMessages.class);
 
-	private UserApplication geodesk;
+	private GwtUserApplication geodesk;
 
 	private LoadingScreen loadScreen;
 
@@ -58,8 +60,8 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 	 * Load a geodesk application. If needed this will first ask for the correct user role and then load the
 	 * application.
 	 * 
-	 * The presentation is added to the layout using a {@link UserApplication}, the key for this application is loaded
-	 * from the configuration. User application must be registered to the {@link UserApplicationRegistry}.
+	 * The presentation is added to the layout using a {@link GwtUserApplication}, the key for this application is
+	 * loaded from the configuration. User application must be registered to the {@link UserApplicationRegistry}.
 	 * 
 	 * @param callback
 	 *            called when everything is drawn and ready to add to the application
@@ -72,8 +74,8 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 	 * Load a geodesk application. If needed this will first ask for the correct user role and then load the
 	 * application.
 	 * 
-	 * The presentation is added to the layout using a {@link UserApplication}, the key for this application is loaded
-	 * from the configuration. User application must be registered to the {@link UserApplicationRegistry}.
+	 * The presentation is added to the layout using a {@link GwtUserApplication}, the key for this application is
+	 * loaded from the configuration. User application must be registered to the {@link UserApplicationRegistry}.
 	 * 
 	 * You can add a user application handler that is called once the user application is loaded and added to the
 	 * layout.
@@ -90,7 +92,7 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 		loadScreen.setZIndex(GdmLayout.loadingZindex);
 		loadScreen.draw();
 
-		String geodeskId = GeodeskUrlUtil.getGeodeskId();
+		String geodeskId = GdmLayout.geodeskIdUtil.parseGeodeskId(Window.Location.getHref());
 		if (geodeskId == null) {
 			Window.alert(MESSAGES.noGeodeskIdGivenError());
 			return;
@@ -106,10 +108,11 @@ public class GeodeskApplicationLoader implements HasTokenRequestHandler {
 				GdmLayout.build = userData.getDeskmanagerBuild();
 
 				// Load geodesk from registry
-				geodesk = UserApplicationRegistry.getInstance().get(userData.getUserApplicationKey());
+				UserApplicationConfiguration userApplication = UserApplicationRegistry.getInstance().get(userData
+						.getUserApplicationKey());
 
-				if (geodesk != null) {
-
+				if (userApplication != null && userApplication instanceof GwtUserApplication) {
+					geodesk = (GwtUserApplication) userApplication;
 					geodesk.setApplicationId(response.getApplication().getId());
 					geodesk.setClientApplicationInfo(response.getApplication());
 

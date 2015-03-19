@@ -10,12 +10,9 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.common.util;
 
+import com.google.gwt.core.client.GWT;
 import org.geomajas.plugin.deskmanager.client.gwt.common.GdmLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.geodesk.impl.CodeServer;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
-
 
 /**
  * Helper class that provides url's for the geodesk previews.
@@ -26,27 +23,24 @@ import com.google.gwt.user.client.Window;
 public final class GeodeskUrlUtil {
 	
 	private GeodeskUrlUtil() { }
-	
-	public static String createUrl(String baseUrl, String geodeskId) {
-		return baseUrl + GdmLayout.geodeskPrefix + geodeskId + "/" + CodeServer.getCodeServer();
-	}
 
 	public static String createPreviewUrl(String geodeskId) {
-		return createUrl(GWT.getModuleBaseURL() + "../", geodeskId);
+		String url = GdmLayout.geodeskIdUtil.buildGeodeskUrl(geodeskId);
+		String codeServer = CodeServer.getCodeServer();
+		if (codeServer.length() > 0 && url.contains("?")) {
+			url += "&" + codeServer;
+		} else if (codeServer.length() > 0) {
+			url += "?" + codeServer;
+		}
+
+		if (isRelative(url)) {
+			return GWT.getModuleBaseURL() + url;
+		}
+		return url;
+	}
+
+	static boolean isRelative(String url) {
+		return !url.startsWith("http");
 	}
 	
-	public static String getGeodeskId() {
-
-		String geodeskId = Window.Location.getHref();
-		if (!geodeskId.contains(GdmLayout.geodeskPrefix)) {
-			return null;
-		}
-		geodeskId = geodeskId.substring(geodeskId.indexOf(GdmLayout.geodeskPrefix) 
-				+ GdmLayout.geodeskPrefix.length()); 
-		geodeskId = geodeskId.substring(0, geodeskId.indexOf('/'));
-		
-		return geodeskId;
-		
-	}
-
 }

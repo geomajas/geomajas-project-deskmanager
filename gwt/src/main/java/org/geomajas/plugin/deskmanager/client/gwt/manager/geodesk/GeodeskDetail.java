@@ -10,11 +10,19 @@
  */
 package org.geomajas.plugin.deskmanager.client.gwt.manager.geodesk;
 
-import java.util.Map;
-
+import com.google.gwt.core.client.GWT;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.AnimationEffect;
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.types.Side;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
 import org.geomajas.configuration.client.ClientWidgetInfo;
 import org.geomajas.gwt.client.Geomajas;
-import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplication;
+import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationConfiguration;
 import org.geomajas.plugin.deskmanager.client.gwt.common.UserApplicationRegistry;
 import org.geomajas.plugin.deskmanager.client.gwt.common.util.DeskmanagerLayout;
 import org.geomajas.plugin.deskmanager.client.gwt.manager.common.AbstractWoaHandler;
@@ -38,16 +46,7 @@ import org.geomajas.plugin.deskmanager.command.manager.dto.SaveBlueprintRequest;
 import org.geomajas.plugin.deskmanager.domain.dto.BaseGeodeskDto;
 import org.geomajas.plugin.deskmanager.domain.dto.GeodeskDto;
 
-import com.google.gwt.core.client.GWT;
-import com.smartgwt.client.types.Alignment;
-import com.smartgwt.client.types.AnimationEffect;
-import com.smartgwt.client.types.Overflow;
-import com.smartgwt.client.types.Side;
-import com.smartgwt.client.widgets.Label;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.tab.Tab;
-import com.smartgwt.client.widgets.tab.TabSet;
+import java.util.Map;
 
 /**
  * Detail panel for a blueprint, contains the different configuration tabs and automatically adds widget editors that
@@ -253,18 +252,22 @@ public class GeodeskDetail extends VLayout implements GeodeskSelectionHandler, E
 	 *            the basegeodesk.
 	 */
 	private void loadWidgetTabs(BaseGeodeskDto bgd) {
-		UserApplication ua = UserApplicationRegistry.getInstance().get(bgd.getUserApplicationInfo().getKey());
-		for (String key : ua.getSupportedApplicationWidgetKeys()) {
-			addWidgetTab(WidgetEditorFactoryRegistry.getApplicationRegistry().get(key),
-					bgd.getApplicationClientWidgetInfos(), GeodeskDtoUtil.getApplicationClientWidgetInfo(bgd), bgd);
-		}
-		for (String key : ua.getSupportedMainMapWidgetKeys()) {
-			addWidgetTab(WidgetEditorFactoryRegistry.getMapRegistry().get(key), bgd.getMainMapClientWidgetInfos(),
-					GeodeskDtoUtil.getMainMapClientWidgetInfo(bgd), bgd);
-		}
-		for (String key : ua.getSupportedOverviewMapWidgetKeys()) {
-			addWidgetTab(WidgetEditorFactoryRegistry.getMapRegistry().get(key), bgd.getOverviewMapClientWidgetInfos(),
-					GeodeskDtoUtil.getOverviewMapClientWidgetInfo(bgd), bgd);
+		UserApplicationConfiguration ua
+				= UserApplicationRegistry.getInstance().get(bgd.getUserApplicationInfo().getKey());
+		if (ua != null) {
+			for (String key : ua.getSupportedApplicationWidgetKeys()) {
+				addWidgetTab(WidgetEditorFactoryRegistry.getApplicationRegistry().get(key),
+						bgd.getApplicationClientWidgetInfos(), GeodeskDtoUtil.getApplicationClientWidgetInfo(bgd), bgd);
+			}
+			for (String key : ua.getSupportedMainMapWidgetKeys()) {
+				addWidgetTab(WidgetEditorFactoryRegistry.getMapRegistry().get(key), bgd.getMainMapClientWidgetInfos(),
+						GeodeskDtoUtil.getMainMapClientWidgetInfo(bgd), bgd);
+			}
+			for (String key : ua.getSupportedOverviewMapWidgetKeys()) {
+				addWidgetTab(WidgetEditorFactoryRegistry.getMapRegistry().get(key),
+						bgd.getOverviewMapClientWidgetInfos(),
+						GeodeskDtoUtil.getOverviewMapClientWidgetInfo(bgd), bgd);
+			}
 		}
 	}
 
