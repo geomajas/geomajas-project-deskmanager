@@ -31,7 +31,7 @@ public class ExampleGeodeskEntryPoint implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		final String geodeskId = GdmLayout.geodeskIdUtil.parseGeodeskId("");
+		final String geodeskId = GdmLayout.geodeskIdUtil.parseGeodeskId(Window.Location.getHref());
 		GeomajasServerExtension.getInstance().getCommandService().setTokenRequestHandler(new TokenRequestHandler() {
 			@Override
 			public void login(final TokenChangedHandler tokenChangedHandler) {

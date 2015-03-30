@@ -53,7 +53,7 @@ public final class GdmLayout { // NOSONAR
 	/** The geodesk url builder. **/
 	public static GeodeskIdUtil geodeskIdUtil = new GeodeskIdUtil() {
 
-		String geodeskPrefix = "desk/";
+		private String geodeskPrefix = "desk/";
 
 		@Override
 		public String parseGeodeskId(String url) {
@@ -71,7 +71,7 @@ public final class GdmLayout { // NOSONAR
 
 		@Override
 		public String buildGeodeskUrl(String geodeskId) {
-			return geodeskPrefix + geodeskId;
+			return "../" + geodeskPrefix + geodeskId + "/index.html";
 		}
 	};
 
