@@ -88,7 +88,7 @@ public final class GdmLayout { // NOSONAR
 	/**
 	 * Default loading logo.
 	 */
-	public static String loadingLogo = "";
+	public static String loadingLogo = "/images/Geomajas-Logo-Large.png";
 
 	/**
 	 * Version of the application.

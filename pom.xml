@@ -48,20 +48,33 @@
 	<properties>
 		<!-- geomajas -->
 		<gdm-version-geomajas-sldeditor>1.0.0-M2</gdm-version-geomajas-sldeditor>
-		<gdm-version-geomajas-client-gwt>1.15.1</gdm-version-geomajas-client-gwt>
-		<gdm-version-geomajas-client-gwt2>2.1.2</gdm-version-geomajas-client-gwt2>
+		<gdm-version-geomajas-client-gwt>1.16.0-RC2</gdm-version-geomajas-client-gwt>
+		<gdm-version-geomajas-client-gwt2>2.4.0</gdm-version-geomajas-client-gwt2>
 		<!-- validation -->
 		<gdm-version-hibernate-validator>4.0.2.GA</gdm-version-hibernate-validator>
 		<gdm-version-javax-validation-api>1.0.0.GA</gdm-version-javax-validation-api>
 		<!-- test -->
 		<gdm-version-mockito>1.9.5</gdm-version-mockito>
-		<gdm-version-gwtmockito>1.1.2</gdm-version-gwtmockito>
+		<gdm-version-gwtmockito>1.1.5</gdm-version-gwtmockito>
 		<gdm-version-powermock-module-junit4>1.5</gdm-version-powermock-module-junit4>
 		<gdm-version-powermock-api-mockito>1.5</gdm-version-powermock-api-mockito>
+		<geotools-wfs-version>13.0.GM2</geotools-wfs-version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!--wfs fixes-->
+			<dependency>
+				<groupId>org.geotools.xsd</groupId>
+				<artifactId>gt-xsd-wfs</artifactId>
+				<version>${geotools-wfs-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-wfs-ng</artifactId>
+				<version>${geotools-wfs-version}</version>
+			</dependency>
+
 			<!-- Artifacts within this project (exclude documentation) -->
 			<dependency>
 				<groupId>org.geomajas.project</groupId>
@@ -84,6 +97,18 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>3.0.2.RELEASE</version>
+			</dependency>
+
+			<!-- code generation: latest version for java1.7 !! this needs to be added before geomajas dependencies -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ow2.asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>5.0.3</version>
 			</dependency>
 
 			<!-- Geomajas dependencies -->
@@ -154,4 +179,19 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<encoding>utf8</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
