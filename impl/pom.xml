@@ -18,7 +18,15 @@
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
 		</dependency>
-
+		<!--wfs fixes-->
+		<dependency>
+			<groupId>org.geotools.xsd</groupId>
+			<artifactId>gt-xsd-wfs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-wfs-ng</artifactId>
+		</dependency>
 		<!-- Database dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -53,6 +61,17 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+			<exclusions>
+				<!-- gwtmockito uses new version of asm, with other groupId: org.ow2.asm:asm-->
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- dependencies for file uploading -->
@@ -80,6 +99,11 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--maybe this dependency is not explicitly necessary-->
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+		</dependency>
 		<!-- geomajas dependencies -->
 		<!-- Needed at compile time because we extend the default security manager and context -->
 		<dependency>
@@ -102,6 +126,12 @@
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-layer-hibernate</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-cglib-repack</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
@@ -112,6 +142,11 @@
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-plugin-print</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
 		</dependency>
 
 		<!-- Dependencies for dynamic layers -->
@@ -126,10 +161,6 @@
 		<dependency>
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-wms</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.geotools</groupId>
-			<artifactId>gt-wfs</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.geotools</groupId>
@@ -198,8 +229,9 @@
 
 	<build>
 		<plugins>
-			<plugin> <!-- Bytecode instrumentation for hibernate: enables lazy loading of properties 
-					(http://tricksdev.blogspot.be/2009/03/hibernate-bytecode-instrumentation.html) -->
+		<!-- Does not work in JAVA 7 !!! -->
+<!-- 			<plugin> Bytecode instrumentation for hibernate: enables lazy loading of properties
+					(http://tricksdev.blogspot.be/2009/03/hibernate-bytecode-instrumentation.html)
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
@@ -226,7 +258,7 @@
 					</execution>
 				</executions>
 			</plugin>
- 			<plugin>
+ --> 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.7.2</version>
@@ -298,6 +330,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<profiles>
 		<!-- include sources in build -->
 		<profile>
