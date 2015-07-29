@@ -8,6 +8,9 @@
 
 	<inherits name="org.geomajas.project.deskmanager.example.ExampleCommonEntryPoint" />
 
+    <!-- Never use in production! IE11 problems -->
+    <!--<collapse-all-properties />-->
+
 	<entry-point class="org.geomajas.project.deskmanager.example.manager.client.ExampleManagerEntryPoint"/>
 
     <set-property-fallback name="locale" value="en"/>

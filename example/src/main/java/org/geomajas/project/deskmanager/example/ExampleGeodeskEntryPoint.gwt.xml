@@ -12,6 +12,9 @@
 
 	<inherits name="org.geomajas.project.deskmanager.example.ExampleCommonEntryPoint" />
 
+    <!-- Never use in production! IE11 problems -->
+    <!--<collapse-all-properties />-->
+
 	<entry-point class="org.geomajas.project.deskmanager.example.geodesk.client.ExampleGeodeskEntryPoint"/>
 
 	<source path="geodesk/client"/>
