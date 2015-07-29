@@ -86,9 +86,9 @@ public final class GdmLayout { // NOSONAR
 	public static int roleSelectZindex = Integer.MAX_VALUE;
 
 	/**
-	 * Default loading logo.
+	 * Logo shown on loading. By default: no logo.
 	 */
-	public static String loadingLogo = "/images/Geomajas-Logo-Large.png";
+	public static String loadingLogo;
 
 	/**
 	 * Version of the application.
